@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource("/incidencias","Api\incidenciaController");
 Route::apiResource("/alertant","Api\alertantController");
+
+Route::apiResource("/incidencias","Api\incidenciaController");
