@@ -8,7 +8,14 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use  App\Http\Resources\RegisterResource;
+use App\Models\Usuario;
 
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Clases\Utilitat;
+use Illuminate\Database\QueryException;
 class RegisterController extends Controller
 {
     /*
@@ -62,12 +69,48 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+
+    public function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        Usuario::create([
+            'codi' => $request->input('correo'),
+
+            'nom' => $request->input('nombre'),
+
+
+            'contrasenya' => Hash::make($request->input('contrasenya')),
+            'rols_id' => $request->input('cbxTemas'),
+
         ]);
+        return redirect('login')->withInput();
     }
+    public function store(Request $request)
+    {
+        $usuario = new Usuario();
+
+
+        $usuario->codi = $request->input('codi');
+        $usuario->nom = $request->input('nom');
+        $usuario->contrasenya = $request->input('contrasenya');
+        $usuario->rols_id = $request->input('rols_id');
+
+
+        try {
+            $usuario->save();
+            $respuesta =  (new RegisterResource($usuario))->response()->setStatusCode(201);
+        } catch (QueryException $e) {
+            $mensaje = Utilitat::errorMessage($e);
+            $respuesta = response()->json(["error" => $mensaje], 400);
+        }
+        return $respuesta;
+    }
+    public function index()
+    {
+        //
+        $Usuario=Usuario::all();
+        return new RegisterResource($Usuario);
+    }
+
 }
+
+
