@@ -16,10 +16,20 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-<<<<<<< HEAD
-=======
 
 
 Route::apiResource("/incidencias","Api\incidenciaController");
 Route::apiResource("/alertant","Api\alertantController");
->>>>>>> Jordi
+Route::apiResource("/estat","Api\EstatincidenciaController");
+Route::apiResource("/afectats","Api\afectatsController");
+Route::apiResource("/privincia","Api\provinciaController");
+Route::apiResource("/comarca","Api\comarcaController");
+Route::apiResource("/municipi","Api\municipiController");
+Route::apiResource("/recurso","Api\RecursoController");
+Route::apiResource("/rols","Api\RolsController");
+Route::apiResource("/TipusA","Api\TipusAlertantController");
+Route::apiResource("/TipusI","Api\TipusIncidentController");
+Route::apiResource("/TipusR","Api\TipusRecursController");
+
+
+Route::apiResource('/register', 'Auth\RegisterController');

@@ -3,11 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-<<<<<<< HEAD
-
-=======
 use Illuminate\Http\Resources\Json\Resource;
->>>>>>> Jordi
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,10 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-<<<<<<< HEAD
-=======
         Resource::withoutWrapping();
 
->>>>>>> Jordi
     }
 }
