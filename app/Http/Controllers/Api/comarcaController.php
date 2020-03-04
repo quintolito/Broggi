@@ -21,7 +21,7 @@ class comarcaController extends Controller
     public function index()
     {
         //
-        $Comarca=Comarca::all();
+        $Comarca = Comarca::all();
         return new comarcaResource($Comarca);
     }
 
@@ -44,10 +44,11 @@ class comarcaController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function show(Alertant $alertant)
+    public function show($id)
     {
         //
-;
+        $Comarca = Comarca::with('provincies')->find($id);
+        return new comarcaResource($Comarca);
     }
 
     /**

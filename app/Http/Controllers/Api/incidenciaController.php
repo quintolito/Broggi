@@ -6,9 +6,14 @@ use App\Models\incidencias;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Clases\Utilitat;
+use App\Models\Usuario;
+use App\Models\Afectats;
+use DateTime;
+use DateTimeZone;
+use Carbon\Carbon;
 
 use  App\Http\Resources\incidenciaResource;
-
+use App\Models\Recurs;
 class incidenciaController extends Controller
 {
     /**
@@ -19,7 +24,7 @@ class incidenciaController extends Controller
     public function index()
     {
         //
-        $incidencias=incidencias::all();
+        $incidencias = incidencias::all();
         return new incidenciaResource($incidencias);
     }
 
@@ -32,8 +37,10 @@ class incidenciaController extends Controller
     public function store(Request $request)
     {
         //
-        $incidencia=new incidencias();
-
+        $incidencia = new incidencias();
+        $Recusr = Recurs::all();
+        $Usuario = Usuario::all();
+        $afectats=Afectats::all();
         $incidencia->num_incidencia = $request->input('num_incidencia');
         $incidencia->telefon_alertant = $request->input('telefon_alertant');
         $incidencia->data = $request->input('data');
@@ -47,20 +54,41 @@ class incidenciaController extends Controller
         $incidencia->tipus_alertant_id = $request->input('tipus_alertant_id');
         $incidencia->num_incidencia = $request->input('num_incidencia');
         $incidencia->alertants_id = $request->input('alertants_id');
-
-
+        ///$now = Carbon::now();
+       //
+       $UTC =new DateTimeZone("UTC");
+       $now=new DateTime();
+       $mytime = Carbon::now();
+       $mytime->setTimezone('UTC');
 
         try {
             $incidencia->save();
-            $resposta=(new incidenciaResource($incidencia))->response()->setStatusCode(201);
+            //$incidencia->pivot->1;
+            $incidencia->incidenciahasrecursos()
+            ->attach($Recusr[0],['prioritat' => 1,
+            'hora_acitvacio' => $now  ,
+            'hora_mobilitzacio' => $now,
+            'hora_assistencia' => $now,
+            'hora_transport' => $now,
+            'hora_arribada_hospital' => $now,
+            'hora_transferencia' => $now,
+            'hora_finalitzacio' => $now]
+        );
+
+            $incidencia->Usuario()->attach($Usuario[0]);
+            $incidencia->Afectats()->attach($afectats[0]);
+
+            //$incidencia->incidenciahasrecursos()->attach($Recusr[0]);
+
+            $resposta = (new incidenciaResource($incidencia))->response()->setStatusCode(201);
+
         } catch (QueryException $e) {
             $error = Utilitat::errorMessage($e);
 
-            $resposta=response()->json(['error'=>$error],400);
-                    }
+            $resposta = response()->json(['error' => $error], 400);
+        }
 
-          return     $resposta;
-
+        return     $resposta;
     }
 
     /**
@@ -74,7 +102,10 @@ class incidenciaController extends Controller
         //
 
 
-        $incidencias=incidencias::find($incidencias);
+        $incidencias = incidencias::with('tipusAlertant')
+            ->with('tipusIncident')
+            ->with('EstatIncidencia')
+            ->with('Municipi')->find($incidencias);
         return new incidenciaResource($incidencias);
     }
 
@@ -88,7 +119,7 @@ class incidenciaController extends Controller
     public function update(Request $request,  $id)
     {
         //
-        $incidencia= incidencias::find($id);
+        $incidencia = incidencias::find($id);
         $incidencia->num_incidencia = $request->input('num_incidencia');
         $incidencia->telefon_alertant = $request->input('telefon_alertant');
         $incidencia->data = $request->input('data');
@@ -107,22 +138,17 @@ class incidenciaController extends Controller
 
         try {
             $incidencia->save();
-            $resposta=(new incidenciaResource($incidencia))->response()->setStatusCode(201);
+            $incidencia->incidenciahasrecursos()->attach(1);
+            $incidencia->save();
+
+            $resposta = (new incidenciaResource($incidencia))->response()->setStatusCode(201);
         } catch (QueryException $e) {
             $error = Utilitat::errorMessage($e);
 
-            $resposta=response()->json(['error'=>$error],400);
-                    }
+            $resposta = response()->json(['error' => $error], 400);
+        }
 
-          return     $resposta;
-
-
-
-
-
-
-
-
+        return     $resposta;
     }
 
     /**
@@ -135,23 +161,29 @@ class incidenciaController extends Controller
     {
         //
 
-        $incidencias=incidencias::find($id_ciudad);
-        if($incidencias!=null){
-            try{
-                $incidencias->delete();
-                $respuesta=  (new incidenciaResource($incidencias))->response()->setStatusCode(200);
+        $incidencias = incidencias::find($id_ciudad);
+        $incidencias->incidenciahasrecursos()
+            ->detach();
 
+
+
+
+
+
+            $incidencias->Usuario()->detach();
+            $incidencias->Afectats()->detach();
+        if ($incidencias != null) {
+            try {
+                $incidencias->delete();
+                $respuesta = (new incidenciaResource($incidencias))->response()->setStatusCode(200);
+            } catch (QueryException $e) {
+                $mensaje = Utilitat::errorMessage($e);
+                $respuesta = response()->json(["error" => $mensaje], 400);
             }
-            catch(QueryException $e ){
-                $mensaje=Utilitat::errorMessage($e);
-                $respuesta= response()->json(["error"=> $mensaje ],400);
-            }
-        }
-        else{
-            $respuesta= response()->json(["error"=>'REGISTRO NO ENCONTRADO'],404);
+        } else {
+            $respuesta = response()->json(["error" => 'REGISTRO NO ENCONTRADO'], 404);
         }
 
         return $respuesta;
     }
-
 }

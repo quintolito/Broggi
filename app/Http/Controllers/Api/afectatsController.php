@@ -21,7 +21,7 @@ class afectatsController extends Controller
     public function index()
     {
         //
-        $Afectats=Afectats::all();
+        $Afectats = Afectats::all();
         return new afectantResource($Afectats);
     }
 
@@ -44,10 +44,12 @@ class afectatsController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function show(Alertant $alertant)
+    public function show($id)
     {
-        //
-;
+            //
+        ;
+        $Afectats = Afectats::with('Municipi')->find($id);
+        return new afectantResource($Afectats);
     }
 
     /**
@@ -57,7 +59,7 @@ class afectatsController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alertant $alertant)
+    public function update(Request $request, Afectats $alertant)
     {
         //
     }
@@ -68,7 +70,7 @@ class afectatsController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alertant $alertant)
+    public function destroy(Afectats $alertant)
     {
         //
     }

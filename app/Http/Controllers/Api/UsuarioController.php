@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Alertant;
-use App\Models\Municipi;
+use App\Models\Usuario;
+
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Clases\Utilitat;
 
-use  App\Http\Resources\alertantResource;
+use  App\Http\Resources\usuarioResource;
 
-class alertantController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +21,8 @@ class alertantController extends Controller
     public function index()
     {
         //
-        $Alertant = Alertant::all();
-        return new alertantResource($Alertant);
+        $Usuario = Usuario::all();
+        return new usuarioResource($Usuario);
     }
 
     /**
@@ -44,15 +44,12 @@ class alertantController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function show(Alertant $alertant)
+    public function show($id)
     {
         //
-
-        $alertant = Alertant::with('municipi')->with('tipusAlertant')->find($alertant->id);
-
-        return new alertantResource($alertant);
+        $Usuario = Usuario::with('rol')->find($id);
+        return new usuarioResource($Usuario);
     }
-
     /**
      * Update the specified resource in storage.
      *

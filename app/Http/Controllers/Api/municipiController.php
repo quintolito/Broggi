@@ -21,7 +21,7 @@ class municipiController extends Controller
     public function index()
     {
         //
-        $Municipi=Municipi::all();
+        $Municipi = Municipi::all();
         return new municipiResource($Municipi);
     }
 
@@ -44,10 +44,12 @@ class municipiController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function show(Alertant $alertant)
+
+    public function show($id)
     {
         //
-;
+        $Municipi = Municipi::with('Comarques')->find($id);
+        return new municipiResource($Municipi);
     }
 
     /**

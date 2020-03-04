@@ -8,12 +8,13 @@ class EstatIncidencia extends Model
 {
     //
 
-    protected $table ='estats_incidencia';
-    public $primaryKey='id';
-    public $incrementing=true;
-    public $timestamps=false;
+    protected $table = 'estats_incidencia';
+    public $primaryKey = 'id';
+    public $incrementing = true;
+    public $timestamps = false;
 
-
-
-
+    public function incidencias()
+    {
+        return $this->belongsTo('App\Models\incidencias');
+    }
 }

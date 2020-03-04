@@ -21,7 +21,7 @@ class recursoController extends Controller
     public function index()
     {
         //
-        $Recurs=Recurs::all();
+        $Recurs = Recurs::all();
         return new recursoResource($Recurs);
     }
 
@@ -44,10 +44,11 @@ class recursoController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function show(Alertant $alertant)
+    public function show($id)
     {
         //
-;
+        $Recurs = Recurs::with('tipusIncident')->find($id);
+        return new recursoResource($Recurs);
     }
 
     /**
