@@ -149,12 +149,35 @@
         </b-card>
       </template>
 
-      <p>{{ getallusers }}</p>
     </b-table>
 
     <!-- Info modal -->
     <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
       <pre>{{ infoModal.content }}</pre>
+    </b-modal>
+        <b-modal
+     :id="infoModal.id"
+      ref="modal"
+      :title="infoModal.title"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
+      <form ref="form" @submit.stop.prevent="handleSubmit">
+        <b-form-group
+          label="Name"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+        >
+          <b-form-input
+            id="name-input"
+            v-model="users.nom"
+            required
+            label=""
+          ></b-form-input>
+          <pre> {{infoModal.content}}</pre>
+        </b-form-group>
+      </form>
     </b-modal>
   </b-container>
 </template>
@@ -190,8 +213,9 @@ import Vuex from 'vuex';
           { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }*/
         ],
         fields: [
-          { key: 'name', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
-          { key: 'url', label: 'Person age', sortable: true, class: 'text-center' },
+          { key: 'nom', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
+          { key: 'adreca', label: 'Person age', sortable: true, class: 'text-center' },
+           { key: 'telefon', label: 'telefon', sortable: true, class: 'text-center' },
           {
             key: 'isActive',
             label: 'is Active',
@@ -204,10 +228,12 @@ import Vuex from 'vuex';
           },
           { key: 'actions', label: 'Actions' }
         ],
+        click:0,
         //totalRows: 1,
         currentPage: 1,
         perPage: 5,
         pageOptions: [5, 10, 15],
+        test:0,
         sortBy: '',
         sortDesc: false,
         sortDirection: 'asc',
@@ -222,7 +248,7 @@ import Vuex from 'vuex';
     },
     computed: {
            ...Vuex.mapState(['message','count','users','posts']),
-
+         //...Vuex.mapGetters({selectedOption:'getUsers'}),
       sortOptions() {
         // Create an options list from our fields
         return this.fields
@@ -230,15 +256,30 @@ import Vuex from 'vuex';
           .map(f => {
             return { text: f.label, value: f.key }
           })
-      }
+      },
+
     },
+    beforeCreate() {
+                          this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+    },
+
     created() {
 
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/users');
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/posts');
-             this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
+            // this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
              //this.items=  this.users.length;/
 
+
+
+    this.pageOptions.push(this.$store.state.count);
+
+
+  },
+  beforeUpdate(){
+                  // this.selectedOption=this.getResults
+
+    this.pageOptions.push(this.$store.state.count);
 
 
   },
@@ -254,13 +295,15 @@ import Vuex from 'vuex';
         console.log('beforeMount');
 
 
+
     },
     methods: {
 
-     ...Vuex.mapMutations(['getallusers']),
+     ...Vuex.mapMutations(['getallusers','getResults']),
+     ...Vuex.mapActions(['getResults']),
       info(item, index, button) {
         this.infoModal.title = `Row index: ${index}`
-        this.infoModal.content = JSON.stringify(item, null, 2)
+        this.infoModal.content = JSON.stringify(item.id+item.nom+item.telefon, null, 2)
         this.$root.$emit('bv::show::modal', this.infoModal.id, button)
       },
       resetInfoModal() {
@@ -271,7 +314,38 @@ import Vuex from 'vuex';
         // Trigger pagination to update the number of buttons/pages due to filtering
         //this.totalRows = users.length;
         this.currentPage = 1;
+      },
+       selectedOption () {
+    return pageOptions.push(this.$store.state.users.length);
+  },checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.nameState = valid
+        return valid
+      },
+      resetModal() {
+        this.name = ''
+        this.nameState = null
+      },
+      handleOk(bvModalEvt) {
+        // Prevent modal from closing
+        bvModalEvt.preventDefault()
+        // Trigger submit handler
+        this.handleSubmit()
+      },
+      handleSubmit() {
+        // Exit when the form isn't valid
+        if (!this.checkFormValidity()) {
+          return
+        }
+        // Push the name to submitted names
+        this.submittedNames.push(this.name)
+        // Hide the modal manually
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-prevent-closing')
+        })
       }
     }
-  }
+
+    }
+
 </script>

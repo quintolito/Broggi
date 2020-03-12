@@ -15,7 +15,7 @@
 
 
 
-             <!--<p>{{  users}} </p>-->
+             <!--<p>{{  users}} </p>
  <table class="users" v-if="users.length != 0">
       <tr>
         <th>Name</th>
@@ -24,8 +24,8 @@
       </tr>
       <tr v-for="user in users">
         <td>{{user.name}}</td>
-        <!--<td>{{user.username}}</td>
-        <td>{{user.email}}</td>-->
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
       </tr>
       <tr></tr>
 </table>
@@ -92,6 +92,7 @@
         <b-card class="mt-3" header="Form Data Result">
             <pre class="m-0">{{ form }}</pre>
         </b-card>
+        -->
         <!-- Using modifiers -->
         <b-button v-b-modal.my-modal>Show Modal</b-button>
 
@@ -155,7 +156,9 @@ export default {
 
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/users');
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/posts');
-                        this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
+              //          this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
+              //this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+
 
   },
     methods: {

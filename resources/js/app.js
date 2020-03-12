@@ -61,22 +61,32 @@ const store = new Vuex.Store({
         modalVisible: false,
         modalComponent: null,
       },
+    getters:{
+        getUsers:  state => {
+            return state.users.length;
+
+}
+},
     actions: {
 
         loadUsers({commit},url) {
           axios.get(url).then(result => {
               if(url.includes('posts')){
-                commit('SAVE_POSTS',result.data);
+                commit('SAVE_POSTS',result);
               }else{
-                commit('SAVE_USERS',result.data.results);
+                commit('SAVE_USERS',result.data);
 
               }
 
           }).catch(error => {
             throw new Error(`API ${error}`);
           });
-        }
-      },
+        },
+
+
+
+    },
+
     mutations: {
         incrementBy(state, n) {
             state.count += n;
@@ -86,6 +96,7 @@ const store = new Vuex.Store({
           },
           SAVE_USERS(state, users) {
             state.users=users ;
+            state.count=users.length;
           },
           SAVE_POSTS(state, posts) {
             state.posts=posts ;
@@ -97,8 +108,10 @@ const store = new Vuex.Store({
           hideModal(state) {
             state.modalVisible = false;
           },
-          async getallusers(state){
-              return state.users.length;
+          getResults() {
+            //const data = await this.$store.dispatch('loadUsers', 'http://127.0.0.1:8000/api/alertant')
+            //do whatever you need with the returned data
+            return this.state.users.length;
           }
       },
 
