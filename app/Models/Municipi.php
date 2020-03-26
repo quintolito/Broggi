@@ -13,13 +13,17 @@ class Municipi extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    public function Comarques()
+    public function comarca()
     {
-        return $this->hasMany('App\Models\Comarca', 'id', 'comarques_id');
+        return $this->belongsTo('App\Models\Comarca', 'comarques_id');
     }
 
     public function Afectats()
     {
         return $this->belongsTo('App\Models\Afectats');
+    }
+    public function alertants()
+    {
+        return $this->hasMany('App\Models\Alertant', 'municipis_id');
     }
 }

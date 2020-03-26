@@ -1,47 +1,16 @@
 <template>
   <b-container fluid>
-    <!-- User Interface controls -->
-    <b-row>
-      <b-col lg="6" class="my-1">
-        <b-form-group
-          label="Sort"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          label-for="sortBySelect"
-          class="mb-0"
-        >
-          <b-input-group size="sm">
-            <b-form-select v-model="sortBy" id="sortBySelect" :options="sortOptions" class="w-75">
-              <template v-slot:first>
-                <option value="">-- none --</option>
-              </template>
-            </b-form-select>
-            <b-form-select v-model="sortDesc" size="sm" :disabled="!sortBy" class="w-25">
-              <option :value="false">Asc</option>
-              <option :value="true">Desc</option>
-            </b-form-select>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
+    <!-- User Interface controls-->
 
-      <b-col lg="6" class="my-1">
-        <b-form-group
-          label="Initial sort"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          label-for="initialSortSelect"
-          class="mb-0"
-        >
-          <b-form-select
-            v-model="sortDirection"
-            id="initialSortSelect"
-            size="sm"
-            :options="['asc', 'desc', 'last']"
-          ></b-form-select>
-        </b-form-group>
-      </b-col>
+
+
+
+
+
+    <b-row>
+
+
+
 
       <b-col lg="6" class="my-1">
         <b-form-group
@@ -116,10 +85,12 @@
 
     <!-- Main table element -->
     <b-table
+    id="my-table"
+    ref="table"
       show-empty
       small
       stacked="md"
-      :items="users"
+     :items="users"
       :fields="fields"
       :current-page="currentPage"
       :per-page="perPage"
@@ -128,94 +99,299 @@
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
       :sort-direction="sortDirection"
-      @filtered="users"
     >
 
 
+
+
       <template v-slot:cell(actions)="row">
-        <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
+
+        <b-button size="sm" @click="info(row.item, row.item.id, $event.target)" class="mr-1">
           Info modal
         </b-button>
-        <b-button size="sm" @click="row.toggleDetails">
+        <b-button size="sm" @click="update(row.item, row.item.id, $event.target)" class="mr-1">
+          Update
+        </b-button>
+<!--
+        <b-button size="sm" @click="eliminar(row.item.id)">
           {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
         </b-button>
-      </template>
 
+      </template>
       <template v-slot:row-details="row">
         <b-card>
           <ul>
             <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
           </ul>
         </b-card>
+
+-->
       </template>
 
     </b-table>
 
-    <!-- Info modal -->
-    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
-      <pre>{{ infoModal.content }}</pre>
+<!--
+
+ <b-modal
+      id="info-delete"
+      :title="deleteModal.titulo"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="Borrarelemento"
+    >
+
+      <form ref="form" @submit.stop.prevent="handleSubmit">
+
+      </form>
+
     </b-modal>
-        <b-modal
-     :id="infoModal.id"
+
+
+
+-->
+
+
+
+
+
+
+
+
+<!--
+
+    <b-modal :id="infoModal.id" :title="infoModal.title"        @ok="handleOk"  >
+      <pre>{{ infoModal.content }}
+
+
+      </pre>
+      </b-modal>
+  /*@hide="resetInfoModal(infoModal.content[1])" */
+
+    <b-modal
+      id="info-modal"
       ref="modal"
       :title="infoModal.title"
       @show="resetModal"
       @hidden="resetModal"
       @ok="handleOk"
     >
+
       <form ref="form" @submit.stop.prevent="handleSubmit">
+
         <b-form-group
-          label="Name"
+          label="Codi"
           label-for="name-input"
-          invalid-feedback="Name is required"
+          invalid-feedback="Codi is required"
         >
           <b-form-input
             id="name-input"
-            v-model="users.nom"
             required
             label=""
+             v-model="infoModal.codi"
+
           ></b-form-input>
-          <pre> {{infoModal.content}}</pre>
+
+
+
+      <b-form-group
+        id="input-group-1"
+        label="Contraseña address:"
+
+        label-for="input-1"
+        description="We'll never share your email with anyone else."
+      >
+        <b-form-input
+          id="input-1"
+
+        v-model="infoModal.Contraseña"
+
+          required
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          required
+          v-model="infoModal.nom"
+            ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
+         <select v-model="infoModal.rols_id" name="city" id="city" class="form-control" tabindex="12">
+            <option v-for="(city, index) in tipoRols"
+                    :key="index"
+                    :value="city.id">{{ city.nom }}
+            </option>
+        </select>
+      </b-form-group>
+
+
+
+
+
+
+
+
         </b-form-group>
       </form>
+
+
     </b-modal>
+
+-->
+
+
+    <b-modal
+      id="modal-recursos2"
+      ref="modal"
+      title="Submit Your Name"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
+      <form ref="form" @submit.stop.prevent="handleSubmit">
+
+
+
+      <b-form-group
+        id="input-group-1"
+        label="codi"
+        label-for="input-1"
+        description="We'll never share your email with anyone else."
+      >
+        <b-form-input
+          id="input-1-recurs"
+          v-model="formRecurs.codi"
+          required
+          placeholder="Enter codi"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-3" label="rols:" label-for="input-3">
+                <select v-model="formRecurs.tipus_recurs_id" name="recurso" id="recurso" class="form-control" tabindex="12">
+            <option v-for="(recurso, index) in tipoRecursos"
+                    :key="index"
+                    :value="recurso.id">{{ recurso.tipus }}
+            </option>
+        </select>
+
+      </b-form-group>
+
+      </form>
+    </b-modal>
+
+
+
+
+<!-- FORM PARA ALERTANT -->
+
+    <b-modal
+      id="modal-alertant2"
+            ref="modal"
+
+      title="Submit Your Name"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
+      <form ref="form" @submit.stop.prevent="handleSubmit">
+
+
+
+      <b-form-group
+        id="input-group-1"
+        label="Nom"
+        label-for="input-1"
+        description="We'll never share your email with anyone else."
+      >
+        <b-form-input
+          id="input-1"
+          v-model="formAlertant.nom"
+          required
+          placeholder="Enter codi"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" label="adreca" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="formAlertant.adreca"
+          required
+          placeholder="Enter nom"
+        ></b-form-input>
+      </b-form-group>
+  <b-form-group id="input-group-5" label="telefon" label-for="input-5">
+        <b-form-input
+          id="input-5"
+          v-model="formAlertant.telefon"
+          required
+          placeholder="Enter contrasenya"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-3" label="municipis_id" label-for="input-3">
+                <select v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-control" tabindex="12">
+            <option v-for="(municipi, index) in municipis"
+                    :key="index"
+                    :value="municipi.id">{{ municipi.nom }}
+            </option>
+        </select>
+
+      </b-form-group>
+
+
+
+  <b-form-group id="input-group-4" label="tipus_alertant_id" label-for="input-3">
+                <select v-model="formAlertant.tipus_alertant_id" name="city" id="city" class="form-control" tabindex="12">
+            <option v-for="(city, index) in tipoAlertant"
+                    :key="index"
+                    :value="city.id">{{ city.tipus }}
+            </option>
+        </select>
+
+      </b-form-group>
+
+
+
+
+
+
+      </form>
+    </b-modal>
+ <p>{{users.tipus_alertant}}</p>
   </b-container>
+
+
+
+
+
+
+
+
 </template>
 
 <script>
 import Vuex from 'vuex';
 
   export default {
+         props: ['api','tablaccion'],
     data() {
       return {
-        items: [/*
-          { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
-          { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
-          {
-            isActive: false,
-            age: 9,
-            name: { first: 'Mini', last: 'Navarro' },
-            _rowVariant: 'success'
-          },
-          { isActive: false, age: 89, name: { first: 'Geneva', last: 'Wilson' } },
-          { isActive: true, age: 38, name: { first: 'Jami', last: 'Carney' } },
-          { isActive: false, age: 27, name: { first: 'Essie', last: 'Dunlap' } },
-          { isActive: true, age: 40, name: { first: 'Thor', last: 'Macdonald' } },
-          {
-            isActive: true,
-            age: 87,
-            name: { first: 'Larsen', last: 'Shaw' },
-            _cellVariants: { age: 'danger', isActive: 'warning' }
-          },
-          { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
-          { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
-          { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
-          { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }*/
+          testfields: ['nom', 'last_name', 'age'],
+          dataReady: false,
+        items: [
+
         ],
         fields: [
-          { key: 'nom', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
+          { key: 'nom', label: 'nom', sortable: true, sortDirection: 'desc' },
           { key: 'adreca', label: 'Person age', sortable: true, class: 'text-center' },
-           { key: 'telefon', label: 'telefon', sortable: true, class: 'text-center' },
+          { key: 'telefon', label: 'telefon', sortable: true, class: 'text-center' },
+         // { key: 'municipis_id', label: 'municipis', sortable: true, class: 'text-center' },
+         // { key: 'municipis_id', label: 'nom', sortable: true, class: 'text-center' },
+
+        { key: 'municipi.nom', label: 'municipi', sortable: true, class: 'text-center' },
+        { key: 'tipus_alertant.tipus', label: 'tipus_alertant', sortable: true, class: 'text-center' },
+
           {
             key: 'isActive',
             label: 'is Active',
@@ -237,17 +413,44 @@ import Vuex from 'vuex';
         sortBy: '',
         sortDesc: false,
         sortDirection: 'asc',
-        filter: null,
+        filter: '',
         filterOn: [],
+        Pruebamunicipi:[],
         infoModal: {
-          id: 'info-modal',
-          title: '',
-          content: ''
+
+          rols_id:0,
+          Contraseña:'',
+          codi:'',
+          nom:'',
+          id:0
+        },
+         formAlertant: {
+                id:0,
+                nom:"",
+
+                adreca:'',
+                municipis_id:null,
+
+                telefon:'',
+                tipus_alertant_id:null
+
+
+            },
+           formRecurs: {
+                id:0,
+                codi:"",
+                tipus_recurs_id:null
+
+            },
+        deleteModal:{
+            titulo:'',
+            id:0,
+            content:''
         }
       }
     },
     computed: {
-           ...Vuex.mapState(['message','count','users','posts']),
+                   ...Vuex.mapState(['message','count','users','posts','tipoRols','municipis','tipoAlertant','tipoRecursos']),
          //...Vuex.mapGetters({selectedOption:'getUsers'}),
       sortOptions() {
         // Create an options list from our fields
@@ -257,10 +460,21 @@ import Vuex from 'vuex';
             return { text: f.label, value: f.key }
           })
       },
+        message: {
+    get () {
+      return this.items=this.$store.state.users
+
+      console.log(this.$store.state.users);
+    },
+        },
+
 
     },
     beforeCreate() {
-                          this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+                        this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+
+        console.log(this.$store.state.users[0])
+
     },
 
     created() {
@@ -269,47 +483,142 @@ import Vuex from 'vuex';
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/posts');
             // this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
              //this.items=  this.users.length;/
+                           this.$store.dispatch('loadRols',' http://127.0.0.1:8000/api/alertant');
+        /*if(this.api =="alertant"){
+                    this.$store.dispatch('loadAlertant','http://127.0.0.1:8000/api/'+this.api );
 
 
+        }else{
+        this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api );
+        }*/
 
+
+  console.log( this.Pruebamunicipi[0]);
     this.pageOptions.push(this.$store.state.count);
 
+        console.log(this.$store.state.users[0])
 
   },
   beforeUpdate(){
                   // this.selectedOption=this.getResults
+    this.$root.$emit('bv::refresh::table', 'my-table')
 
     this.pageOptions.push(this.$store.state.count);
 
 
   },
-    mounted() {
-      // Set the initial number of items
-     // this.totalRows = users.length
-    // this.totalRows = 1;
+ async mounted() {
 
-
-    },
+    this.get();
+    this.dataReady = true;
+},
      beforeMount() {
         //SE EJECUTA ANTES DE INSERTAR EL DOM
         console.log('beforeMount');
 
 
 
+
     },
     methods: {
+ get () {
+      return this.Pruebamunicipi=this.$store.state.users
 
+      console.log(this.$store.state.users);
+    },
      ...Vuex.mapMutations(['getallusers','getResults']),
      ...Vuex.mapActions(['getResults']),
+       update(item, index, button) {
+           //console.log(item);
+             console.log(item);
+        if(this.tablaccion=="rols"){
+        this.infoModal.id=index;
+        this.infoModal.rols_id=item.rols_id;
+
+         this.infoModal.Contraseña=item.contrasenya;
+         this.infoModal.codi=item.codi;
+                  this.infoModal.nom=item.nom;
+        }
+        else if(this.tablaccion=="recursos"){
+         /*   console.log(this.formRecurs);
+                        console.log(this.item);*/
+
+         this.formRecurs.id=index;
+
+         this.formRecurs.codi=item.codi;
+         this.formRecurs.tipus_recurs_id=item.tipus_recurs_id;
+
+
+        //this.$root.$emit('bv::show::modal', "modal-recursos2", button)
+        }
+        else if(this.tablaccion=="alertant"){
+                this.formAlertant.id=index;
+                this.formAlertant.nom=item.nom;
+                 this.formAlertant.adreca=item.adreca;
+                  this.formAlertant.telefon=item.telefon;
+                  this.formAlertant.municipis_id=item.municipi.id;
+                  this.formAlertant.tipus_alertant_id=item.tipus_alertant.id;
+
+                   console.log(this.formAlertant);
+                      this.$root.$emit('bv::show::modal', "modal-alertant2", button)
+
+            }
+
+
+
+       console.log(item);
+                          console.log(this.formAlertant);
+
+
+      },
       info(item, index, button) {
-        this.infoModal.title = `Row index: ${index}`
-        this.infoModal.content = JSON.stringify(item.id+item.nom+item.telefon, null, 2)
-        this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+        this.deleteModal.id = index
+        this.$bvModal.msgBoxOk(`Esta seguro que desea borrar este elemento.  Row index: ${index}`, {
+          title: 'Confirmation',
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'success',
+          headerClass: 'p-2 border-bottom-0',
+          footerClass: 'p-2 border-top-0',
+          centered: true
+        }).then(value => {
+              console.log( this.deleteModal.id);
+                 var vm = this
+            axios.delete('http://127.0.0.1:8000/api/'+this.api +'/'+ this.deleteModal.id)
+            .then(response => {
+                        /*const prueba = this.users.findIndex(user => user.id === id) // find the post index
+                        if (~prueba) // if the post exists in array
+                            this.users.splice(prueba, 1) //delete the post
+
+                console.log(this.result);*/
+
+
+
+
+
+            });          })
+          .catch(err => {
+            // An error occurred
+          });
+        console.log(this.$refs.table.refresh());
+        this.$refs.table.refresh();
+        //console.log();
       },
-      resetInfoModal() {
-        this.infoModal.title = ''
-        this.infoModal.content = ''
-      },
+      UpdateFORMS(Apiactuar,RecibirObjeto) {
+          console.log("RECIBIROBKETO")
+        console.log(RecibirObjeto);
+      return axios.put('http://127.0.0.1:8000/api/'+Apiactuar +'/'+ RecibirObjeto.id,RecibirObjeto)
+             .then(function(response){
+                    //me.rols=response.data;
+
+                           console.log(this.result);
+
+
+                })
+                .catch(function(error){
+
+    });
+    },
       onFiltered(filteredItems) {
         // Trigger pagination to update the number of buttons/pages due to filtering
         //this.totalRows = users.length;
@@ -317,7 +626,8 @@ import Vuex from 'vuex';
       },
        selectedOption () {
     return pageOptions.push(this.$store.state.users.length);
-  },checkFormValidity() {
+  },
+  checkFormValidity() {
         const valid = this.$refs.form.checkValidity()
         this.nameState = valid
         return valid
@@ -325,27 +635,80 @@ import Vuex from 'vuex';
       resetModal() {
         this.name = ''
         this.nameState = null
+
+
+      },
+      Borrarelemento(bvModalEvt){
+          bvModalEvt.preventDefault()
+               // console.log(this.infoModal);
+
+                axios.delete('http://127.0.0.1:8000/api/'+this.nombreApi + this.infoModal.index)
+            .then(response => {
+                        const prueba = this.items.findIndex(item => items.id === id) // find the post index
+                        if (~prueba) // if the post exists in array
+                            this.items.splice(prueba, 1) //delete the post
+
+                console.log(this.result);
+            });
+
+          this.handleSubmit();
+
+
       },
       handleOk(bvModalEvt) {
         // Prevent modal from closing
+
+
         bvModalEvt.preventDefault()
-        // Trigger submit handler
-        this.handleSubmit()
+               // console.log(this.infoModal);
+    console.log(this.api);
+        console.log(this.formRecurs);
+        if(this.api=="recurso"){
+        this.UpdateFORMS(this.api,this.formRecurs);
+        }
+        else if(this.api=="alertant"){
+             this.UpdateFORMS(this.api,this.formAlertant);
+
+          this.handleSubmit();
+        }
+
+
+
+          this.handleSubmit();
+
       },
       handleSubmit() {
         // Exit when the form isn't valid
-        if (!this.checkFormValidity()) {
-          return
-        }
+         console.log("cerrar modal");
+        console.log(this.infoModal);
+      // location.reload();
+
+
+
         // Push the name to submitted names
-        this.submittedNames.push(this.name)
         // Hide the modal manually
         this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
+          // Wrapped in $nextTick to ensure DOM is rendered before closing
+          this.$refs.modal.hide()
         })
-      }
+      },
+     eliminar(id) {
+        // Exit when the form isn't valid
+
+
+
+
+      axios.delete('http://127.0.0.1:8000/api/usuarios/' + id)
+      .then(response => {
+                  this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.nombreApi);
+
+        this.result.splice(id, 1)
+        console.log(this.result);
+      });
     }
 
-    }
+    },
+
+  }
 
 </script>

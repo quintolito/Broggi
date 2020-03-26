@@ -21,8 +21,8 @@ class tipusAlertant extends Model
         return $this->belongsTo('App\Models\incidencias');
     }
 
-    public function Alertant()
+    public function alertants()
     {
-        return $this->belongsTo('App\Models\Alertant');
+        return $this->hasMany('App\Models\Alertant', 'tipus_alertant_id');
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Clases\Utilitat;
 
 use  App\Http\Resources\alertantResource;
+use Illuminate\Database\QueryException;
 
 class alertantController extends Controller
 {
@@ -22,7 +23,8 @@ class alertantController extends Controller
     {
         //
         $Alertant = Alertant::all();
-        return new alertantResource($Alertant);
+        return  alertantResource::collection($Alertant);
+
     }
 
     /**
@@ -34,7 +36,40 @@ class alertantController extends Controller
     public function store(Request $request)
     {
         //
+        $Alertant = new Alertant();
 
+
+        $Alertant->nom = $request->input('nom');
+
+        $Alertant->adreca = $request->input('adreca');
+
+
+        $Alertant->municipis_id = $request->input('municipis_id');
+
+        $Alertant->telefon = $request->input('telefon');
+
+        $Alertant->tipus_alertant_id = $request->input('tipus_alertant_id');
+
+
+
+
+        try {
+            $Alertant->save();
+            //$incidencia->pivot->1;
+
+
+
+            //$incidencia->incidenciahasrecursos()->attach($Recusr[0]);
+
+            $resposta = (new alertantResource($Alertant))->response()->setStatusCode(201);
+
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
+
+            $resposta = response()->json(['error' => $error], 400);
+        }
+
+        return     $resposta;
 
     }
 
@@ -60,9 +95,45 @@ class alertantController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alertant $alertant)
+    public function update(Request $request,  $id)
     {
         //
+        $Alertant =  Alertant::find($id);
+
+
+        $Alertant->nom = $request->input('nom');
+
+        $Alertant->adreca = $request->input('adreca');
+
+
+        $Alertant->municipis_id = $request->input('municipis_id');
+
+        $Alertant->telefon = $request->input('telefon');
+
+        $Alertant->tipus_alertant_id = $request->input('tipus_alertant_id');
+
+
+
+
+        try {
+            $Alertant->save();
+            //$incidencia->pivot->1;
+
+
+
+            //$incidencia->incidenciahasrecursos()->attach($Recusr[0]);
+
+            $resposta = (new alertantResource($Alertant))->response()->setStatusCode(201);
+
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
+
+            $resposta = response()->json(['error' => $error], 400);
+        }
+
+        return     $resposta;
+
+
     }
 
     /**
@@ -71,8 +142,30 @@ class alertantController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alertant $alertant)
+    public function destroy( $id_ciudad)
     {
         //
+
+        $alertant = Alertant::find($id_ciudad);
+
+
+
+        if ($alertant != null) {
+            try {
+
+
+                $alertant->delete();
+                $respuesta = (new alertantResource($alertant))->response()->setStatusCode(200);
+            } catch (QueryException $e) {
+                $mensaje = Utilitat::errorMessage($e);
+                $respuesta = response()->json(["error" => $mensaje], 400);
+            }
+        } else {
+            $respuesta = response()->json(["error" => 'REGISTRO NO ENCONTRADO'], 404);
+        }
+
+        return $respuesta;
     }
+
+
 }

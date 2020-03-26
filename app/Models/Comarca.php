@@ -14,12 +14,13 @@ class Comarca extends Model
     public $timestamps = false;
 
 
-    public function provincies()
+    public function municipis()
     {
-        return $this->hasMany('App\Models\Provincia', 'id', 'provincies_id');
+        return $this->hasMany('App\Models\Municipi', 'comarques_id');
     }
-    public function municipi()
+
+    public function provincia()
     {
-        return $this->belongsTo('App\Models\Municipi');
+        return $this->belongsTo('App\Models\Provincia', 'provincies_id');
     }
 }

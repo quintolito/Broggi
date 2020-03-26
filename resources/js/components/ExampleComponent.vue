@@ -2,105 +2,7 @@
     <div>
 
 
-       <!-- <calendar></calendar>-->
-             <p>{{  message}} </p>
-             <p>{{  count}} </p>
-            <button class="btn btn-primary" @click="incrementBy(5)">+</button>
-            <button class="btn btn-danger" @click="disminuir(5)">-</button>
-              <div>
-    <b-button @click="modalShow = !modalShow">Open Modal</b-button>
-
-    <b-modal v-model="modalShow">Hello From Modal!</b-modal>
-  </div>
-
-
-
-             <!--<p>{{  users}} </p>
- <table class="users" v-if="users.length != 0">
-      <tr>
-        <th>Name</th>
-        <th>Username</th>
-        <th>Email</th>
-      </tr>
-      <tr v-for="user in users">
-        <td>{{user.name}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.email}}</td>
-      </tr>
-      <tr></tr>
-</table>
- <table class="users" v-else>
-      <tr>
-        <th>titulo</th>
-        <th>descriptcion</th>
-      </tr>
-      <tr  v-for="post in posts">
-        <td>{{post.title}}</td>
-        <td>{{post.body}}</td>
-      </tr>
-    </table>
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-            <b-form-group
-                id="input-group-1"
-                label="Email address:"
-                label-for="input-1"
-                description="We'll never share your email with anyone else."
-            >
-                <b-form-input
-                    id="input-1"
-                    v-model="form.email"
-                    type="email"
-                    required
-                    placeholder="Enter email"
-                ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-                id="input-group-2"
-                label="Your Name:"
-                label-for="input-2"
-            >
-                <b-form-input
-                    id="input-2"
-                    v-model="form.name"
-                    required
-                    placeholder="Enter name"
-                ></b-form-input>
-            </b-form-group>
-
-            <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-                <b-form-select
-                    id="input-3"
-                    v-model="form.food"
-                    :options="foods"
-                    required
-                ></b-form-select>
-            </b-form-group>
-
-            <b-form-group id="input-group-4">
-                <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-                    <b-form-checkbox value="me">Check me out</b-form-checkbox>
-                    <b-form-checkbox value="that"
-                        >Check that out</b-form-checkbox
-                    >
-                </b-form-checkbox-group>
-            </b-form-group>
-
-            <b-button type="submit" variant="primary">Submit</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
-        </b-form>
-        <b-card class="mt-3" header="Form Data Result">
-            <pre class="m-0">{{ form }}</pre>
-        </b-card>
-        -->
-        <!-- Using modifiers -->
-        <b-button v-b-modal.my-modal>Show Modal</b-button>
-
-        <!-- Using value -->
-        <b-button v-b-modal="'my-modal'">Show Modal</b-button>
-
-        <!-- The modal -->
-        <b-modal id="my-modal">Hello From My Modal!</b-modal>
+        <modal-Post></modal-Post>
         <!-- The modal
         <modal></modal>
         <tableJS></tableJS>
@@ -108,7 +10,7 @@
 
         <tableJS></tableJS>-->
 
-        <tablecomplexa></tablecomplexa>
+        <tablecomplexa ref="table" nombreApi="usuarios"></tablecomplexa>
 
     </div>
 </template>
@@ -121,19 +23,17 @@ export default {
     data() {
         return {
             form: {
-                email: "",
-                name: "",
-                food: null,
-                checked: []
-
+                codi:0,
+                nom:"",
+                contrasenya:"",
+                rols_id: null
             },
 
-            foods: [
+            rols_id: [
                 { text: "Select One", value: null },
-                "Carrots",
-                "Beans",
-                "Tomatoes",
-                "Corn"
+                1,
+                2
+
             ],
             show: true,
             modalShow: false
@@ -152,6 +52,18 @@ export default {
 
 
         },
+        mounted(){
+
+                                        this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/usuarios');
+        },
+          updated() {
+        //SE EJECUTA CUÁNDO SE RALIZAN LOS CAMBIOS
+                                                this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/usuarios');
+
+        console.log('update');
+       // onReset(evt);
+
+    },
          created() {
 
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/users');
@@ -167,15 +79,36 @@ export default {
         ...Vuex.mapMutations(['incrementBy','disminuir','hideModal']),
         onSubmit(evt) {
             evt.preventDefault();
-            alert(JSON.stringify(this.form));
-        },
-        onReset(evt) {
-            evt.preventDefault();
+              let me=this;
+              console.log(JSON.stringify(this.form));
+                axios.post('http://127.0.0.1:8000/api/usuarios',this.form).then(function(response){
+                    //me.rols=response.data;
+                    console.log(response);
+
+                    alert("Se ha generado correctamente.");
+
+
+                })
+                .catch(function(error){
+                console.log(error)
+                 })
+                  setTimeout(function(){
+                    this.codi = this.nom = '';
+
+                        evt.target.reset();            }, 2000);
+                          /*this.form.codi = "";
+                      this.form.nom = "";
+                      this.form.contrasenya = null;*/
+
+            },
+
+        onReset() {
+
             // Reset our form values
-            this.form.email = "";
-            this.form.name = "";
-            this.form.food = null;
-            this.form.checked = [];
+
+            this.form.codi = "";
+            this.form.nom = "";
+            this.form.contrasenya = null;
             // Trick to reset/clear native browser form validation state
             this.show = false;
             this.$nextTick(() => {
@@ -184,9 +117,10 @@ export default {
         },
         modal(){
               this.hideModal();
-        }
+        },
     }
-};
+}
+
 </script>
 <style scoped>
 table {

@@ -71,5 +71,8 @@ class TipusRecursController extends Controller
     public function destroy(Alertant $alertant)
     {
         //
+
+
+
     }
 }

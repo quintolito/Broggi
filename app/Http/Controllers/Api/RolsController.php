@@ -35,8 +35,29 @@ class RolsController extends Controller
     {
         //
 
+        $Rols = new Rols();
 
-    }
+
+        $Rols->nom = $request->input('nom');
+
+
+        try {
+            $Rols->save();
+            //$incidencia->pivot->1;
+
+
+
+            //$incidencia->incidenciahasrecursos()->attach($Recusr[0]);
+
+            $resposta = (new RolsResource($Rols))->response()->setStatusCode(201);
+
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
+
+            $resposta = response()->json(['error' => $error], 400);
+        }
+
+        return     $resposta;    }
 
     /**
      * Display the specified resource.

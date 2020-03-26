@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Laravel</title>
+        <title>PRUEBA</title>
 
         <!-- Fonts -->
 
@@ -15,7 +15,12 @@
     </head>
     <body>
         <div id="app">
-            <example-component></example-component>
+            <!-- <example-component></example-component> -->
+        <tablecomplexa  tablaccion= "{{$tablaccion}}" api="{{$api}}"></tablecomplexa>
+
+        <probademodal></probademodal>
+        <modal-post test= "{{$test}}" tipoaccion= "{{$tipoaccion}}"></modal-post>
+            <p>{{$tipoaccion}} {{$test}}</p>
         </div>
     </body>
     <script src="{{asset('js/app.js')}}"></script>

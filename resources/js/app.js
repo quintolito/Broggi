@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-//require("./bootstrap");
+require("./bootstrap");
 import Vue from "vue";
 
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
@@ -40,10 +40,21 @@ Vue.component(
     "example-component",
     require("./components/ExampleComponent.vue").default
 );
+
+Vue.component(
+    "modal-post",
+    require("./components/TESTPOSRTDEVAL.vue").default
+);
+
+
+
 Vue.component("modal", require("./components/modal.vue").default);
 Vue.component("calendar", require("./components/calendar.vue").default);
 Vue.component("tableJS", require("./components/table.vue").default);
 Vue.component("tablecomplexa", require("./components/tablecomplexa.vue").default);
+Vue.component("probademodal", require("./components/modalboostrappryeba.vue").default);
+
+devtool: 'source-map';
 
 
 /**
@@ -57,7 +68,12 @@ const store = new Vuex.Store({
         count:0,
         message: 'Hello World',
         users: [],
+        alertants:[],
         posts:[],
+        tipoRols:[],
+        municipis:[],
+        tipoRecursos:[],
+        tipoAlertant:[],
         modalVisible: false,
         modalComponent: null,
       },
@@ -71,19 +87,73 @@ const store = new Vuex.Store({
 
         loadUsers({commit},url) {
           axios.get(url).then(result => {
-              if(url.includes('posts')){
-                commit('SAVE_POSTS',result);
-              }else{
+
                 commit('SAVE_USERS',result.data);
 
-              }
+
+
 
           }).catch(error => {
             throw new Error(`API ${error}`);
           });
         },
 
+        loadRols({commit},url) {
+            axios.get(url).then(result => {
 
+                  commit('SAVE_ROLS',result.data);
+
+
+
+            }).catch(error => {
+              throw new Error(`API ${error}`);
+            });
+          },
+          loadRecursos({commit},url) {
+            axios.get(url).then(result => {
+
+                  commit('SAVE_RECURSOS',result.data);
+
+
+
+            }).catch(error => {
+              throw new Error(`API ${error}`);
+            });
+          },
+
+        loadMunicipi({commit},url) {
+            axios.get(url).then(result => {
+
+                  commit('SAVE_MUNICIPI',result.data);
+
+
+
+            }).catch(error => {
+              throw new Error(`API ${error}`);
+            });
+          },
+          tipuAlertant({commit},url) {
+            axios.get(url).then(result => {
+
+                  commit('SAVE_TIPOALERTANT',result.data);
+
+
+
+            }).catch(error => {
+              throw new Error(`API ${error}`);
+            });
+          },
+          loadAlertant({commit},url) {
+            axios.get(url).then(result => {
+
+                commit('SAVE_USERS',result.data);
+
+
+
+            }).catch(error => {
+              throw new Error(`API ${error}`);
+            });
+          },
 
     },
 
@@ -91,8 +161,21 @@ const store = new Vuex.Store({
         incrementBy(state, n) {
             state.count += n;
           },
+          SAVE_RECURSOS(state,tipoRecursos){
+            state.tipoRecursos=tipoRecursos ;
+          },
+          SAVE_ROLS(state,tipoRols){
+            state.tipoRols=tipoRols ;
+
+          },
+          SAVE_ALERTAMT(state,alertants){
+            state.alertants=alertants;
+          },
           disminuir(state) {
             state.count -= 2;
+          },
+          SAVE_MUNICIPI(state, municipis) {
+            state.municipis=municipis ;
           },
           SAVE_USERS(state, users) {
             state.users=users ;
@@ -100,6 +183,9 @@ const store = new Vuex.Store({
           },
           SAVE_POSTS(state, posts) {
             state.posts=posts ;
+          },
+          SAVE_TIPOALERTANT(state, tipoAlertant) {
+            state.tipoAlertant=tipoAlertant ;
           },
           showModal(state, componentName) {
             state.modalVisible = true;

@@ -13,8 +13,8 @@ class Provincia extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    public function Comarca()
+    public function municipis()
     {
-        return $this->belongsTo('App\Models\Comarca');
+        return $this->hasMany('App\Models\Provincia', 'provincies_id');
     }
 }
