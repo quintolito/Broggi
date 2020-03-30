@@ -16,3 +16,8 @@ Route::get('/', function () {
     return view('welcome')->with('nombreApi',$nombreApi);
 });*/
 Route::get('/','PruebaController@index' );
+
+
+Route::get('/template', function(){
+    return view ('templates.main');
+} );

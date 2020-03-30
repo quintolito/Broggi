@@ -1,0 +1,37 @@
+
+/*font family*/
+@import url(https://fonts.googleapis.com/css?family=Bungee&display=swap);
+
+/*template*/
+body{
+    /*si descomentem apareix el dgradat*/
+    /*background: linear-gradient(to left, #ffffff, #D9E8F5);*/
+} 
+#template .navbar {
+    background-color: #304269;
+    
+    font-family: 'Bungee', cursive !important;
+}
+
+/* classe aplicable a tots els botons principals */
+.boto-primari
+{
+    background-color: #f26101 !important;
+}
+/* classe aplicable a tots els botons secondaris */
+.boto-secondari
+{
+    background-color: #91BED4 !important;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /*no canviar alçada plz*/
+    height: 60px;
+    background-color: #304269;
+}
+
+   
+
