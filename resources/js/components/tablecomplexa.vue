@@ -1,10 +1,19 @@
 <template>
   <b-container fluid>
-    <!-- User Interface controls-->
+    <!-- User Interface controls
 
 
+    <b-form-input list="my-list-id"></b-form-input>
 
+  <datalist id="my-list-id">
 
+    <option v-for="size in municipis" :key="size.id">{{ size.nom }}
+      <p>{{size.id}}</p>
+    </option>
+
+  </datalist>
+
+-->
 
 
     <b-row>
@@ -329,7 +338,11 @@
           placeholder="Enter contrasenya"
         ></b-form-input>
       </b-form-group>
+
       <b-form-group id="input-group-3" label="municipis_id" label-for="input-3">
+
+
+
                 <select v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-control" tabindex="12">
             <option v-for="(municipi, index) in municipis"
                     :key="index"
@@ -337,6 +350,18 @@
             </option>
         </select>
 
+
+<!-- cAMBIAR POR DATALIST PERO SE LAGEA
+  <b-form-input  v-model="formAlertant.municipis_id"  name="municipi" id="municipi" list="my-list-id"></b-form-input>
+
+  <datalist id="my-list-id" >
+    <option>Manual Option</option>
+    <option v-for="municipi in municipis " :key="municipi.id">{{ municipi }}</option>
+
+
+
+  </datalist>
+-->
       </b-form-group>
 
 
@@ -352,12 +377,25 @@
       </b-form-group>
 
 
+<!--
+  <b-form-input  v-model="formAlertant.municipis_id"  name="municipi" id="municipi" list="my-list-id"></b-form-input>
 
+  <datalist id="my-list-id" >
 
+    <option v-for="(municipi, index) in municipis"
+                    :key="index"
+                    :value="municipi.nom">
+
+    </option>
+
+  </datalist>
+-->
 
 
       </form>
+
     </b-modal>
+
  <p>{{users.tipus_alertant}}</p>
   </b-container>
 
@@ -406,6 +444,7 @@ import Vuex from 'vuex';
         ],
         click:0,
         //totalRows: 1,
+        VALOR:0,
         currentPage: 1,
         perPage: 5,
         pageOptions: [5, 10, 15],
@@ -452,6 +491,7 @@ import Vuex from 'vuex';
     computed: {
                    ...Vuex.mapState(['message','count','users','posts','tipoRols','municipis','tipoAlertant','tipoRecursos']),
          //...Vuex.mapGetters({selectedOption:'getUsers'}),
+
       sortOptions() {
         // Create an options list from our fields
         return this.fields
@@ -460,13 +500,7 @@ import Vuex from 'vuex';
             return { text: f.label, value: f.key }
           })
       },
-        message: {
-    get () {
-      return this.items=this.$store.state.users
 
-      console.log(this.$store.state.users);
-    },
-        },
 
 
     },
@@ -483,7 +517,8 @@ import Vuex from 'vuex';
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/posts');
             // this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
              //this.items=  this.users.length;/
-                           this.$store.dispatch('loadRols',' http://127.0.0.1:8000/api/alertant');
+               this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+
         /*if(this.api =="alertant"){
                     this.$store.dispatch('loadAlertant','http://127.0.0.1:8000/api/'+this.api );
 
@@ -501,12 +536,19 @@ import Vuex from 'vuex';
   },
   beforeUpdate(){
                   // this.selectedOption=this.getResults
+
     this.$root.$emit('bv::refresh::table', 'my-table')
 
     this.pageOptions.push(this.$store.state.count);
 
 
   },
+    updated() {
+        //SE EJECUTA CUÁNDO SE RALIZAN LOS CAMBIOS
+                                        // this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+
+        console.log('update');
+    },
  async mounted() {
 
     this.get();
@@ -517,10 +559,18 @@ import Vuex from 'vuex';
         console.log('beforeMount');
 
 
+                                 this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
 
 
     },
     methods: {
+          makeToast(variant = null) {
+        this.$bvToast.toast('Toast body content', {
+          title: `Variant ${variant || 'default'}`,
+          variant: variant,
+          solid: true
+        })
+      },
  get () {
       return this.Pruebamunicipi=this.$store.state.users
 
@@ -612,6 +662,7 @@ import Vuex from 'vuex';
                     //me.rols=response.data;
 
                            console.log(this.result);
+                            this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+Apiactuar);
 
 
                 })
@@ -679,6 +730,7 @@ import Vuex from 'vuex';
       },
       handleSubmit() {
         // Exit when the form isn't valid
+
          console.log("cerrar modal");
         console.log(this.infoModal);
       // location.reload();
@@ -688,7 +740,9 @@ import Vuex from 'vuex';
         // Push the name to submitted names
         // Hide the modal manually
         this.$nextTick(() => {
+            this.popToast();
           // Wrapped in $nextTick to ensure DOM is rendered before closing
+          this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api);
           this.$refs.modal.hide()
         })
       },
@@ -705,9 +759,42 @@ import Vuex from 'vuex';
         this.result.splice(id, 1)
         console.log(this.result);
       });
+    },
+      popToast() {
+        // Use a shorter name for this.$createElement
+        const h = this.$createElement
+        // Increment the toast count
+        this.VALOR++
+        // Create the message
+        const vNodesMsg = h(
+          'p',
+          { class: ['text-center', 'mb-0'] },
+          [
+            h('b-spinner', { props: { type: 'grow', small: true } }),
+            ' Flashy ',
+            h('strong', 'toast'),
+            ` message #${this.count} `,
+            h('b-spinner', { props: { type: 'grow', small: true } })
+          ]
+        )
+           // Create the title
+        const vNodesTitle = h(
+          'div',
+          { class: ['d-flex', 'flex-grow-1', 'align-items-baseline', 'mr-2'] },
+          [
+            h('strong', { class: 'mr-2' }, 'The Title'),
+            h('small', { class: 'ml-auto text-italics' }, '5 minutes ago')
+          ]
+        )
+        // Pass the VNodes as an array for message and title
+        this.$bvToast.toast([vNodesMsg], {
+          title: [vNodesTitle],
+          solid: true,
+          variant: 'success'
+        })
+      }
     }
 
-    },
 
   }
 

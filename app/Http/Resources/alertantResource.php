@@ -14,8 +14,8 @@ class alertantResource extends JsonResource
      */
     public function toArray($request)
     {
-      /* return parent::toArray($request);*/
-      return [
+      return parent::toArray($request);
+     /* return [
         "id" => $this->id,
         "nom" => $this->nom,
         "adreca" => $this->adreca,
@@ -23,7 +23,7 @@ class alertantResource extends JsonResource
         "municipi"=>$this->municipi,
         "telefon"=>$this->telefon,
         "tipus_alertant"=>$this->tipus_alertant
-    ];
+    ];*/
 
 
     }

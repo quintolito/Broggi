@@ -161,6 +161,9 @@ const store = new Vuex.Store({
         incrementBy(state, n) {
             state.count += n;
           },
+          setShowAlert(state, value) {
+            state.showAlert = value
+          },
           SAVE_RECURSOS(state,tipoRecursos){
             state.tipoRecursos=tipoRecursos ;
           },

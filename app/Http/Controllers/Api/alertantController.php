@@ -22,7 +22,15 @@ class alertantController extends Controller
     public function index()
     {
         //
-        $Alertant = Alertant::all();
+        try{
+        $Alertant = Alertant::with('municipi','tipus_alertant')->get();
+        }
+        catch(QueryException $e) {
+        $error = Utilitat::errorMessage($e);
+
+        return response()->json(['error' => $error], 403);
+
+         }
         return  alertantResource::collection($Alertant);
 
     }
