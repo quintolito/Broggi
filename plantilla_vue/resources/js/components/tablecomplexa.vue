@@ -112,134 +112,13 @@
         <b-button size="sm" @click="update(row.item, row.item.id, $event.target)" class="mr-1">
           Update
         </b-button>
-<!--
-        <b-button size="sm" @click="eliminar(row.item.id)">
-          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-        </b-button>
-
-      </template>
-      <template v-slot:row-details="row">
-        <b-card>
-          <ul>
-            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
-          </ul>
-        </b-card>
 
 -->
       </template>
 
     </b-table>
 
-<!--
 
- <b-modal
-      id="info-delete"
-      :title="deleteModal.titulo"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="Borrarelemento"
-    >
-
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-
-      </form>
-
-    </b-modal>
-
-
-
--->
-
-
-
-
-
-
-
-
-<!--
-
-    <b-modal :id="infoModal.id" :title="infoModal.title"        @ok="handleOk"  >
-      <pre>{{ infoModal.content }}
-
-
-      </pre>
-      </b-modal>
-  /*@hide="resetInfoModal(infoModal.content[1])" */
-
-    <b-modal
-      id="info-modal"
-      ref="modal"
-      :title="infoModal.title"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-    >
-
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-
-        <b-form-group
-          label="Codi"
-          label-for="name-input"
-          invalid-feedback="Codi is required"
-        >
-          <b-form-input
-            id="name-input"
-            required
-            label=""
-             v-model="infoModal.codi"
-
-          ></b-form-input>
-
-
-
-      <b-form-group
-        id="input-group-1"
-        label="Contraseña address:"
-
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-
-        v-model="infoModal.Contraseña"
-
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          required
-          v-model="infoModal.nom"
-            ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-         <select v-model="infoModal.rols_id" name="city" id="city" class="form-control" tabindex="12">
-            <option v-for="(city, index) in tipoRols"
-                    :key="index"
-                    :value="city.id">{{ city.nom }}
-            </option>
-        </select>
-      </b-form-group>
-
-
-
-
-
-
-
-
-        </b-form-group>
-      </form>
-
-
-    </b-modal>
-
--->
 
 
     <b-modal
@@ -371,6 +250,7 @@
 </template>
 
 <script>
+// agafem el TITO vuex de app.js
 import Vuex from 'vuex';
 
   export default {
@@ -471,10 +351,8 @@ import Vuex from 'vuex';
 
     },
     beforeCreate() {
-                        this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
 
-        console.log(this.$store.state.users[0])
-
+     
     },
 
     created() {
@@ -491,6 +369,14 @@ import Vuex from 'vuex';
         }else{
         this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api );
         }*/
+
+         /**
+       * En funcio del tipus d'api, crearem un tipud de taula o una altra
+       * dispatch: mirar documentacio
+      */
+        this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+ this.api);
+
+        console.log(this.$store.state.users[0])
 
 
   console.log( this.Pruebamunicipi[0]);

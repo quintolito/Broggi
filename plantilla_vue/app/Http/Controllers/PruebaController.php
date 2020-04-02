@@ -14,7 +14,8 @@ class PruebaController extends Controller
         $tipoaccion="alertant";
         $tablaccion ="alertant";
         $test="Prueba de pasar mas parametros";
-        return view('welcome')->with('api',$api)->with('tipoaccion',$tipoaccion)->with('test',$test)->with('tablaccion',$tablaccion);
+        //return view('welcome')->with('api',$api)->with('tipoaccion',$tipoaccion)->with('test',$test)->with('tablaccion',$tablaccion);
+        return view('welcome', compact('api', 'tipoaccion', 'test', 'tablaccion'));
 
     }
     public function indexStreetfighterranking()

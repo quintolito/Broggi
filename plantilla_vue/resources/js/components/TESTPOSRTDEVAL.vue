@@ -5,7 +5,7 @@
 
     <b-button v-if="tipoaccion == 'usuarios'" v-b-modal.modal-prevent-closing>Open Modal</b-button>
     <b-button v-if="tipoaccion == 'alertant'" v-b-modal.modal-Alertant>Open Modal</b-button>
-    <b-button v-if="tipoaccion == 'recurso'" v-b-modal.modal-recursos>Open Modal</b-button>
+    <b-button v-if="tipoaccion == 'recurso'" v-b-modal.modal-recursos>Recurs Modal</b-button>
 
     <b-button v-else v-b-modal.modalPostRol>Open Modal</b-button>
 

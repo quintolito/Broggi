@@ -63,6 +63,10 @@ devtool: 'source-map';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+/**
+ * serveix per a crear funcions general per a utilitzar tot els compoenents
+ */
+
 const store = new Vuex.Store({
       state: {
         count:0,
@@ -84,14 +88,13 @@ const store = new Vuex.Store({
 }
 },
     actions: {
-
+        // metode per a obtenir els valor amb api (get)
+        // commir === a java "push"
         loadUsers({commit},url) {
           axios.get(url).then(result => {
 
+              // fer switch
                 commit('SAVE_USERS',result.data);
-
-
-
 
           }).catch(error => {
             throw new Error(`API ${error}`);
@@ -156,7 +159,7 @@ const store = new Vuex.Store({
           },
 
     },
-
+    // mutations: permet afegir qualsevol valor a l'array
     mutations: {
         incrementBy(state, n) {
             state.count += n;

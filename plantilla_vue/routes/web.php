@@ -21,3 +21,9 @@ Route::get('/','PruebaController@index' );
 Route::get('/template', function(){
     return view ('templates.main');
 } );
+
+Route::get('/form_incidencia', function(){
+    return view ('forms.form_incidencia');
+} );
+
+Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );

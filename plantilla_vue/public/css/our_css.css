@@ -5,11 +5,10 @@
 /*template*/
 body{
     /*si descomentem apareix el dgradat*/
-    /*background: linear-gradient(to left, #ffffff, #D9E8F5);*/
+    background: linear-gradient(to left, #ffffff, #D9E8F5);
 } 
 #template .navbar {
-    background-color: #304269;
-    
+    background-color: #304269;    
     font-family: 'Bungee', cursive !important;
 }
 
@@ -31,6 +30,10 @@ body{
     /*no canviar alçada plz*/
     height: 60px;
     background-color: #304269;
+}
+
+.titol{
+    font-family: 'Bungee', cursive !important;
 }
 
    
