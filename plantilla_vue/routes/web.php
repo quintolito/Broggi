@@ -22,8 +22,8 @@ Route::get('/template', function(){
     return view ('templates.main');
 } );
 
-Route::get('/form_incidencia', function(){
-    return view ('forms.form_incidencia');
-} );
-
+// INCIÈNCIA
+    //taula
 Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
+    //form
+Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');

@@ -5,13 +5,13 @@
 @endsection
 
 @section('main')
-    {{-- 
-        tablecomplexa: component vue, li passem accio i api corresponent 
-        (per a + info, mirar a Controllers\IncidienciaController) 
-    --}}
+    
+    <h1 class="display-4 text_titol">
+        INCIDÈNCIES
+    </h1>
     <div class="card p-3">
         <div card-body>
-            <a href="{{-- action('IncidenciaController@create') --}}" class="btn boto-terciari">
+            <a href="{{ action('IncidenciaController@mostrarForm')}}" class="btn boto-terciari">
                 
                 <span>
                     NOVA INCIDÈNCIA
@@ -19,7 +19,11 @@
             </a>
         </div>
     </div>
-    <div id="app">
+    {{-- 
+        tablecomplexa: component vue, li passem accio i api corresponent 
+        (per a + info, mirar a Controllers\IncidienciaController) 
+    --}}
+    <div id="app" class="mt-5">
         <tablecomplexa  tablaccion= "{{$tablaccion}}" api="{{$api}}"></tablecomplexa>
     </div>
     

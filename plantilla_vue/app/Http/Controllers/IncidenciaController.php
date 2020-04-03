@@ -11,15 +11,16 @@ class IncidenciaController extends Controller
     **/
     public function mostrarTaula()
     {
-        $api='privincia';
+        $api='alertant';
         $tablaccion ="alertant";
 
         // tornem la vista
         return view('taules.taula_incidencia', compact('api', 'tablaccion'));
     }
 
-    public function formIbcidencia()
+    public function mostrarForm()
     {
         
+        return view('forms.form_incidencia');
     }
 }
