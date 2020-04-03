@@ -17,4 +17,9 @@ class IncidenciaController extends Controller
         // tornem la vista
         return view('taules.taula_incidencia', compact('api', 'tablaccion'));
     }
+
+    public function formIbcidencia()
+    {
+        
+    }
 }
