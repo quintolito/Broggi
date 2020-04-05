@@ -11,8 +11,8 @@ class PruebaController extends Controller
     {
 
         $api='alertant';
-        $tipoaccion="alertant";
         $tablaccion ="alertant";
+        $tipoaccion="alertant";
         $test="Prueba de pasar mas parametros";
         //return view('welcome')->with('api',$api)->with('tipoaccion',$tipoaccion)->with('test',$test)->with('tablaccion',$tablaccion);
         return view('welcome', compact('api', 'tipoaccion', 'test', 'tablaccion'));

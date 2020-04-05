@@ -20,7 +20,10 @@ class IncidenciaController extends Controller
 
     public function mostrarForm()
     {
+        $tipoaccion ="alertant";
+        $test="Prueba de pasar mas parametros";
+
         
-        return view('forms.form_incidencia');
+        return view('forms.form_incidencia', compact('tipoaccion', 'test'));
     }
 }

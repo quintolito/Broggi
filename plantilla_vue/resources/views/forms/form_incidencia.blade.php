@@ -8,6 +8,10 @@
 
     <h1 class="display-4 text_titol">
         NOVA INCIDÈNCIA
-    </h1>
+	</h1>
+	<div id="app">
+		<form-incidencia test= "{{$test}}" tipoaccion= "{{$tipoaccion}}"></form-incidencia>
+	</div>	
+	
     
 @endsection

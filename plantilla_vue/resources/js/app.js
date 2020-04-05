@@ -54,6 +54,8 @@ Vue.component("tableJS", require("./components/table.vue").default);
 Vue.component("tablecomplexa", require("./components/tablecomplexa.vue").default);
 Vue.component("probademodal", require("./components/modalboostrappryeba.vue").default);
 
+Vue.component("form-incidencia", require("./components/form_incidencia.vue").default);
+
 devtool: 'source-map';
 
 
