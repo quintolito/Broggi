@@ -53,6 +53,7 @@ Vue.component("calendar", require("./components/calendar.vue").default);
 Vue.component("tableJS", require("./components/table.vue").default);
 Vue.component("tablecomplexa", require("./components/tablecomplexa.vue").default);
 Vue.component("probademodal", require("./components/modalboostrappryeba.vue").default);
+Vue.component("sumbittest", require("./components/TestFrancisco.vue").default);
 
 devtool: 'source-map';
 
@@ -74,8 +75,10 @@ const store = new Vuex.Store({
         municipis:[],
         tipoRecursos:[],
         tipoAlertant:[],
+        recursosMobile:[],
         modalVisible: false,
         modalComponent: null,
+
       },
     getters:{
         getUsers:  state => {
@@ -85,20 +88,61 @@ const store = new Vuex.Store({
 },
     actions: {
 
+
         loadUsers({commit},url) {
+
           axios.get(url).then(result => {
+                //hacer switch
 
-                commit('SAVE_USERS',result.data);
+                if(url.includes("alertant")){
+
+                    commit('SAVE_USERS',result.data);
+                }
+                else if(url.includes("recurso")){
+                    commit('SAVE_USERS',result.data);
+                }
+                else if(url.includes("rols")){
+                    commit('SAVE_ROLS',result.data);
+                }
+                else if(url.includes("TipusR")){
+
+                  commit('SAVE_RECURSOS',result.data);
+                }
+                else if(url.includes("municipi")){
+                    commit('SAVE_MUNICIPI',result.data);
+                }
+                else if(url.includes("TipusA")){
+                    commit('SAVE_TIPOALERTANT',result.data);
+                }
 
 
+                console.log(url);
 
+
+/*
+              this.$store.dispatch('loadRols',' http://127.0.0.1:8000/api/rols');
+               this.$store.dispatch('loadMunicipi',' http://127.0.0.1:8000/api/municipi');
+               this.$store.dispatch('tipuAlertant',' http://127.0.0.1:8000/api/TipusA');
+               this.$store.dispatch('loadRecursos',' http://127.0.0.1:8000/api/TipusR');
+
+    },
+            switch(url) {
+                        case url.includes("alertant"):
+                        // code block
+                        commit('SAVE_USERS',result.data);
+                        break;
+
+                        default:
+                        // code block
+        }
+*/
 
           }).catch(error => {
             throw new Error(`API ${error}`);
           });
         },
 
-        loadRols({commit},url) {
+       /* loadRols({commit},url) {
             axios.get(url).then(result => {
 
                   commit('SAVE_ROLS',result.data);
@@ -154,6 +198,7 @@ const store = new Vuex.Store({
               throw new Error(`API ${error}`);
             });
           },
+          */
 
     },
 
@@ -161,6 +206,7 @@ const store = new Vuex.Store({
         incrementBy(state, n) {
             state.count += n;
           },
+
           setShowAlert(state, value) {
             state.showAlert = value
           },
@@ -189,6 +235,9 @@ const store = new Vuex.Store({
           },
           SAVE_TIPOALERTANT(state, tipoAlertant) {
             state.tipoAlertant=tipoAlertant ;
+          },
+          SAVE_ALLRECURSOS(state, recursosMobile) {
+            state.recursosMobile=recursosMobile ;
           },
           showModal(state, componentName) {
             state.modalVisible = true;

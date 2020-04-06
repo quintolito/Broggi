@@ -6,6 +6,8 @@
 body{
     /*si descomentem apareix el dgradat*/
     /*background: linear-gradient(to left, #ffffff, #D9E8F5);*/
+    background: linear-gradient(to left, #ffffff, #D9E8F5);
+
 }
 #template .navbar {
     background-color: #304269;
@@ -25,7 +27,7 @@ body{
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     /*no canviar alçada plz*/
@@ -35,10 +37,12 @@ body{
 
 
 
-.container{
 
+.container{
+/*
     height: 100%;
     width: 1000vh;
+    */
     margin-top: 20vh;
   }
 

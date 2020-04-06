@@ -3,10 +3,10 @@
   <div>
 
 
-    <b-button v-if="tipoaccion == 'usuarios'" v-b-modal.modal-prevent-closing>Open Modal</b-button>
-    <b-button v-if="tipoaccion == 'alertant'" v-b-modal.modal-Alertant>Open Modal</b-button>
+    <b-button v-if="tipoaccion == 'usuarios'" v-b-modal.modal-prevent-closing>1</b-button>
+    <b-button v-if="tipoaccion == 'alertant'" v-b-modal.modal-Alertant>Afegeix un alertant </b-button>
 
-    <b-button v-else v-b-modal.modalPostRol>Open Modal</b-button>
+    <b-button v-else v-b-modal.modalPostRol>2</b-button>
 
 
     <b-modal

@@ -13,6 +13,11 @@ class Recurs extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+
+    public function recursosid()
+    {
+        return $this->belongsTo('App\Models\tipusRecurs', 'tipus_recurs_id');
+    }
     public function tipusIncident()
     {
         return $this->hasMany('App\Models\tipusIncident', 'id', 'tipus_recurs_id');

@@ -42,11 +42,11 @@
 
         @yield('main')
 
+
         <footer class="footer">
 
 
         </footer>
-
 
     </div>
 

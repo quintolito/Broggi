@@ -1,27 +1,29 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+@extends('templates.main')
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@section('titol')
+    Taula incidencia
+@endsection
 
-        <title>PRUEBA</title>
-
-        <!-- Fonts -->
-
-        <!-- Styles -->
-
-    </head>
-    <body>
+@section('main')
         <div id="app">
+            <sumbittest></sumbittest>
+
+
+            <modal-post test= "{{$test}}" tipoaccion= "{{$tipoaccion}}"></modal-post>
+
             <!-- <example-component></example-component> -->
-        <tablecomplexa  tablaccion= "{{$tablaccion}}" api="{{$api}}"></tablecomplexa>
+            <!-- EN CADA COMPONENTE PONDREMOS LAS VARIABLES INDICADA PARA CREAR LA  TABLA CON SU CAMPOS CORRESPONDIENTES-->
+        <tablecomplexa  tablaccion= "{{$tablaccion}}" api="{{$api}}" nomtabla="{{$nomtabla}}"
+
+        tipusalertant="{{ $tipusalertant }}"
+        nombtablaalertant="{{ $nombtablaalertant }}"
+
+
+
+        ></tablecomplexa>
 
         <probademodal></probademodal>
-        <modal-post test= "{{$test}}" tipoaccion= "{{$tipoaccion}}"></modal-post>
             <p>{{$tipoaccion}} {{$test}}</p>
         </div>
-    </body>
-    <script src="{{asset('js/app.js')}}"></script>
-</html>
+@endsection
+

@@ -94,12 +94,14 @@
 
     <!-- Main table element -->
     <b-table
+    head-variant="dark"
     id="my-table"
     ref="table"
       show-empty
       small
       stacked="md"
-     :items="users"
+      :items="users"
+
       :fields="fields"
       :current-page="currentPage"
       :per-page="perPage"
@@ -115,7 +117,7 @@
 
       <template v-slot:cell(actions)="row">
 
-        <b-button size="sm" @click="info(row.item, row.item.id, $event.target)" class="mr-1">
+        <b-button size="sm" @click="info(row.item, row.item.id, $event.target)" variant="danger" class="mr-1">
           Info modal
         </b-button>
         <b-button size="sm" @click="update(row.item, row.item.id, $event.target)" class="mr-1">
@@ -396,9 +398,7 @@
 
     </b-modal>
 
- <p>{{users.tipus_alertant}}</p>
   </b-container>
-
 
 
 
@@ -412,7 +412,10 @@
 import Vuex from 'vuex';
 
   export default {
-         props: ['api','tablaccion'],
+      /**
+       * OBTENEMOS LAS VARIABLES PASADAS POR PARAMETRO DE LARAVEL EN VUE CON LAS PROPS
+       */
+         props: ['api','tablaccion','nomtabla','tablanula','datamunicipi','adreca','telefon','tipusalertant','nombtablaalertant'],
     data() {
       return {
           testfields: ['nom', 'last_name', 'age'],
@@ -421,27 +424,22 @@ import Vuex from 'vuex';
 
         ],
         fields: [
-          { key: 'nom', label: 'nom', sortable: true, sortDirection: 'desc' },
-          { key: 'adreca', label: 'Person age', sortable: true, class: 'text-center' },
-          { key: 'telefon', label: 'telefon', sortable: true, class: 'text-center' },
+/**
+ * INDICAREMOS CADA VARIABLE CON SU CAMPO CORRESPONDIENTE.
+ */
+          { key: this.nomtabla, label: this.nomtabla, sortable: true, sortDirection: 'desc' },
+          { key: this.adreca, label: this.adreca, sortable: true, class: 'text-center' },
+          { key: this.telefon, label: this.telefon, sortable: true, class: 'text-center' },
          // { key: 'municipis_id', label: 'municipis', sortable: true, class: 'text-center' },
          // { key: 'municipis_id', label: 'nom', sortable: true, class: 'text-center' },
 
-        { key: 'municipi.nom', label: 'municipi', sortable: true, class: 'text-center' },
-        { key: 'tipus_alertant.tipus', label: 'tipus_alertant', sortable: true, class: 'text-center' },
+        { key: this.datamunicipi , label: 'municipi', sortable: true, class: 'text-center' },
+        { key: this.tipusalertant, label: this.nombtablaalertant, sortable: true, class: 'text-center' },
 
-          {
-            key: 'isActive',
-            label: 'is Active',
-            formatter: (value, key, item) => {
-              return value ? 'Yes' : 'No'
-            },
-            sortable: true,
-            sortByFormatted: true,
-            filterByFormatted: true
-          },
-          { key: 'actions', label: 'Actions' }
+          { key: 'actions', label: 'Actions' , class: 'text-center' },
+
         ],
+
         click:0,
         //totalRows: 1,
         VALOR:0,
@@ -505,9 +503,6 @@ import Vuex from 'vuex';
 
     },
     beforeCreate() {
-                        this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
-
-        console.log(this.$store.state.users[0])
 
     },
 
@@ -517,7 +512,7 @@ import Vuex from 'vuex';
             //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/posts');
             // this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
              //this.items=  this.users.length;/
-               this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+               this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api);
 
         /*if(this.api =="alertant"){
                     this.$store.dispatch('loadAlertant','http://127.0.0.1:8000/api/'+this.api );
@@ -536,8 +531,7 @@ import Vuex from 'vuex';
   },
   beforeUpdate(){
                   // this.selectedOption=this.getResults
-
-    this.$root.$emit('bv::refresh::table', 'my-table')
+this.All_fields=this.fields;
 
     this.pageOptions.push(this.$store.state.count);
 
@@ -559,7 +553,7 @@ import Vuex from 'vuex';
         console.log('beforeMount');
 
 
-                                 this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+                               //  this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
 
 
     },
@@ -598,6 +592,7 @@ import Vuex from 'vuex';
          this.formRecurs.codi=item.codi;
          this.formRecurs.tipus_recurs_id=item.tipus_recurs_id;
 
+                      this.$root.$emit('bv::show::modal', "modal-recursos2", button)
 
         //this.$root.$emit('bv::show::modal', "modal-recursos2", button)
         }
@@ -641,7 +636,7 @@ import Vuex from 'vuex';
                             this.users.splice(prueba, 1) //delete the post
 
                 console.log(this.result);*/
-
+                    this.Actualizar(this.api);
 
 
 
@@ -662,7 +657,8 @@ import Vuex from 'vuex';
                     //me.rols=response.data;
 
                            console.log(this.result);
-                            this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+Apiactuar);
+                            //this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+Apiactuar);
+                            Actualizar(Apiactuar)
 
 
                 })
@@ -727,6 +723,9 @@ import Vuex from 'vuex';
 
           this.handleSubmit();
 
+      },
+      Actualizar(Apiactuar){
+          this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+Apiactuar);
       },
       handleSubmit() {
         // Exit when the form isn't valid
