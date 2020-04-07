@@ -15,7 +15,9 @@ Route::get('/', function () {
     $nombreApi='usuarios';
     return view('welcome')->with('nombreApi',$nombreApi);
 });*/
-Route::get('/','PruebaController@index' );
+Route::get('/Recursos','PruebaController@index' );
+Route::get('/alertant','PruebaController@moostrarvip' );
+
 Route::get('/template', function(){
     return view ('card');
 } );
