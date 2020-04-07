@@ -1,0 +1,83 @@
+
+/*TIPOGRAFIA FONTS */
+    /*titols*/
+@import url(https://fonts.googleapis.com/css?family=Bungee&display=swap);
+    /*text*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans&display=swap);
+
+    /*classe per al titols*/
+.text_titol{
+    font-family: 'Bungee', cursive !important;
+}
+    /*per a tot la resta*/
+*{
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+
+/*template*/
+body{
+    /*si descomentem apareix el dgradat*/
+    background: linear-gradient(to left, #ffffff, #D9E8F5);
+} 
+#template .navbar {
+    background-color: #304269;    
+    /*font per als titols*/
+    font-family: 'Bungee', cursive !important;
+}
+
+/* classe aplicable a tots els botons principals */
+.boto-primari
+{
+    color: white !important;
+    background-color: #f26101 !important;
+}
+/* classe aplicable a tots els botons secondaris */
+.boto-secondari
+{
+    background-color: #91BED4 !important;
+}
+
+.boto-terciari
+{
+    color: white !important;
+    background-color: #304269 !important;
+}
+
+/*
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+    height: 50px;
+    background-color: #304269;
+    left: 0;
+}*/
+
+/*tema login*/
+.logincenter{
+    height: 75vh;
+    justify-content: center;
+    align-items: center;
+}
+
+/*tema register*/
+.registercenter{
+    height: 75vh;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.footer{
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: #304269;
+}
+
+   
+
