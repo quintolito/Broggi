@@ -12,6 +12,73 @@
         ></b-form-input>
       </b-form-group>
 
+      <!-- Hora -->
+      <b-form-group id="input-group-3" label="Hora de l'incidència" label-for="input-3">
+        <b-form-input
+          id="input-2"
+          v-model="formIncidencia.hora"
+          required
+          placeholder="0"
+          type="time"
+        ></b-form-input>
+      </b-form-group>
+
+      <!-- Tipus d'alertant -->
+      <b-form-group id="input-group-4" label="Tipus d'alertant" label-for="input-3">
+        <select
+          v-model="formIncidencia.tipus_alertant_id"
+          name="city"
+          id="city"
+          class="form-control"
+          tabindex="12"
+        >
+          <option
+            v-for="(city, index) in tipoAlertant"
+            :key="index"
+            :value="city.id"
+          >{{ city.tipus }}</option>
+        </select>
+      </b-form-group>
+
+      <!-- Municipi -->
+      <b-form-group id="input-group-3" label="Municipi" label-for="input-3">
+        <select
+          v-model="formIncidencia.municipis_id"
+          name="municipi"
+          id="municipi"
+          class="form-control"
+          tabindex="12"
+        >
+          <option
+            v-for="(municipi, index) in municipis"
+            :key="index"
+            :value="municipi.id"
+          >{{ municipi.nom }}</option>
+        </select>
+      </b-form-group>
+
+      <!-- Adreça -->
+      <b-form-group id="input-group-2" label="Adreça" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="formIncidencia.adreca"
+          required
+          placeholder="Adreça"
+          type=""
+        ></b-form-input>
+      </b-form-group>
+
+      <!-- Complement Adreça -->
+      <b-form-group id="input-group-2" label="Complemnet Adreça" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="formIncidencia.complement_adreca"
+          required
+          placeholder="Informacio complemntaria sobre l'adreça"
+          type="text"
+        ></b-form-input>
+      </b-form-group>
+
       <!-- Nivell incidencia -->
       <b-form-group id="input-group-2" label="Nivell Incidència" label-for="input-2">
         <b-form-input
@@ -25,51 +92,48 @@
         ></b-form-input>
       </b-form-group>
 
-      <!-- Hora -->
-      <b-form-group id="input-group-3" label="Hora de l'incidència" label-for="input-3">
-        <b-form-input
-          id="input-2"
-          v-model="formIncidencia.hora"
-          required
-          placeholder="0"
-          type="time"
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- Tipus d'alertant -->
-      <b-form-group id="input-group-4" label="tipus_alertant_id" label-for="input-3">
-        <select
-          v-model="formIncidencia.tipus_alertant_id"
-          name="city"
-          id="city"
-          class="form-control"
-          tabindex="12"
-        >
-          <option
-            v-for="(city, index) in tipoAlertant"
-            :key="index"
-            :value="city.id"
-          >{{ city.tipus }}</option>
-        </select>
-      </b-form-group>
-
       <!-- Recurs mòbil -->
       <b-form-group id="input-group-4" label="Recurs mòbil" label-for="input-3">
-        <select
-          v-model="formIncidencia.tipus_alertant_id"
-          name="city"
-          id="city"
-          class="form-control"
-          tabindex="12"
-        >
-          <option
-            v-for="(city, index) in tipoAlertant"
-            :key="index"
-            :value="city.id"
-          >{{ city.tipus }}</option>
-        </select>
+        <b-button v-b-modal.modal_recurs>Selecionar recurs mobil</b-button>
       </b-form-group>
     </form>
+
+    <!-- FORM PARA RECURSOS -->
+    <b-modal
+      id="modal_recurs"
+      ref="modal"
+      title="Submit Your Name"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
+      <form ref="form" @submit.stop.prevent="handleSubmit">
+        <b-form-group
+          id="input-group-1"
+          label="codi"
+          label-for="input-1"
+          description="We'll never share your email with anyone else."
+        >
+          <b-form-input id="input-1" v-model="formRecurs.codi" required placeholder="Enter codi"></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-3" label="rols:" label-for="input-3">
+          <select
+            v-model="formRecurs.tipus_recurs_id"
+            name="city"
+            id="city"
+            class="form-control"
+            tabindex="12"
+          >
+            <option
+              v-for="(city, index) in tipoRecursos"
+              :key="index"
+              :value="city.id"
+            >{{ city.tipus }}</option>
+          </select>
+        </b-form-group>
+      </form>
+    </b-modal>
   </div>
 </template>
 <script>
@@ -85,18 +149,25 @@ export default {
         rols_id: null
       },
       rols_id: [],
-
       formRols: {
         nom: ""
       },
       formIncidencia: {
-        nom: "",
-
-        adreca: "",
-        municipis_id: null,
-
+        data: null,
+        hora: "",
+        tipus_alertant_id: null,
         telefon: "",
-        tipus_alertant_id: null
+
+        municipis_id: null,
+        adreca: "",
+        complement_adreca: "",
+
+        recurs_mobil: "",
+        descripcio: ""
+      },
+      formRecurs: {
+        codi: "",
+        tipus_recurs_id: null
       },
       name: "",
       nameState: null,

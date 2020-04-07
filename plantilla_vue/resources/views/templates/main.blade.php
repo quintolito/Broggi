@@ -16,7 +16,7 @@
 <body>
     <div id="template">
 
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light">
                      
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@
             </div>
         </nav>
         
-        <div class="container-fluid mt-5">
+        <div class="container-fluid mt-5 mb-5 pb-4">
             @yield('main')
         </div>
         
