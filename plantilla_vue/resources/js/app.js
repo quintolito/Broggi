@@ -94,7 +94,7 @@ const store = new Vuex.Store({
 },
     actions: {
         // metode per a obtenir els valor amb api (get)
-        // commir === a java "push"
+        // commit === a java "push"
         loadUsers({commit},url) {
           axios.get(url).then(result => {
 
