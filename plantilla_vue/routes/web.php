@@ -27,3 +27,7 @@ Route::get('/template', function(){
 Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
     //form
 Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');
+    //login
+Route::get('/login', 'LoginController@index');
+    //register
+Route::get('/register','LoginController@showRegister');

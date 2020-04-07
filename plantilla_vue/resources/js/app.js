@@ -56,6 +56,9 @@ Vue.component("probademodal", require("./components/modalboostrappryeba.vue").de
 
 Vue.component("form-incidencia", require("./components/form_incidencia.vue").default);
 
+Vue.component("login", require("./components/login.vue").default);
+Vue.component("register", require("./components/register.vue").default);
+
 devtool: 'source-map';
 
 
