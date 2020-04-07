@@ -23,11 +23,17 @@ Route::get('/template', function(){
 } );
 
 // INCIÈNCIA
-    //taula
-Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
-    //form
-Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');
+    
     //login
 Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@login')->name('login');
+Route::get('/logout', 'LoginController@logout')->name('logout');
     //register
 Route::get('/register','LoginController@showRegister');
+    //cosas raras @marti
+Route::group(['middleware' => ['auth']], function () {
+    //taula
+    Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
+    //form
+    Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');
+});

@@ -10,22 +10,22 @@
                             <form>
                             <div class="form-group">
                                 <label for="inputName">Name</label>
-                                <input v-model="formregister.nombre" type="text" class="form-control" id="inputName" placeholder="Enter name">
+                                <input v-model="formregister.nom" type="text" class="form-control" id="inputName" placeholder="Enter name">
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail">Email address</label>
-                                <input v-model="formregister.email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input v-model="formregister.codi" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
                             </div>
                             <div class="form-group">
                                 <label for="inputPass">Password</label>
-                                <input v-model="formregister.password" type="password" class="form-control" id="inputPass" placeholder="Password">
+                                <input v-model="formregister.contrasenya" type="password" class="form-control" id="inputPass" placeholder="Password">
                             </div>
                             <div class="form-group">
                                 <label for="inputPassEqual">Repeat the password</label>
                                 <input v-model="formregister.repeatpassword" type="password" class="form-control" id="inputPassEqual" placeholder="Repeat the password">
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" v-on:click="postRegister()" class="btn boto-primari">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -45,12 +45,35 @@ export default {
     data() {
         return {
             formregister: {
-                nombre: "",
-                email: "",
-                password:"",
-                repeatpassword: "",
+                codi: "",
+                contrasenya:"",
+                nom: "",
+                rols_id: "2",
             },
+            errors:[]
         };
+    },
+    methods:{
+        postRegister(){
+
+            axios
+                .post(
+                "http://127.0.0.1:8000/api/usuarios",
+                this.formregister
+                )
+                .then(function(response) {
+                //
+                console.log(response);
+//si la contrasenya es diferent que repeat contrasenya (error)
+                alert("Se ha registrado correctamente.");
+                })
+                .catch(function(error) {
+                errors.push(error);
+                console.log(error);
+                });
+
+            
+        }
     }
 }
 </script>
