@@ -55,6 +55,20 @@ body{
     left: 0;
 }*/
 
+/*tema login*/
+.logincenter{
+    height: 75vh;
+    justify-content: center;
+    align-items: center;
+}
+
+/*tema register*/
+.registercenter{
+    height: 75vh;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .footer{
     left: 0;
