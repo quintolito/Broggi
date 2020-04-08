@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,13 +8,6 @@
         @yield('titol')
     </title>
 
-    <!--<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">-->
-
-    <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{asset('js/popper.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-
     {{-- Vinculem el bootstrap --}}
     <link rel="stylesheet" href=" {{ asset('css/app.css') }}">
     {{-- Vinculem el bootstrap --}}
@@ -22,31 +16,57 @@
 <body>
     <div id="template">
 
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light">
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand btn" href="/home" {{-- boto per anar a home o whatever --}}>LOGO BROGGI</a>
+            <a class="navbar-brand btn text_titol" href="/home" {{-- boto per anar a home o whatever --}}>LOGO BROGGI</a>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul class="navbar-nav ml-md-auto">
+
+                    @if(Auth::check())
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->codic }}
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('logout')}}">Logout</a>
+                            </div>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ url('/login')}}" class="nav-link">LOGIN</a>
+                        </li>
+                    @endif
+
+
+                </ul>
+
+
+                <ul class="navbar-nav ml-md-auto">
+
                     <li class="nav-item active">
-                         <a class="nav-link text-white btn boto-primari" href="#">FORMACIO <span class="sr-only"></span></a>
+                         <a class="nav-link text-white btn boto-primari text_titol" href="#">FORMACIO <span class="sr-only"></span></a>
                     </li>
 
                 </ul>
+
             </div>
         </nav>
 
-
-        @yield('main')
+        <div class="container-fluid mt-5 mb-5 pb-4">
+            @yield('main')
+        </div>
 
 
         <footer class="footer">
 
 
         </footer>
+
 
     </div>
 

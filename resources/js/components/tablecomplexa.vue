@@ -118,10 +118,10 @@
       <template v-slot:cell(actions)="row">
 
         <b-button size="sm" @click="info(row.item, row.item.id, $event.target)" variant="danger" class="mr-1">
-          Info modal
+          Eliminar
         </b-button>
-        <b-button size="sm" @click="update(row.item, row.item.id, $event.target)" class="mr-1">
-          Update
+        <b-button  size="sm" @click="update(row.item, row.item.id, $event.target)" class="mr-1 boto-primari">
+          Modificar
         </b-button>
 <!--
         <b-button size="sm" @click="eliminar(row.item.id)">
@@ -513,6 +513,9 @@ import Vuex from 'vuex';
             // this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
              //this.items=  this.users.length;/
                this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api);
+                             this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/rols');
+               this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/municipi');
+               this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/TipusA');
 
         /*if(this.api =="alertant"){
                     this.$store.dispatch('loadAlertant','http://127.0.0.1:8000/api/'+this.api );

@@ -53,7 +53,11 @@ Vue.component("calendar", require("./components/calendar.vue").default);
 Vue.component("tableJS", require("./components/table.vue").default);
 Vue.component("tablecomplexa", require("./components/tablecomplexa.vue").default);
 Vue.component("probademodal", require("./components/modalboostrappryeba.vue").default);
-Vue.component("sumbittest", require("./components/TestFrancisco.vue").default);
+
+Vue.component("form-incidencia", require("./components/form_incidencia.vue").default);
+
+Vue.component("login", require("./components/login.vue").default);
+Vue.component("register", require("./components/register.vue").default);
 
 devtool: 'source-map';
 
@@ -62,6 +66,10 @@ devtool: 'source-map';
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+/**
+ * serveix per a crear funcions general per a utilitzar tot els compoenents
  */
 
 const store = new Vuex.Store({
@@ -75,10 +83,8 @@ const store = new Vuex.Store({
         municipis:[],
         tipoRecursos:[],
         tipoAlertant:[],
-        recursosMobile:[],
         modalVisible: false,
         modalComponent: null,
-
       },
     getters:{
         getUsers:  state => {
@@ -87,55 +93,33 @@ const store = new Vuex.Store({
 }
 },
     actions: {
-
-
+        // metode per a obtenir els valor amb api (get)
+        // commit === a java "push"
         loadUsers({commit},url) {
-
           axios.get(url).then(result => {
-                //hacer switch
-
-                if(url.includes("alertant")){
-
-                    commit('SAVE_USERS',result.data);
-                }
-                else if(url.includes("recurso")){
-                    commit('SAVE_USERS',result.data);
-                }
-                else if(url.includes("rols")){
-                    commit('SAVE_ROLS',result.data);
-                }
-                else if(url.includes("TipusR")){
-
-                  commit('SAVE_RECURSOS',result.data);
-                }
-                else if(url.includes("municipi")){
-                    commit('SAVE_MUNICIPI',result.data);
-                }
-                else if(url.includes("TipusA")){
-                    commit('SAVE_TIPOALERTANT',result.data);
-                }
 
 
-                console.log(url);
+            if(url.includes("alertant")){
 
+                commit('SAVE_USERS',result.data);
+            }
+            else if(url.includes("recurso")){
+                commit('SAVE_USERS',result.data);
+            }
+            else if(url.includes("rols")){
+                commit('SAVE_ROLS',result.data);
+            }
+            else if(url.includes("TipusR")){
 
-/*
-              this.$store.dispatch('loadRols',' http://127.0.0.1:8000/api/rols');
-               this.$store.dispatch('loadMunicipi',' http://127.0.0.1:8000/api/municipi');
-               this.$store.dispatch('tipuAlertant',' http://127.0.0.1:8000/api/TipusA');
-               this.$store.dispatch('loadRecursos',' http://127.0.0.1:8000/api/TipusR');
+              commit('SAVE_RECURSOS',result.data);
+            }
+            else if(url.includes("municipi")){
+                commit('SAVE_MUNICIPI',result.data);
+            }
+            else if(url.includes("TipusA")){
+                commit('SAVE_TIPOALERTANT',result.data);
+            }
 
-    },
-            switch(url) {
-                        case url.includes("alertant"):
-                        // code block
-                        commit('SAVE_USERS',result.data);
-                        break;
-
-                        default:
-                        // code block
-        }
-*/
 
           }).catch(error => {
             throw new Error(`API ${error}`);
@@ -198,17 +182,13 @@ const store = new Vuex.Store({
               throw new Error(`API ${error}`);
             });
           },
-          */
-
+*/
     },
 
+    // mutations: permet afegir qualsevol valor a l'array
     mutations: {
         incrementBy(state, n) {
             state.count += n;
-          },
-
-          setShowAlert(state, value) {
-            state.showAlert = value
           },
           SAVE_RECURSOS(state,tipoRecursos){
             state.tipoRecursos=tipoRecursos ;
@@ -235,9 +215,6 @@ const store = new Vuex.Store({
           },
           SAVE_TIPOALERTANT(state, tipoAlertant) {
             state.tipoAlertant=tipoAlertant ;
-          },
-          SAVE_ALLRECURSOS(state, recursosMobile) {
-            state.recursosMobile=recursosMobile ;
           },
           showModal(state, componentName) {
             state.modalVisible = true;

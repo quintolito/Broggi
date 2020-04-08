@@ -3,11 +3,10 @@
   <div>
 
 
-    <b-button v-if="tipoaccion == 'usuarios'" v-b-modal.modal-prevent-closing>Open Modal</b-button>
-    <b-button v-if="tipoaccion == 'alertant'" v-b-modal.modal-Alertant>Afegeis alertant</b-button>
-    <b-button v-if="tipoaccion == 'recurso'" v-b-modal.modal-recursos>Afegeis recurs</b-button>
+    <b-button class="btn boto-terciari" v-if="tipoaccion == 'usuarios'" v-b-modal.modal-prevent-closing>Open Modal</b-button>
+    <b-button class="btn boto-terciari"  v-if="tipoaccion == 'alertant'" v-b-modal.modal-Alertant>Afegeis alertant</b-button>
+    <b-button class="btn boto-terciari"  v-if="tipoaccion == 'recurso'" v-b-modal.modal-recursos>Afegeis recurs</b-button>
 
-    <b-button v-else v-b-modal.modalPostRol>Open Modal</b-button>
 
 
 <!-- FORM PARA ROL -->
@@ -18,7 +17,7 @@
       title="Submit Your Name"
       @show="resetModal"
       @hidden="resetModal"
-      @ok="handleOk"
+      hide-footer="true"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
      <p class="my-4">Hello from modal!</p>
@@ -34,15 +33,17 @@
   </b-modal>
 
 
-<!-- FORM PARA ALERTANT -->
+<!-- FORM PARA ALERTANT  ok-only ok-variant="secondary" ok-title="Cancel" -->
 
     <b-modal
+       hide-footer
+
       id="modal-Alertant"
       ref="modal"
       title="Submit Your Name"
       @show="resetModal"
       @hidden="resetModal"
-      @ok="handleOk"
+
     >
       <form ref="form" @submit.stop.prevent="onSubmit">
 
@@ -151,7 +152,6 @@
       title="Submit Your Name"
       @show="resetModal"
       @hidden="resetModal"
-      @ok="handleOk"
     >
       <form ref="form" @submit.stop.prevent="onSubmit">
 
@@ -216,7 +216,6 @@
       title="Submit Your Name"
       @show="resetModal"
       @hidden="resetModal"
-      @ok="handleOk"
     >
       <form ref="form" @submit.stop.prevent="onSubmit">
 
@@ -590,4 +589,5 @@ import Vuex from 'vuex';
 table {
   width: 100%;
 }
+
 </style>

@@ -27,21 +27,18 @@
     <h5 class="card-title">Recursos movils</h5>
     <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    <a href="{{ action('PruebaController@index')}}" class="btn boto-terciari">
 
-        <button type="button" class="btn btn-outline-danger">Danger</button>
+    <button type="button" class="btn boto-primari"  onclick="window.location='{{ url('/Recursos') }}'" action>RECURSOS</button>
+
 
   </div>
 </div>
-<div class="card" id="card-boostrap">
+<div class="card" id="card-boostrap" action>
   <img class="card-img-top" src="https://www.consalud.es/uploads/s1/97/22/26/asi-quedara-la-fachada-del-nuevo-hospital-universitario-la-paz-integrado-en-la-red-publica-de-la-comunidad-de-madrid.jpeg" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">Gestio de alertants</h5>
 
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    <a href="{{ action('PruebaController@moostrarvip')}}" class="btn boto-terciari">
-        <button type="button" class="btn btn-outline-danger">Danger</button>
+        <button type="button" class="btn  boto-primari"  onclick="window.location='{{ url('/alertant') }}'" action>VIP</button>
 
 
   </div>

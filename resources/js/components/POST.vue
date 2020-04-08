@@ -251,7 +251,7 @@ import Vuex from 'vuex';
       },
       handleOk(bvModalEvt) {
         // Prevent modal from closing
-        bvModalEvt.preventDefault()
+
         // Trigger submit handler
         this.handleSubmit()
       },
@@ -293,9 +293,9 @@ import Vuex from 'vuex';
 
     },
     created(){
-              this.$store.dispatch('loadRols',' http://127.0.0.1:8000/api/rols');
-               this.$store.dispatch('loadMunicipi',' http://127.0.0.1:8000/api/municipi');
-               this.$store.dispatch('tipuAlertant',' http://127.0.0.1:8000/api/TipusA');
+              this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/rols');
+               this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/municipi');
+               this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/TipusA');
 
     },
     beforeCreate(){

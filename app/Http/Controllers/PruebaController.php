@@ -7,9 +7,6 @@ use App\Models\Alertant;
 class PruebaController extends Controller
 {
 
-    public function landingpage(){
-        return view ('card');
-    }
     public function index()
     {
 
@@ -35,7 +32,7 @@ class PruebaController extends Controller
         $tipusalertant='recursosid.tipus';
         $nombtablaalertant='Recurs';
        // return view('welcome')->with('api',$api)->with('tipoaccion',$tipoaccion)->with('test',$test)->with('tablaccion',$tablaccion);
-      return view('welcome', compact('api', 'test','tipoaccion', 'tipusalertant','tablaccion','nomtabla','nombtablaalertant'));
+      return view('taules.taula_recursmovil', compact('api', 'test','tipoaccion', 'tipusalertant','tablaccion','nomtabla','nombtablaalertant'));
 
     }
     public function moostrarvip()
@@ -64,8 +61,12 @@ class PruebaController extends Controller
         $nombtablaalertant='Recurs';
         */
        // return view('welcome')->with('api',$api)->with('tipoaccion',$tipoaccion)->with('test',$test)->with('tablaccion',$tablaccion);
-      return view('vip', compact('api', 'test','tipoaccion', 'tipusalertant','tablaccion','nomtabla','datamunicipi','adreca','telefon','nombtablaalertant'));
+      return view('taules.taula_vip', compact('api', 'test','tipoaccion', 'tipusalertant','tablaccion','nomtabla','datamunicipi','adreca','telefon','nombtablaalertant'));
 
+    }
+
+    public function landingpage(){
+        return view ('card');
     }
 /*
     public function index()
