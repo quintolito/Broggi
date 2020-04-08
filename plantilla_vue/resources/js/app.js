@@ -98,15 +98,35 @@ const store = new Vuex.Store({
         loadUsers({commit},url) {
           axios.get(url).then(result => {
 
-              // fer switch
+
+            if(url.includes("alertant")){
+
                 commit('SAVE_USERS',result.data);
+            }
+            else if(url.includes("recurso")){
+                commit('SAVE_USERS',result.data);
+            }
+            else if(url.includes("rols")){
+                commit('SAVE_ROLS',result.data);
+            }
+            else if(url.includes("TipusR")){
+
+              commit('SAVE_RECURSOS',result.data);
+            }
+            else if(url.includes("municipi")){
+                commit('SAVE_MUNICIPI',result.data);
+            }
+            else if(url.includes("TipusA")){
+                commit('SAVE_TIPOALERTANT',result.data);
+            }
+
 
           }).catch(error => {
             throw new Error(`API ${error}`);
           });
         },
 
-        loadRols({commit},url) {
+       /* loadRols({commit},url) {
             axios.get(url).then(result => {
 
                   commit('SAVE_ROLS',result.data);
@@ -162,8 +182,9 @@ const store = new Vuex.Store({
               throw new Error(`API ${error}`);
             });
           },
-
+*/
     },
+
     // mutations: permet afegir qualsevol valor a l'array
     mutations: {
         incrementBy(state, n) {

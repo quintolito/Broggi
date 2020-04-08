@@ -15,15 +15,15 @@ Route::get('/', function () {
     $nombreApi='usuarios';
     return view('welcome')->with('nombreApi',$nombreApi);
 });*/
-Route::get('/','PruebaController@index' );
+/*Route::get('/','PruebaController@index' );
 
 
 Route::get('/template', function(){
     return view ('templates.main');
 } );
-
+*/
 // INCIÈNCIA
-    
+
     //login
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@login')->name('login');
@@ -36,4 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
     //form
     Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');
+    Route::get('/landingpage','PruebaController@landingpage' );
+    Route::get('/Recursos','PruebaController@index' );
+    Route::get('/alertant','PruebaController@moostrarvip' );
 });
