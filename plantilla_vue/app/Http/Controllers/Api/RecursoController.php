@@ -21,8 +21,8 @@ class recursoController extends Controller
     public function index()
     {
         //
-        $Recurs = Recurs::all();
-        return new recursoResource($Recurs);
+        $Recurs = Recurs::with('recursosid')->get();
+        return  recursoResource::collection($Recurs);
     }
 
     /**

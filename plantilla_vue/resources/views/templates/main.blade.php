@@ -17,10 +17,10 @@
     <div id="template">
 
         <nav class="navbar sticky-top navbar-expand-lg navbar-light">
-                     
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="navbar-toggler-icon"></span>
-            </button> 
+            </button>
             <a class="navbar-brand btn text_titol" href="/home" {{-- boto per anar a home o whatever --}}>LOGO BROGGI</a>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
@@ -28,8 +28,9 @@
 
                     @if(Auth::check())
                         <li class="nav-item dropdown">
+
                             <a class="nav-link dropdown toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->nombre }}
+                                {{ Auth::user()->codic }}
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ route('logout')}}">Logout</a>
@@ -41,7 +42,7 @@
                         </li>
                     @endif
 
-                    
+
                 </ul>
 
 
@@ -50,23 +51,23 @@
                     <li class="nav-item active">
                          <a class="nav-link text-white btn boto-primari text_titol" href="#">FORMACIO <span class="sr-only"></span></a>
                     </li>
-                    
+
                 </ul>
-                
+
             </div>
         </nav>
-        
+
         <div class="container-fluid mt-5 mb-5 pb-4">
             @yield('main')
         </div>
-        
+
 
         <footer class="footer">
-            
-            
+
+
         </footer>
 
-        
+
     </div>
 
     <script src=" {{ asset('js/app.js') }} " ></script>

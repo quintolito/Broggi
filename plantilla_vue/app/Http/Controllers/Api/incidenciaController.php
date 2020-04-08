@@ -134,8 +134,6 @@ class incidenciaController extends Controller
         $incidencia->num_incidencia = $request->input('num_incidencia');
         $incidencia->alertants_id = $request->input('alertants_id');
 
-
-
         try {
             $incidencia->save();
             $incidencia->incidenciahasrecursos()->attach(1);
