@@ -83,6 +83,7 @@ const store = new Vuex.Store({
         municipis:[],
         tipoRecursos:[],
         tipoAlertant:[],
+        incidencias:[],
         modalVisible: false,
         modalComponent: null,
       },
@@ -119,6 +120,9 @@ const store = new Vuex.Store({
             else if(url.includes("TipusA")){
                 commit('SAVE_TIPOALERTANT',result.data);
             }
+            else if(url.includes("incidencias")){
+              commit('SAVE_USERS',result.data);
+          }
 
 
           }).catch(error => {
@@ -215,6 +219,9 @@ const store = new Vuex.Store({
           },
           SAVE_TIPOALERTANT(state, tipoAlertant) {
             state.tipoAlertant=tipoAlertant ;
+          },
+          SAVE_INCIDENCIAS(state, incidencia) {
+            state.incidencia=incidencia ;
           },
           showModal(state, componentName) {
             state.modalVisible = true;
