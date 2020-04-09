@@ -101,7 +101,7 @@ const store = new Vuex.Store({
 
             if(url.includes("alertant")){
 
-                commit('SAVE_USERS',result.data);
+                commit('SAVE_ALERTANT',result.data);
             }
             else if(url.includes("recurso")){
                 commit('SAVE_USERS',result.data);
@@ -197,7 +197,7 @@ const store = new Vuex.Store({
             state.tipoRols=tipoRols ;
 
           },
-          SAVE_ALERTAMT(state,alertants){
+          SAVE_ALERTANT(state,alertants){
             state.alertants=alertants;
           },
           disminuir(state) {
