@@ -1,8 +1,19 @@
 <template>
   <div>
     <form ref="form" @submit.stop.prevent="handleSubmit">
+      <!-- NUm Inciedncia -->
+      <b-form-group id="input-group-1" label="Numero incidència" label-for="input-1">
+        <b-form-input
+          id="input-1"
+          v-model="formIncidencia.num_incidencia"
+          required
+          placeholder="00000000000"
+          type="number"
+        ></b-form-input>
+      </b-form-group>
+
       <!-- Data -->
-      <b-form-group id="input-group-1" label="Data" label-for="input-1">
+      <b-form-group id="input-group-2" label="Data" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="formIncidencia.data"
@@ -13,7 +24,7 @@
       </b-form-group>
 
       <!-- Hora -->
-      <b-form-group id="input-group-3" label="Hora de l'incidència" label-for="input-3">
+      <b-form-group id="input-group-3" label="Hora d'alerta" label-for="input-3">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.hora"
@@ -40,8 +51,36 @@
         </select>
       </b-form-group>
 
+      <!-- Alertants -->
+      <b-form-group id="input-group-5" label="Hospitals/Alertants" label-for="input-3">
+        <select
+          v-model="formIncidencia.alertants_id"
+          name="municipi"
+          id="municipi"
+          class="form-control"
+          tabindex="12"
+        >
+          <option
+            v-for="(alertant, index) in alertants"
+            :key="index"
+            :value="alertant.id"
+          >{{ alertant.nom }}</option>
+        </select>
+      </b-form-group>
+
+      <!-- Telefon alertant -->
+      <b-form-group id="input-group-8" label="Telefon alertant" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="formIncidencia.telefon_alertant"
+          required
+          placeholder="000-000-000"
+          type="number"
+        ></b-form-input>
+      </b-form-group>
+
       <!-- Municipi -->
-      <b-form-group id="input-group-3" label="Municipi" label-for="input-3">
+      <b-form-group id="input-group-5" label="Municipi" label-for="input-3">
         <select
           v-model="formIncidencia.municipis_id"
           name="municipi"
@@ -58,18 +97,18 @@
       </b-form-group>
 
       <!-- Adreça -->
-      <b-form-group id="input-group-2" label="Adreça" label-for="input-2">
+      <b-form-group id="input-group-6" label="Adreça" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.adreca"
           required
           placeholder="Adreça"
-          type=""
+          type="text"
         ></b-form-input>
       </b-form-group>
 
       <!-- Complement Adreça -->
-      <b-form-group id="input-group-2" label="Complemnet Adreça" label-for="input-2">
+      <b-form-group id="input-group-7" label="Complemnet Adreça" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.complement_adreca"
@@ -79,11 +118,11 @@
         ></b-form-input>
       </b-form-group>
 
-      <!-- Nivell incidencia -->
-      <b-form-group id="input-group-2" label="Nivell Incidència" label-for="input-2">
+      <!-- Tipus incident -->
+      <b-form-group id="input-group-8" label="Tipus icidència" label-for="input-2">
         <b-form-input
           id="input-2"
-          v-model="formIncidencia.nivell"
+          v-model="formIncidencia.tipus_incident_id"
           required
           placeholder="0"
           type="number"
@@ -92,48 +131,27 @@
         ></b-form-input>
       </b-form-group>
 
+      <!-- Descripcio -->
+      <b-form-group id="input-group-8" label="Descripció" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="formIncidencia.descripcio"
+          required
+          placeholder="Què ha passat?"
+          type="text"
+        ></b-form-input>
+      </b-form-group>
+
       <!-- Recurs mòbil -->
-      <b-form-group id="input-group-4" label="Recurs mòbil" label-for="input-3">
+      <b-form-group id="input-group-9" label="Recurs mòbil" label-for="input-3">
         <b-button v-b-modal.modal_recurs>Selecionar recurs mobil</b-button>
       </b-form-group>
     </form>
 
-    <!-- FORM PARA RECURSOS -->
-    <b-modal
-      id="modal_recurs"
-      ref="modal"
-      title="Submit Your Name"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-    >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-        <b-form-group
-          id="input-group-1"
-          label="codi"
-          label-for="input-1"
-          description="We'll never share your email with anyone else."
-        >
-          <b-form-input id="input-1" v-model="formRecurs.codi" required placeholder="Enter codi"></b-form-input>
-        </b-form-group>
+    <button type="submit" v-on:click="postIncidencia()" class="btn boto-primari">Dale</button>
 
-        <b-form-group id="input-group-3" label="rols:" label-for="input-3">
-          <select
-            v-model="formRecurs.tipus_recurs_id"
-            name="city"
-            id="city"
-            class="form-control"
-            tabindex="12"
-          >
-            <option
-              v-for="(city, index) in tipoRecursos"
-              :key="index"
-              :value="city.id"
-            >{{ city.tipus }}</option>
-          </select>
-        </b-form-group>
-      </form>
-    </b-modal>
+    <!-- MODAL-FORM PARA RECURSOS -->
+
   </div>
 </template>
 <script>
@@ -142,119 +160,60 @@ export default {
   props: ["tipoaccion", "alertant", "test"],
   data() {
     return {
-      form: {
-        codi: 0,
-        nom: "",
-        contrasenya: "",
-        rols_id: null
-      },
-      rols_id: [],
-      formRols: {
-        nom: ""
-      },
       formIncidencia: {
+        num_incidencia: null,
         data: null,
         hora: "",
         tipus_alertant_id: null,
-        telefon: "",
+        alertants_id: null,
+        
+        telefon_alertant: "",
 
         municipis_id: null,
         adreca: "",
         complement_adreca: "",
+        
+        tipus_incident_id: null,
+        // recurs_mobil: "",
+        descripcio: "",
 
-        recurs_mobil: "",
-        descripcio: ""
+        estats_incidencia_id: "1",
       },
-      formRecurs: {
-        codi: "",
-        tipus_recurs_id: null
-      },
-      name: "",
-      nameState: null,
-      submittedNames: []
+      errors: []
     };
   },
   computed: {
     ...Vuex.mapState([
       "message",
+      "alertants",
       "count",
       "users",
       "posts",
       "tipoRols",
       "municipis",
-      "tipoAlertant"
+      "tipoAlertant",
     ])
   },
   methods: {
-    checkFormValidity() {
-      const valid = this.$refs.form.checkValidity();
-      this.nameState = valid;
-      return valid;
-    },
-    resetModal() {
-      if (this.tipoaccion == "usuarios") {
-        this.name = "";
-        this.form.nom = "";
-        this.form.codi = "";
-
-        this.form.contrasenya = "";
-        this.form.rols_id = "";
-
-        this.nameState = null;
-      } else if (this.tipoaccion == "alertant") {
-        (this.formIncidencia.nom = ""),
-          (this.formIncidencia.adreca = ""),
-          (this.formIncidencia.telefon = ""),
-          (this.formIncidencia.municipis_id = null),
-          (this.formIncidencia.tipus_alertant_id = null);
-      } else {
-        this.formRols.nom = "";
-      }
-    },
-    handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault();
-      // Trigger submit handler
-      this.handleSubmit();
-    },
-    handleSubmit() {
-      console.log(this.formIncidencia);
-      // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return;
-      }
-      // Push the name to submitted names
-      console.log(this.tipoaccion);
+    // post incidencia
+    postIncidencia() {
       axios
-        .post(
-          "http://127.0.0.1:8000/api/" + this.tipoaccion,
-          this.formIncidencia
-        )
+        .post("http://127.0.0.1:8000/api/incidencias", this.formIncidencia)
         .then(function(response) {
-          //me.rols=response.data;
           console.log(response);
-
-          alert("Se ha generado correctamente.");
+          alert("todo ok");
         })
         .catch(function(error) {
-          console.log(error);
+          this.errors.push(error.response.data);
+          console.log(error.response.data);
         });
-      // Hide the modal manually
-      this.$nextTick(() => {
-        if (this.tipoaccion == "usuarios") {
-          this.$bvModal.hide("modal-prevent-closing");
-        } else if (this.tipoaccion == "alertant") {
-          this.$bvModal.hide("modal-Alertant");
-        } else {
-          this.$bvModal.hide("modalPostRol");
-        }
-      });
     }
   },
   created() {
-    this.$store.dispatch("loadRols", " http://127.0.0.1:8000/api/rols");
-    this.$store.dispatch("loadMunicipi", " http://127.0.0.1:8000/api/municipi");
-    this.$store.dispatch("tipuAlertant", " http://127.0.0.1:8000/api/TipusA");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/rols");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/municipi");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/TipusA");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/alertant");
   },
   beforeCreate() {},
   mounted() {

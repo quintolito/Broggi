@@ -38,7 +38,7 @@ class incidenciaController extends Controller
     {
         //
         $incidencia = new incidencias();
-        $Recusr = Recurs::all();
+        $Recurs = Recurs::all();
         $Usuario = Usuario::all();
         $afectats=Afectats::all();
         $incidencia->num_incidencia = $request->input('num_incidencia');
@@ -65,7 +65,7 @@ class incidenciaController extends Controller
             $incidencia->save();
             //$incidencia->pivot->1;
             $incidencia->incidenciahasrecursos()
-            ->attach($Recusr[0],['prioritat' => 1,
+            ->attach($Recurs[0],['prioritat' => 1,
             'hora_acitvacio' => $now  ,
             'hora_mobilitzacio' => $now,
             'hora_assistencia' => $now,

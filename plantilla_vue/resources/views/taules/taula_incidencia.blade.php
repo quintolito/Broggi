@@ -31,7 +31,11 @@
 
         tipusalertant="{{ $tipusalertant }}"
         nombtablaalertant="{{ $nombtablaalertant }}"
-
+        col23= "{{ $col23 }}"
+        col24= "{{ $col24 }}"
+        col25= "{{ $col25 }}"
+        col26= "{{ $col26 }}"
+        col27= "{{ $col27 }}"
 
 
         ></tablecomplexa>   </div>

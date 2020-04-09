@@ -17,5 +17,11 @@
                    "webpack:///./node_modules/*": "${workspaceFolder}/node_modules/*"
              },
       },
+      {
+        "name": "Listen for XDebug",
+        "type": "php",
+        "request": "launch",
+        "port": 9000
+    },
     ]
 }
