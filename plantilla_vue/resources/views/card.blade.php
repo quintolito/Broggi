@@ -12,7 +12,7 @@
         <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-zTVIvOtz5Va3qA2i8-LpG8XxpM93jeLDyqGxGUxz3n6cH7o6" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">INCIDENCIAS</h5>
-          <button type="button" class="btn boto-primari"  onclick="window.location='{{ url('/Recursos') }}'" action>INCIDENCIAS</button>
+          <button type="button" class="btn boto-primari"  onclick="window.location='{{ url('/taula_incidencia') }}'" action>INCIDENCIAS</button>
         </div>
       </div>
     <div class="card text-center" id="card-boostrap">
