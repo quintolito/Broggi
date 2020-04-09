@@ -17,11 +17,16 @@
       title="Submit Your Name"
       @show="resetModal"
       @hidden="resetModal"
-      hide-footer="true"
+       hide-footer
+      class="margeninput"
     >
+
       <form ref="form" @submit.stop.prevent="handleSubmit">
      <p class="my-4">Hello from modal!</p>
          <b-form-group id="input-group-2" label="Nom" label-for="input-2">
+              <div>
+     <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>  </div>
         <b-form-input
           id="input-2"
           v-model="formRols.nom"
@@ -37,68 +42,100 @@
 
     <b-modal
        hide-footer
-
+      class="margeninput"
       id="modal-Alertant"
       ref="modal"
-      title="Submit Your Name"
+
+      title="Añade otro alertante/vip "
       @show="resetModal"
       @hidden="resetModal"
 
     >
-      <form ref="form" @submit.stop.prevent="onSubmit">
+      <form inline ref="form" @submit.stop.prevent="onSubmit">
 
 
 
       <b-form-group
+    
         id="input-group-1"
-        label="Nom"
+        label="Nom:"
         label-for="input-1"
+        label-class="margenform"
+
+
         description="We'll never share your email with anyone else."
       >
+
+
+
         <b-form-input
+        
+            class="margeninput"
+
           id="input-1"
           v-model="formAlertant.nom"
           required
           placeholder="Enter codi"
         ></b-form-input>
-      </b-form-group>
 
-      <b-form-group id="input-group-2" label="adreca" label-for="input-2">
+     <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>      </b-form-group>
+
+      <b-form-group id="input-group-2"          label-class="margenform"
+ label="adreca" label-for="input-2">
         <b-form-input
+                class="margeninput"
+
           id="input-2"
           v-model="formAlertant.adreca"
           required
           placeholder="Enter nom"
         ></b-form-input>
+     <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
       </b-form-group>
-  <b-form-group id="input-group-5" label="telefon" label-for="input-5">
+  <b-form-group id="input-group-5"                 label-class="margenform"
+  label="telefon" label-for="input-5">
         <b-form-input
+            class="margeninput"
+
           id="input-5"
           v-model="formAlertant.telefon"
           required
           placeholder="Enter contrasenya"
         ></b-form-input>
+     <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
       </b-form-group>
-      <b-form-group id="input-group-3" label="municipis_id" label-for="input-3">
-                <select v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-control" tabindex="12">
+      <b-form-group id="input-group-3"                  label-class="margenform"
+ label="municipis_id" label-for="input-3">
+                <select                                    
+
+v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-control margeninput" tabindex="12">
             <option v-for="(municipi, index) in municipis"
                     :key="index"
                     :value="municipi.id">{{ municipi.nom }}
             </option>
         </select>
+        <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
 
       </b-form-group>
 
 
 
-  <b-form-group id="input-group-4" label="tipus_alertant_id" label-for="input-3">
-                <select v-model="formAlertant.tipus_alertant_id" name="city" id="city" class="form-control" tabindex="12">
+  <b-form-group          label-class="margenform"
+ id="input-group-4" label="tipus_alertant_id" label-for="input-3">
+                <select                                      
+
+ v-model="formAlertant.tipus_alertant_id" name="city" id="city" class="form-control margeninput" tabindex="12">
             <option v-for="(city, index) in tipoAlertant"
                     :key="index"
                     :value="city.id">{{ city.tipus }}
             </option>
         </select>
-
+     <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
       </b-form-group>
  <div class="d-flex justify-content-center">
          <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
@@ -152,23 +189,34 @@
       title="Submit Your Name"
       @show="resetModal"
       @hidden="resetModal"
+             hide-footer
+
     >
       <form ref="form" @submit.stop.prevent="onSubmit">
 
 
 
       <b-form-group
+              label-class="margenform"
+
         id="input-group-1"
         label="codi"
         label-for="input-1"
+        
         description="We'll never share your email with anyone else."
       >
         <b-form-input
+                    class="margeninput"
+
           id="input-1"
           v-model="form.codi"
           required
           placeholder="Enter codi"
         ></b-form-input>
+
+     <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
+
       </b-form-group>
 
       <b-form-group id="input-group-2" label="Nom" label-for="input-2">
@@ -216,6 +264,8 @@
       title="Submit Your Name"
       @show="resetModal"
       @hidden="resetModal"
+             hide-footer
+
     >
       <form ref="form" @submit.stop.prevent="onSubmit">
 
@@ -223,27 +273,37 @@
 
 
       <b-form-group
+                    label-class="margenform"
+
         id="input-group-1"
         label="codi"
         label-for="input-1"
         description="We'll never share your email with anyone else."
       >
         <b-form-input
+                            class="margeninput"
+
           id="input-1"
           v-model="formNourecurs.codi"
           required
           placeholder="Enter codi"
         ></b-form-input>
+
+             <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="rols:" label-for="input-3">
-                <select v-model="formNourecurs.tipus_recurs_id" name="city" id="city" class="form-control" tabindex="12">
+      <b-form-group                     label-class="margenform"
+ id="input-group-3" label="rols:" label-for="input-3">
+                <select  v-model="formNourecurs.tipus_recurs_id" name="city" id="city" class="form-control margeninput" tabindex="12">
             <option v-for="(city, index) in tipoRecursos"
                     :key="index"
                     :value="city.id">{{ city.tipus }}
             </option>
         </select>
-
+ <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
+      </b-form-group>
       </b-form-group>
 <div class="d-flex justify-content-center">
          <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
