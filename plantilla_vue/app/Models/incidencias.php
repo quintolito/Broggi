@@ -17,7 +17,13 @@ class incidencias extends Model
 
     public function Afectats()
     {
-        return $this->belongsToMany('App\Models\Afectats', 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
+        return $this->belongsTo('App\Models\Afectats', 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
+    }
+
+    public function Alertants()
+    {
+
+        return $this->belongsTo('App\Models\Alertant');
     }
     public function getYourDateFieldAttribute($value)
     {
