@@ -52,6 +52,9 @@ Vue.component("modal", require("./components/modal.vue").default);
 Vue.component("calendar", require("./components/calendar.vue").default);
 Vue.component("tableJS", require("./components/table.vue").default);
 Vue.component("tablecomplexa", require("./components/tablecomplexa.vue").default);
+
+Vue.component("taula-form", require("./components/taula_form.vue").default);
+
 Vue.component("probademodal", require("./components/modalboostrappryeba.vue").default);
 
 Vue.component("form-incidencia", require("./components/form_incidencia.vue").default);
@@ -83,6 +86,7 @@ const store = new Vuex.Store({
         municipis:[],
         tipoRecursos:[],
         tipoAlertant:[],
+        tipoIncidentes:[],
         incidencias:[],
         modalVisible: false,
         modalComponent: null,
@@ -122,8 +126,10 @@ const store = new Vuex.Store({
             }
             else if(url.includes("incidencias")){
               commit('SAVE_USERS',result.data);
-          }
-
+            }
+            else if(url.includes("TipusI")){
+              commit('SAVE_TIPOINCIDENTE',result.data);
+            }
 
           }).catch(error => {
             throw new Error(`API ${error}`);
@@ -219,6 +225,9 @@ const store = new Vuex.Store({
           },
           SAVE_TIPOALERTANT(state, tipoAlertant) {
             state.tipoAlertant=tipoAlertant ;
+          },
+          SAVE_TIPOINCIDENTE(state, tipoIncidentes) {
+            state.tipoIncidentes=tipoIncidentes ;
           },
           SAVE_INCIDENCIAS(state, incidencia) {
             state.incidencia=incidencia ;

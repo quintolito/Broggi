@@ -1,8 +1,8 @@
 <template>
   <div>
     <form ref="form" @submit.stop.prevent="handleSubmit">
-      <!-- NUm Inciedncia -->
-      <b-form-group id="input-group-1" label="Numero incidència" label-for="input-1">
+      <!-- Num Inciedncia -->
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-1" label="Numero incidència" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="formIncidencia.num_incidencia"
@@ -13,7 +13,7 @@
       </b-form-group>
 
       <!-- Data -->
-      <b-form-group id="input-group-2" label="Data" label-for="input-1">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-2" label="Data" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="formIncidencia.data"
@@ -24,7 +24,7 @@
       </b-form-group>
 
       <!-- Hora -->
-      <b-form-group id="input-group-3" label="Hora d'alerta" label-for="input-3">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-3" label="Hora d'alerta" label-for="input-3">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.hora"
@@ -35,7 +35,7 @@
       </b-form-group>
 
       <!-- Tipus d'alertant -->
-      <b-form-group id="input-group-4" label="Tipus d'alertant" label-for="input-3">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-4" label="Tipus d'alertant" label-for="input-3">
         <select
           v-model="formIncidencia.tipus_alertant_id"
           name="city"
@@ -51,8 +51,9 @@
         </select>
       </b-form-group>
 
-      <!-- Alertants -->
-      <b-form-group id="input-group-5" label="Hospitals/Alertants" label-for="input-3">
+      <!-- Alertants/Hospitals -->
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-5" label="Hospitals/Alertants" label-for="input-3">
+        <!-- 
         <select
           v-model="formIncidencia.alertants_id"
           name="municipi"
@@ -65,11 +66,16 @@
             :key="index"
             :value="alertant.id"
           >{{ alertant.nom }}</option>
-        </select>
+        </select>-->
+
+        <b-button v-b-modal.modal-hospital>
+          Selecionar Hospital
+        </b-button>
+        
       </b-form-group>
 
       <!-- Telefon alertant -->
-      <b-form-group id="input-group-8" label="Telefon alertant" label-for="input-2">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-8" label="Telefon alertant" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.telefon_alertant"
@@ -80,7 +86,7 @@
       </b-form-group>
 
       <!-- Municipi -->
-      <b-form-group id="input-group-5" label="Municipi" label-for="input-3">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-5" label="Municipi" label-for="input-3">
         <select
           v-model="formIncidencia.municipis_id"
           name="municipi"
@@ -97,7 +103,7 @@
       </b-form-group>
 
       <!-- Adreça -->
-      <b-form-group id="input-group-6" label="Adreça" label-for="input-2">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-6" label="Adreça" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.adreca"
@@ -108,7 +114,7 @@
       </b-form-group>
 
       <!-- Complement Adreça -->
-      <b-form-group id="input-group-7" label="Complemnet Adreça" label-for="input-2">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-7" label="Complemnet Adreça" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.complement_adreca"
@@ -119,20 +125,24 @@
       </b-form-group>
 
       <!-- Tipus incident -->
-      <b-form-group id="input-group-8" label="Tipus icidència" label-for="input-2">
-        <b-form-input
-          id="input-2"
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-8" label="Tipus icidència" label-for="input-2">
+        <select
           v-model="formIncidencia.tipus_incident_id"
-          required
-          placeholder="0"
-          type="number"
-          max="5"
-          min="0"
-        ></b-form-input>
+          name="tipus_incidencia"
+          id="tipus_incidencia"
+          class="form-control"
+          tabindex="12"
+        >
+          <option
+            v-for="(tipoIncidente, index) in tipoIncidentes"
+            :key="index"
+            :value="tipoIncidente.id"
+          >{{ tipoIncidente.tipus }}</option>
+        </select>
       </b-form-group>
 
       <!-- Descripcio -->
-      <b-form-group id="input-group-8" label="Descripció" label-for="input-2">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-8" label="Descripció" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="formIncidencia.descripcio"
@@ -143,19 +153,39 @@
       </b-form-group>
 
       <!-- Recurs mòbil -->
-      <b-form-group id="input-group-9" label="Recurs mòbil" label-for="input-3">
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-9" label="Recurs mòbil" label-for="input-3">
         <b-button v-b-modal.modal_recurs>Selecionar recurs mobil</b-button>
       </b-form-group>
     </form>
 
     <button type="submit" v-on:click="postIncidencia()" class="btn boto-primari">Dale</button>
 
-    <!-- MODAL-FORM PARA RECURSOS -->
+    <!-- MODAL PARA Hospital -->
+    <b-modal
+      id="modal-hospital"
+      ref="modal"
+      title="Seleciona un hospital"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+      size="xl"
+    >
+      <taula-form :current_items="alertants" 
+        col1="id"
+        col2="nom"
+        col3="adreca"
+        col4="municipis_id"
+        col5="telefon">
+
+      </taula-form>
+      
+    </b-modal>
 
   </div>
 </template>
 <script>
 import Vuex from "vuex";
+import TaulaForm from './taula_form.vue';
 export default {
   props: ["tipoaccion", "alertant", "test"],
   data() {
@@ -179,6 +209,10 @@ export default {
 
         estats_incidencia_id: "1",
       },
+      formAlertant:{
+        id: null,
+        nom: ""
+      },
       errors: []
     };
   },
@@ -192,6 +226,7 @@ export default {
       "tipoRols",
       "municipis",
       "tipoAlertant",
+      "tipoIncidentes"
     ])
   },
   methods: {
@@ -214,6 +249,7 @@ export default {
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/municipi");
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/TipusA");
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/alertant");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/TipusI");
   },
   beforeCreate() {},
   mounted() {
