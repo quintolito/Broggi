@@ -2,7 +2,7 @@
   <b-container fluid>
     <!-- User Interface controls -->
     <b-row>
-      <b-col lg="6" class="my-1">
+      <b-col lg="5" sm="5" md="5" class="my-1">
         <b-form-group
           label="Ordenar"
           label-cols-sm="3"
@@ -25,7 +25,7 @@
         </b-form-group>
       </b-col>
 
-      <b-col sm="6" md="6" class="my-1">
+      <b-col sm="7" md="7" class="my-1">
         <b-form-group
           label="Per page"
           label-cols-sm="6"
@@ -45,10 +45,8 @@
         </b-form-group>
       </b-col>
 
-     
-
-
-      <b-col lg="6" class="my-1">
+      
+      <b-col lg="5" class="my-1">
         <b-form-group
           label="Filtrar"
           label-cols-sm="3"
@@ -71,7 +69,7 @@
         </b-form-group>
       </b-col>
 
-      <b-col lg="6" class="my-1">
+      <b-col lg="7" class="my-1">
         <b-form-group
           label="Municipi"
           label-cols-sm="3"
@@ -81,20 +79,30 @@
           class="mb-0">
           <b-form-checkbox-group v-model="filterOn" class="mt-1">
             <b-form-checkbox value="1">Barcelona</b-form-checkbox>
-            <b-form-checkbox value="2">Tarragona</b-form-checkbox>
-            <b-form-checkbox value="3">Girona</b-form-checkbox>
-            <b-form-checkbox value="4">Lleida</b-form-checkbox>
+            <b-form-checkbox value="2">Girona</b-form-checkbox>
+            <b-form-checkbox value="3">Lleida</b-form-checkbox>
+            <b-form-checkbox value="4">Tarragona</b-form-checkbox>
           </b-form-checkbox-group>
         </b-form-group>
       </b-col>
 
-      
+      <b-col sm="12" md="12" class="my-1">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="current_items.length"
+          :per-page="perPage"
+          align="fill"
+          size="sm"
+          class="my-0"
+        ></b-pagination>
+      </b-col>
 
       
     </b-row>
 
     <!-- Main table element -->
     <b-table
+      head-variant="dark"
       show-empty
       small
       stacked="md"
@@ -110,22 +118,10 @@
       @row-dblclicked="showInfo"
       @filtered="onFiltered"
     >
-      <template v-slot:cell(name)="row">
-        {{ row.value.first }} {{ row.value.last }}
-      </template>
+      
 
       
     </b-table>
-     <b-col sm="12" md="12" class="my-1">
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="totalRows"
-          :per-page="perPage"
-          align="fill"
-          size="sm"
-          class="my-0"
-        ></b-pagination>
-      </b-col>
   </b-container>
 </template>
 
@@ -156,35 +152,11 @@ import Vuex from "vuex";
     ],
     data() {       
       return {
-        items: [
-          { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
-          { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
-          {
-            isActive: false,
-            age: 9,
-            name: { first: 'Mini', last: 'Navarro' },
-            _rowVariant: 'success'
-          },
-          { isActive: false, age: 89, name: { first: 'Geneva', last: 'Wilson' } },
-          { isActive: true, age: 38, name: { first: 'Jami', last: 'Carney' } },
-          { isActive: false, age: 27, name: { first: 'Essie', last: 'Dunlap' } },
-          { isActive: true, age: 40, name: { first: 'Thor', last: 'Macdonald' } },
-          {
-            isActive: true,
-            age: 87,
-            name: { first: 'Larsen', last: 'Shaw' },
-            _cellVariants: { age: 'danger', isActive: 'warning' }
-          },
-          { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
-          { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
-          { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
-          { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
-        ],
         fields: [          
           //columnes personalitzades
           {
             key: this.col1,
-            label: this.col1,
+            label: "Codi",
             sortable: true,
             class: "text-center"
           },
@@ -216,11 +188,6 @@ import Vuex from "vuex";
         sortDirection: 'asc',
         filter: null,
         filterOn: [],
-        infoModal: {
-          id: 'info-modal',
-          title: '',
-          content: ''
-        }
       }
     },
     computed: {
@@ -235,14 +202,9 @@ import Vuex from "vuex";
     },
     mounted() {
       // Set the initial number of items
-      this.totalRows = this.items.length
+      //this.totalRows = this.items.length
     },
     methods: {
-      info(item, index, button) {
-        this.infoModal.title = `Row index: ${index}`
-        this.infoModal.content = JSON.stringify(item, null, 2)
-        this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-      },
       resetInfoModal() {
         this.infoModal.title = ''
         this.infoModal.content = ''
@@ -252,8 +214,10 @@ import Vuex from "vuex";
         this.totalRows = filteredItems.length
         this.currentPage = 1
       },
-      showInfo(item ){
-        alert(item.id)
+      showInfo(item, index){
+        //alert(item.id)
+        
+        this.$emit('tancar-modal', item);
       }
     }
   }

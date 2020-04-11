@@ -4,7 +4,7 @@
       <!-- Num Inciedncia -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-1" label="Numero incidència" label-for="input-1">
         <b-form-input
-          id="input-1"
+          id="input-num-incidencia"
           v-model="formIncidencia.num_incidencia"
           required
           placeholder="00000000000"
@@ -15,7 +15,7 @@
       <!-- Data -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-2" label="Data" label-for="input-1">
         <b-form-input
-          id="input-1"
+          id="input-data"
           v-model="formIncidencia.data"
           required
           placeholder="Data de la incidecnia"
@@ -26,7 +26,7 @@
       <!-- Hora -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-3" label="Hora d'alerta" label-for="input-3">
         <b-form-input
-          id="input-2"
+          id="input-hora"
           v-model="formIncidencia.hora"
           required
           placeholder="0"
@@ -39,7 +39,7 @@
         <select
           v-model="formIncidencia.tipus_alertant_id"
           name="city"
-          id="city"
+          id="tipus-alertant"
           class="form-control"
           tabindex="12"
         >
@@ -68,10 +68,9 @@
           >{{ alertant.nom }}</option>
         </select>-->
 
-        <b-button v-b-modal.modal-hospital>
+        <b-button  @click="modalHospitals = !modalHospitals" ref="botoHospital">
           Selecionar Hospital
         </b-button>
-        
       </b-form-group>
 
       <!-- Telefon alertant -->
@@ -87,6 +86,7 @@
 
       <!-- Municipi -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-5" label="Municipi" label-for="input-3">
+        <!-- 
         <select
           v-model="formIncidencia.municipis_id"
           name="municipi"
@@ -100,6 +100,11 @@
             :value="municipi.id"
           >{{ municipi.nom }}</option>
         </select>
+        -->
+
+        <b-button  @click="modalMunicpis = !modalMunicpis" ref="botoMunincpi">
+          Selecionar Municipi
+        </b-button> 
       </b-form-group>
 
       <!-- Adreça -->
@@ -163,19 +168,44 @@
     <!-- MODAL PARA Hospital -->
     <b-modal
       id="modal-hospital"
-      ref="modal"
       title="Seleciona un hospital"
       @show="resetModal"
       @hidden="resetModal"
       @ok="handleOk"
       size="xl"
+
+      v-model="modalHospitals"
+      
     >
       <taula-form :current_items="alertants" 
         col1="id"
         col2="nom"
         col3="adreca"
         col4="municipis_id"
-        col5="telefon">
+        col5="telefon"
+        
+        @tancar-modal="tancarModal">
+
+      </taula-form>
+      
+    </b-modal>
+
+    <!-- MODAL PARA Municipis -->
+    <b-modal
+      id="modal-municipi"
+      title="Seleciona un municipi"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+      size="xl"
+
+       v-model="modalMunicpis"
+    >
+      <taula-form :current_items="municipis" 
+        col1="id"
+        col2="nom"
+        col3="comarques_id"
+        @tancar-modal="tancarModal">
 
       </taula-form>
       
@@ -213,6 +243,8 @@ export default {
         id: null,
         nom: ""
       },
+      modalHospitals: false,
+      modalMunicpis: false,
       errors: []
     };
   },
@@ -242,7 +274,21 @@ export default {
           this.errors.push(error.response.data);
           console.log(error.response.data);
         });
-    }
+    },
+    // tancar modal
+    tancarModal(item){
+      //alert(item.id);
+      //input = this.$refs['input-alertant'];
+      if(this.modalHospitals){
+        this.modalHospitals = false;
+        this.$refs.botoHospital.textContent = item.nom;
+        this.formIncidencia.alertants_id = item.id
+      }else{
+        this.modalMunicpis = false;        
+        this.$refs.botoMunincpi.textContent = item.nom;
+        this.formIncidencia.municipis_id = item.id
+      }     
+    },
   },
   created() {
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/rols");
