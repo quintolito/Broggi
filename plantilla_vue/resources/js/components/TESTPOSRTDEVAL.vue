@@ -343,19 +343,71 @@
           <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
         </div>
 
-        <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
-          <template v-slot:overlay>
-            <div v-if="processing" class="text-center p-4 bg-primary text-light rounded">
-              <b-icon icon="cloud-upload" font-scale="4"></b-icon>
-              <div class="mb-3">Processing...</div>
-              <b-progress
-                min="1"
-                max="20"
-                :value="counter"
-                variant="success"
-                height="3px"
-                class="mx-n4 rounded-0"
-              ></b-progress>
+      <b-form-group
+                    label-class="margenform"
+
+        id="input-group-1"
+        label="codi"
+        label-for="input-1"
+        description="We'll never share your email with anyone else."
+      >
+        <b-form-input
+                            class="margeninput"
+
+          id="input-1"
+          v-model="formNourecurs.codi"
+          required
+          placeholder="Enter codi"
+        ></b-form-input>
+
+             <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
+      </b-form-group>
+
+      <b-form-group                     label-class="margenform"
+ id="input-group-3" label="rols:" label-for="input-3">
+                <select  v-model="formNourecurs.tipus_recurs_id" name="city" id="city" class="form-control margeninput" tabindex="12">
+            <option v-for="(city, index) in tipoRecursos"
+                    :key="index"
+                    :value="city.id">{{ city.tipus }}
+            </option>
+        </select>
+ <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "></b-icon>
+      </b-form-group>
+<div class="d-flex justify-content-center">
+         <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
+      </div>
+
+      <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
+        <template v-slot:overlay>
+          <div v-if="processing" class="text-center p-4 bg-primary text-light rounded">
+            <b-icon icon="cloud-upload" font-scale="4"></b-icon>
+            <div class="mb-3">Processing...</div>
+            <b-progress
+              min="1"
+              max="20"
+              :value="counter"
+              variant="success"
+              height="3px"
+              class="mx-n4 rounded-0"
+            ></b-progress>
+          </div>
+          <div
+            v-else
+            ref="dialog"
+            tabindex="-1"
+            role="dialog"
+            aria-modal="false"
+            aria-labelledby="form-confirm-label"
+            class="text-center p-3"
+          >
+            <p><strong id="form-confirm-label">Are you sure?</strong></p>
+            <div class="d-flex">
+              <b-button variant="outline-danger" class="mr-3" @click="onCancel">
+                Cancel
+              </b-button>
+              <b-button variant="outline-success" @click="onOK">OK</b-button>
             </div>
             <div
               v-else
