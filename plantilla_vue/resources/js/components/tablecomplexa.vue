@@ -390,7 +390,7 @@ export default {
     "col24",
     "col25",
     "col26",
-    "col27"
+    "col27",
   ],
   data() {
     return {
