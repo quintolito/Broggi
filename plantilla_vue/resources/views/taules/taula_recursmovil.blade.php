@@ -7,7 +7,7 @@
 @section('main')
 
     <h1 class="display-4 text_titol">
-        Recurs movil
+        Recurs mòbil
     </h1>
 
     {{--

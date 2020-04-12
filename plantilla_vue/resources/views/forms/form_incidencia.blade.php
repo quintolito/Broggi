@@ -1,7 +1,7 @@
 @extends('templates.main')
 
 @section('titol')
-    Form incidencia
+    Form incidència
 @endsection
 
 @section('main')
