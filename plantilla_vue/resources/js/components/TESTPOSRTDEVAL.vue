@@ -304,7 +304,6 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
  <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
     margin-top: 2px; "></b-icon>
       </b-form-group>
-      </b-form-group>
 <div class="d-flex justify-content-center">
          <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
       </div>
