@@ -156,7 +156,7 @@ import Vuex from "vuex";
           //columnes personalitzades
           {
             key: this.col1,
-            label: "Codi",
+            label: this.col1,
             sortable: true,
             class: "text-center"
           },

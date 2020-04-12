@@ -37,13 +37,13 @@ window.axios = require("axios");
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component(
-    "example-component",
-    require("./components/ExampleComponent.vue").default
+  "example-component",
+  require("./components/ExampleComponent.vue").default
 );
 
 Vue.component(
-    "modal-post",
-    require("./components/TESTPOSRTDEVAL.vue").default
+  "modal-post",
+  require("./components/TESTPOSRTDEVAL.vue").default
 );
 
 
@@ -76,186 +76,196 @@ devtool: 'source-map';
  */
 
 const store = new Vuex.Store({
-      state: {
-        count:0,
-        message: 'Hello World',
-        users: [],
-        alertants:[],
-        posts:[],
-        tipoRols:[],
-        municipis:[],
-        tipoRecursos:[],
-        tipoAlertant:[],
-        tipoIncidentes:[],
-        incidencias:[],
-        modalVisible: false,
-        modalComponent: null,
-      },
-    getters:{
-        getUsers:  state => {
-            return state.users.length;
+  state: {
+    count: 0,
+    message: 'Hello World',
+    users: [],
+    alertants: [],
+    posts: [],
+    recursos: [],
+    tipoRols: [],
+    municipis: [],
+    tipoRecursos: [],
+    tipoAlertant: [],
+    tipoIncidentes: [],
+    incidencias: [],
+    modalVisible: false,
+    modalComponent: null,
+  },
+  getters: {
+    getUsers: state => {
+      return state.users.length;
 
-}
-},
-    actions: {
-        // metode per a obtenir els valor amb api (get)
-        // commit === a java "push"
-        loadUsers({commit},url) {
-          axios.get(url).then(result => {
+    }
+  },
+  actions: {
+    // metode per a obtenir els valor amb api (get)
+    // commit === a java "push"
+    loadUsers({ commit }, url) {
+      axios.get(url).then(result => {
 
+        // alertants/hospitals
+        if (url.includes("alertant")) {
+          commit('SAVE_ALERTANT', result.data);
+        }
+        // recursos
+        else if (url.includes("recurso")) {
+          commit('SAVE_RECURSOS', result.data);
+        }
+        // rols
+        else if (url.includes("rols")) {
+          commit('SAVE_ROLS', result.data);
+        } 
+        // tipus de recurs
+        else if (url.includes("TipusR")) {
+          commit('SAVE_TIPORECURSOS', result.data);
+        }
+        // municipis
+        else if (url.includes("municipi")) {
+          commit('SAVE_MUNICIPI', result.data);
+        }
+        // tipus Alertant 
+        else if (url.includes("TipusA")) {
+          commit('SAVE_TIPOALERTANT', result.data);
+        }
+        // incidencies
+        else if (url.includes("incidencias")) {
+          commit('SAVE_USERS', result.data);
+        }
+        // tipus de incidencia
+        else if (url.includes("TipusI")) {
+          commit('SAVE_TIPOINCIDENTE', result.data);
+        }
 
-            if(url.includes("alertant")){
-
-                commit('SAVE_ALERTANT',result.data);
-            }
-            else if(url.includes("recurso")){
-                commit('SAVE_USERS',result.data);
-            }
-            else if(url.includes("rols")){
-                commit('SAVE_ROLS',result.data);
-            }
-            else if(url.includes("TipusR")){
-
-              commit('SAVE_RECURSOS',result.data);
-            }
-            else if(url.includes("municipi")){
-                commit('SAVE_MUNICIPI',result.data);
-            }
-            else if(url.includes("TipusA")){
-                commit('SAVE_TIPOALERTANT',result.data);
-            }
-            else if(url.includes("incidencias")){
-              commit('SAVE_USERS',result.data);
-            }
-            else if(url.includes("TipusI")){
-              commit('SAVE_TIPOINCIDENTE',result.data);
-            }
-
-          }).catch(error => {
-            throw new Error(`API ${error}`);
-          });
-        },
-
-       /* loadRols({commit},url) {
-            axios.get(url).then(result => {
-
-                  commit('SAVE_ROLS',result.data);
-
-
-
-            }).catch(error => {
-              throw new Error(`API ${error}`);
-            });
-          },
-          loadRecursos({commit},url) {
-            axios.get(url).then(result => {
-
-                  commit('SAVE_RECURSOS',result.data);
-
-
-
-            }).catch(error => {
-              throw new Error(`API ${error}`);
-            });
-          },
-
-        loadMunicipi({commit},url) {
-            axios.get(url).then(result => {
-
-                  commit('SAVE_MUNICIPI',result.data);
-
-
-
-            }).catch(error => {
-              throw new Error(`API ${error}`);
-            });
-          },
-          tipuAlertant({commit},url) {
-            axios.get(url).then(result => {
-
-                  commit('SAVE_TIPOALERTANT',result.data);
-
-
-
-            }).catch(error => {
-              throw new Error(`API ${error}`);
-            });
-          },
-          loadAlertant({commit},url) {
-            axios.get(url).then(result => {
-
-                commit('SAVE_USERS',result.data);
-
-
-
-            }).catch(error => {
-              throw new Error(`API ${error}`);
-            });
-          },
-*/
+      }).catch(error => {
+        throw new Error(`API ${error}`);
+      });
     },
 
-    // mutations: permet afegir qualsevol valor a l'array
-    mutations: {
-        incrementBy(state, n) {
-            state.count += n;
-          },
-          SAVE_RECURSOS(state,tipoRecursos){
-            state.tipoRecursos=tipoRecursos ;
-          },
-          SAVE_ROLS(state,tipoRols){
-            state.tipoRols=tipoRols ;
+    /* loadRols({commit},url) {
+         axios.get(url).then(result => {
 
-          },
-          SAVE_ALERTANT(state,alertants){
-            state.alertants=alertants;
-          },
-          disminuir(state) {
-            state.count -= 2;
-          },
-          SAVE_MUNICIPI(state, municipis) {
-            state.municipis=municipis ;
-          },
-          SAVE_USERS(state, users) {
-            state.users=users ;
-            state.count=users.length;
-          },
-          SAVE_POSTS(state, posts) {
-            state.posts=posts ;
-          },
-          SAVE_TIPOALERTANT(state, tipoAlertant) {
-            state.tipoAlertant=tipoAlertant ;
-          },
-          SAVE_TIPOINCIDENTE(state, tipoIncidentes) {
-            state.tipoIncidentes=tipoIncidentes ;
-          },
-          SAVE_INCIDENCIAS(state, incidencia) {
-            state.incidencia=incidencia ;
-          },
-          showModal(state, componentName) {
-            state.modalVisible = true;
-            state.modalComponent = componentName;
-          },
-          hideModal(state) {
-            state.modalVisible = false;
-          },
-          getResults() {
-            //const data = await this.$store.dispatch('loadUsers', 'http://127.0.0.1:8000/api/alertant')
-            //do whatever you need with the returned data
-            return this.state.users.length;
-          }
-      },
+               commit('SAVE_ROLS',result.data);
 
-    });
+
+
+         }).catch(error => {
+           throw new Error(`API ${error}`);
+         });
+       },
+       loadRecursos({commit},url) {
+         axios.get(url).then(result => {
+
+               commit('SAVE_RECURSOS',result.data);
+
+
+
+         }).catch(error => {
+           throw new Error(`API ${error}`);
+         });
+       },
+
+     loadMunicipi({commit},url) {
+         axios.get(url).then(result => {
+
+               commit('SAVE_MUNICIPI',result.data);
+
+
+
+         }).catch(error => {
+           throw new Error(`API ${error}`);
+         });
+       },
+       tipuAlertant({commit},url) {
+         axios.get(url).then(result => {
+
+               commit('SAVE_TIPOALERTANT',result.data);
+
+
+
+         }).catch(error => {
+           throw new Error(`API ${error}`);
+         });
+       },
+       loadAlertant({commit},url) {
+         axios.get(url).then(result => {
+
+             commit('SAVE_USERS',result.data);
+
+
+
+         }).catch(error => {
+           throw new Error(`API ${error}`);
+         });
+       },
+*/
+  },
+
+  // mutations: permet afegir qualsevol valor a l'array
+  mutations: {
+    incrementBy(state, n) {
+      state.count += n;
+    },
+    SAVE_RECURSOS(state, recursos) {
+      state.recursos = recursos;
+
+    },
+    SAVE_ROLS(state, tipoRols) {
+      state.tipoRols = tipoRols;
+
+    },
+    SAVE_ALERTANT(state, alertants) {
+      state.alertants = alertants;
+    },
+    disminuir(state) {
+      state.count -= 2;
+    },
+    SAVE_MUNICIPI(state, municipis) {
+      state.municipis = municipis;
+    },
+    SAVE_USERS(state, users) {
+      state.users = users;
+      state.count = users.length;
+    },
+    SAVE_POSTS(state, posts) {
+      state.posts = posts;
+    },
+    SAVE_TIPOALERTANT(state, tipoAlertant) {
+      state.tipoAlertant = tipoAlertant;
+    },
+    SAVE_TIPORECURSOS(state, tipoRecursos) {
+      state.tipoRecursos = tipoRecursos;
+    },
+    SAVE_TIPOINCIDENTE(state, tipoIncidentes) {
+      state.tipoIncidentes = tipoIncidentes;
+    },
+    SAVE_INCIDENCIAS(state, incidencia) {
+      state.incidencia = incidencia;
+    },
+    showModal(state, componentName) {
+      state.modalVisible = true;
+      state.modalComponent = componentName;
+    },
+    hideModal(state) {
+      state.modalVisible = false;
+    },
+    getResults() {
+      //const data = await this.$store.dispatch('loadUsers', 'http://127.0.0.1:8000/api/alertant')
+      //do whatever you need with the returned data
+      return this.state.users.length;
+    }
+  },
+
+});
 
 const app = new Vue({
-    el: "#app",
-    store
+  el: "#app",
+  store
 });
 
 
 
-     
+
 /*export const store = new Vuex.Store({
     state: {
         flavor: ''

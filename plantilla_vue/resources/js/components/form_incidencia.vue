@@ -1,6 +1,14 @@
 <template>
   <div>
     <form ref="form" @submit.stop.prevent="handleSubmit">
+
+       <!-- Afectat -->
+      <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-1" label="Form afectat" label-for="input-1">
+          <b-button  @click="modalAfectat = !modalAfectat" ref="botoAfectat">
+            FORM AFECTAT
+        </b-button> 
+      </b-form-group> 
+
       <!-- Num Inciedncia -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-1" label="Numero incidència" label-for="input-1">
         <b-form-input
@@ -159,19 +167,18 @@
 
       <!-- Recurs mòbil -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-9" label="Recurs mòbil" label-for="input-3">
-        <b-button v-b-modal.modal_recurs>Selecionar recurs mobil</b-button>
+        <b-button  @click="modalRecursos = !modalRecursos" ref="botoRecurs">
+          Selecionar Recurs Mòbil
+        </b-button> 
       </b-form-group>
     </form>
 
-    <button type="submit" v-on:click="postIncidencia()" class="btn boto-primari">Dale</button>
+    <button type="submit" v-on:click="postIncidencia()" class="btn boto-primari">Guardar Incidencia</button>
 
     <!-- MODAL PARA Hospital -->
     <b-modal
       id="modal-hospital"
       title="Seleciona un hospital"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
       size="xl"
 
       v-model="modalHospitals"
@@ -194,9 +201,6 @@
     <b-modal
       id="modal-municipi"
       title="Seleciona un municipi"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
       size="xl"
 
        v-model="modalMunicpis"
@@ -205,6 +209,25 @@
         col1="id"
         col2="nom"
         col3="comarques_id"
+        @tancar-modal="tancarModal">
+
+      </taula-form>
+      
+    </b-modal>
+
+    <!-- MODAL PARA Recursos -->
+    <b-modal
+      id="modal-recurs"
+      title="Seleciona un recurs mòbil"
+      size="xl"
+
+       v-model="modalRecursos"
+    >
+      <taula-form :current_items="recursos" 
+        col1="id"
+        col2="codi"
+        col3="tipus_recurs_id"
+        col4="id_usuario"
         @tancar-modal="tancarModal">
 
       </taula-form>
@@ -238,13 +261,22 @@ export default {
         descripcio: "",
 
         estats_incidencia_id: "1",
+        recurs_mobil_id: null,
       },
-      formAlertant:{
-        id: null,
-        nom: ""
+      formAfectat:{
+        cip: "",
+        telefon: "",
+        edat: null,
+        sexe: null,
+        nom: "",
+        cognoms: "",
+        tenir_tarjeta: null,
+        municipis_id: null
+
       },
       modalHospitals: false,
       modalMunicpis: false,
+      modalRecursos: false,
       errors: []
     };
   },
@@ -258,7 +290,8 @@ export default {
       "tipoRols",
       "municipis",
       "tipoAlertant",
-      "tipoIncidentes"
+      "tipoIncidentes",
+      "recursos"
     ])
   },
   methods: {
@@ -283,10 +316,16 @@ export default {
         this.modalHospitals = false;
         this.$refs.botoHospital.textContent = item.nom;
         this.formIncidencia.alertants_id = item.id
-      }else{
+      }else if(this.modalMunicpis){
         this.modalMunicpis = false;        
         this.$refs.botoMunincpi.textContent = item.nom;
         this.formIncidencia.municipis_id = item.id
+      }else if(this.modalRecursos){
+        this.modalRecursos = false;        
+        this.$refs.botoRecurs.textContent = item.nom;
+        this.formIncidencia.recurs_mobil_id = item.id
+      }else{
+        this.modalAfectat = false;
       }     
     },
   },
@@ -296,6 +335,7 @@ export default {
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/TipusA");
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/alertant");
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/TipusI");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/recurso");
   },
   beforeCreate() {},
   mounted() {
