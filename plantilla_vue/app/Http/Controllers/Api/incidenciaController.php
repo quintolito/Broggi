@@ -38,9 +38,14 @@ class incidenciaController extends Controller
     {
         //
         $incidencia = new incidencias();
-        $Recusr = Recurs::all();
+
+        // millorar (seleccionar el recurs en el form)
+        $Recurs = Recurs::all();
+        // millorar
         $Usuario = Usuario::all();
+        // millorar (selecionar l'afectat introduit previament)
         $afectats=Afectats::all();
+
         $incidencia->num_incidencia = $request->input('num_incidencia');
         $incidencia->telefon_alertant = $request->input('telefon_alertant');
         $incidencia->data = $request->input('data');
@@ -64,7 +69,7 @@ class incidenciaController extends Controller
             $incidencia->save();
             //$incidencia->pivot->1;
             $incidencia->incidenciahasrecursos()
-            ->attach($Recusr[0],['prioritat' => 1,
+            ->attach($Recurs[0],['prioritat' => 1,
             'hora_acitvacio' => $now  ,
             'hora_mobilitzacio' => $now,
             'hora_assistencia' => $now,
