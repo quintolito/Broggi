@@ -410,7 +410,6 @@
               <b-button variant="outline-success" @click="onOK">OK</b-button>
             </div>
             <div
-              v-else
               ref="dialog"
               tabindex="-1"
               role="dialog"
