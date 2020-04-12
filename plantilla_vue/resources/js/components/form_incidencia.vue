@@ -228,6 +228,8 @@
         col2="codi"
         col3="tipus_recurs_id"
         col4="id_usuario"
+        col5="recursosid"
+        col6="recursosid.tipus"
         @tancar-modal="tancarModal">
 
       </taula-form>
