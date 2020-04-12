@@ -24,8 +24,8 @@ class incidenciaController extends Controller
     public function index()
     {
         //
-        $incidencias = incidencias::all();
-        return new incidenciaResource($incidencias);
+    $incidencias = incidencias::with('Municipi','EstatIncidencia','tipusIncident','tipusAlertant','Alertants')->get();
+        return  incidenciaResource::collection($incidencias);
     }
 
     /**
@@ -52,7 +52,6 @@ class incidenciaController extends Controller
         $incidencia->tipus_incident_id = $request->input('tipus_incident_id');
         $incidencia->estats_incidencia_id = $request->input('estats_incidencia_id');
         $incidencia->tipus_alertant_id = $request->input('tipus_alertant_id');
-        $incidencia->num_incidencia = $request->input('num_incidencia');
         $incidencia->alertants_id = $request->input('alertants_id');
         ///$now = Carbon::now();
        //
