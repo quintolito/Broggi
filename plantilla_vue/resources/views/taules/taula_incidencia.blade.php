@@ -1,7 +1,7 @@
 @extends('templates.main')
 
 @section('titol')
-    Taula incidencia
+    Taula incidència
 @endsection
 
 @section('main')
