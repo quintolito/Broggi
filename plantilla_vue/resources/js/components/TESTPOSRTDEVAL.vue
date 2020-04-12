@@ -409,22 +409,7 @@
               </b-button>
               <b-button variant="outline-success" @click="onOK">OK</b-button>
             </div>
-            <div
-              ref="dialog"
-              tabindex="-1"
-              role="dialog"
-              aria-modal="false"
-              aria-labelledby="form-confirm-label"
-              class="text-center p-3"
-            >
-              <p>
-                <strong id="form-confirm-label">Are you sure?</strong>
-              </p>
-              <div class="d-flex">
-                <b-button variant="outline-danger" class="mr-3" @click="onCancel">Cancel</b-button>
-                <b-button variant="outline-success" @click="onOK">OK</b-button>
-              </div>
-            </div>
+          </div>  
           </template>
         </b-overlay>
       </form>
