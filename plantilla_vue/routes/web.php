@@ -33,6 +33,7 @@ Route::get('/register','LoginController@showRegister');
     //cosas raras @marti
 Route::group(['middleware' => ['auth']], function () {
     //taula
+    Route::get('/recurscard', 'PruebaController@landingpagerecurs' );
     Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
     //form
     Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');

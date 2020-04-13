@@ -13,14 +13,9 @@
 
   </datalist>
 
--->
-
+    -->
 
     <b-row>
-
-
-
-
       <b-col lg="6" class="my-1">
         <b-form-group
           label="Filter"
@@ -51,7 +46,8 @@
           label-align-sm="right"
           label-size="sm"
           description="Leave all unchecked to filter on all data"
-          class="mb-0">
+          class="mb-0"
+        >
           <b-form-checkbox-group v-model="filterOn" class="mt-1">
             <b-form-checkbox value="name">Name</b-form-checkbox>
             <b-form-checkbox value="age">Age</b-form-checkbox>
@@ -71,12 +67,7 @@
           label-for="perPageSelect"
           class="mb-0"
         >
-          <b-form-select
-            v-model="perPage"
-            id="perPageSelect"
-            size="sm"
-            :options="pageOptions"
-          ></b-form-select>
+          <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
         </b-form-group>
       </b-col>
 
@@ -94,14 +85,14 @@
 
     <!-- Main table element -->
     <b-table
-    head-variant="dark"
-    id="my-table"
-    ref="table"
+    sticky-header
+      head-variant="dark"
+      id="my-table"
+      ref="table"
       show-empty
       small
       stacked="md"
       :items="users"
-
       :fields="fields"
       :current-page="currentPage"
       :per-page="perPage"
@@ -111,19 +102,19 @@
       :sort-desc.sync="sortDesc"
       :sort-direction="sortDirection"
     >
-
-
-
-
       <template v-slot:cell(actions)="row">
-
-        <b-button size="sm" @click="info(row.item, row.item.id, $event.target)" variant="danger" class="mr-1">
-          Eliminar
-        </b-button>
-        <b-button  size="sm" @click="update(row.item, row.item.id, $event.target)" class="mr-1 boto-primari">
-          Modificar
-        </b-button>
-<!--
+        <b-button
+          size="sm"
+          @click="info(row.item, row.item.id, $event.target)"
+          variant="danger"
+          class="mr-1"
+        >Eliminar</b-button>
+        <b-button
+          size="sm"
+          @click="update(row.item, row.item.id, $event.target)"
+          class="mr-1 boto-primari"
+        >Modificar</b-button>
+        <!--
         <b-button size="sm" @click="eliminar(row.item.id)">
           {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
         </b-button>
@@ -136,12 +127,11 @@
           </ul>
         </b-card>
 
--->
+        -->
       </template>
-
     </b-table>
 
-<!--
+    <!--
 
  <b-modal
       id="info-delete"
@@ -159,16 +149,9 @@
 
 
 
--->
+    -->
 
-
-
-
-
-
-
-
-<!--
+    <!--
 
     <b-modal :id="infoModal.id" :title="infoModal.title"        @ok="handleOk"  >
       <pre>{{ infoModal.content }}
@@ -250,110 +233,151 @@
 
     </b-modal>
 
--->
-
+    -->
 
     <b-modal
       id="modal-recursos2"
       ref="modal"
-      title="Submit Your Name"
+      title="Añadir un recurso movil"
       @show="resetModal"
       @hidden="resetModal"
       @ok="handleOk"
+      cancel-variant="colordefondoinsert"
+
+      cancel-title="Cancelar"
+      ok-title="Aceptar"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
+        <b-form-group
+          id="input-group-1"
+          label="codi"
+          label-for="input-1"
+        label-class="margenform"
 
+        >
+          <b-form-input
+            id="input-1-recurs"
+                                    class="margeninput"
 
+            v-model="formRecurs.codi"
+            required
+            placeholder="Enter codi"
+          ></b-form-input>
+            <b-icon
+                        v-b-tooltip.focus
+                        title="Este campo se ha de rellenar con el codigo del recurso movil"
+                        icon="question-circle"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "
+                    ></b-icon>
+        </b-form-group>
 
-      <b-form-group
-        id="input-group-1"
-        label="codi"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1-recurs"
-          v-model="formRecurs.codi"
-          required
-          placeholder="Enter codi"
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group  label-class="margenform" id="input-group-3" label="rols:" label-for="input-3">
+          <select
 
-      <b-form-group id="input-group-3" label="rols:" label-for="input-3">
-                <select v-model="formRecurs.tipus_recurs_id" name="recurso" id="recurso" class="form-control" tabindex="12">
-            <option v-for="(recurso, index) in tipoRecursos"
-                    :key="index"
-                    :value="recurso.id">{{ recurso.tipus }}
-            </option>
-        </select>
-
-      </b-form-group>
-
+            v-model="formRecurs.tipus_recurs_id"
+            name="recurso"
+            id="recurso"
+            class="form-control margeninput"
+            tabindex="12"
+          >
+            <option
+              v-for="(recurso, index) in tipoRecursos"
+              :key="index"
+              :value="recurso.id"
+            >{{ recurso.tipus }}</option>
+          </select>
+           <b-icon
+                        v-b-tooltip.focus
+                        title="Este campo se ha de rellenar con el tipo que sera el recurso movil"
+                        icon="question-circle"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "
+                    ></b-icon>
+        </b-form-group>
       </form>
     </b-modal>
 
-
-
-
-<!-- FORM PARA ALERTANT -->
+    <!-- FORM PARA ALERTANT -->
 
     <b-modal
+            class="margeninput"
       id="modal-alertant2"
-            ref="modal"
-
-      title="Submit Your Name"
+      ref="modal"
+      title="Modifica un alertant"
       @show="resetModal"
       @hidden="resetModal"
       @ok="handleOk"
+            cancel-variant="colordefondoinsert"
+
+      cancel-title="Cancelar"
+      ok-title="Aceptar"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
+        <b-form-group
+          id="input-group-1"
+          label="Nom"
+          label-for="input-1"
+                              label-class="margenform"
+
+        >
+          <b-form-input                         class="margeninput"
+id="input-1" v-model="formAlertant.nom" required placeholder="Enter codi"></b-form-input>
 
 
+                    <b-icon
+                        v-b-tooltip.focus
+                        title="Este campo se ha de rellenar con el nombre del alertante"
+                        icon="question-circle"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "
+                    ></b-icon>
+        </b-form-group>
 
-      <b-form-group
-        id="input-group-1"
-        label="Nom"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="formAlertant.nom"
-          required
-          placeholder="Enter codi"
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group label-class="margenform" id="input-group-2" label="adreca" label-for="input-2">
+          <b-form-input  class="margeninput" id="input-2" v-model="formAlertant.adreca" required placeholder="Enter nom"></b-form-input>
+              <b-icon
+                        v-b-tooltip.focus
+                        title="Este campo se ha de rellenar con la direccion del alertante"
+                        icon="question-circle"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "
+                    ></b-icon>
+        </b-form-group>
+        <b-form-group label-class="margenform" id="input-group-5" label="telefon" label-for="input-5">
+          <b-form-input
+            id="input-5"
+            class="margeninput"
+            v-model="formAlertant.telefon"
+            required
+            placeholder="Indica el telefon"
+          ></b-form-input>
+          <b-icon
+                        v-b-tooltip.focus
+                        title="Este campo se ha de rellenar con el telefono del alertante"
+                        icon="question-circle"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "
+                    ></b-icon>
+        </b-form-group>
 
-      <b-form-group id="input-group-2" label="adreca" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="formAlertant.adreca"
-          required
-          placeholder="Enter nom"
-        ></b-form-input>
-      </b-form-group>
-  <b-form-group id="input-group-5" label="telefon" label-for="input-5">
-        <b-form-input
-          id="input-5"
-          v-model="formAlertant.telefon"
-          required
-          placeholder="Enter contrasenya"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="municipis_id" label-for="input-3">
-
-
-
-                <select v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-control" tabindex="12">
-            <option v-for="(municipi, index) in municipis"
-                    :key="index"
-                    :value="municipi.id">{{ municipi.nom }}
-            </option>
-        </select>
-
-
-<!-- cAMBIAR POR DATALIST PERO SE LAGEA
+        <b-form-group label-class="margenform" id="input-group-3" label="municipis_id" label-for="input-3">
+          <select
+            v-model="formAlertant.municipis_id"
+            name="municipi"
+            id="municipi"
+            class="form-control margeninput"
+            tabindex="12"
+          >
+            <option
+              v-for="(municipi, index) in municipis"
+              :key="index"
+              :value="municipi.id"
+            >{{ municipi.nom }}</option>
+          </select>
+            <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
+            margin-top: 2px; "></b-icon>
+          <!-- cAMBIAR POR DATALIST PERO SE LAGEA
   <b-form-input  v-model="formAlertant.municipis_id"  name="municipi" id="municipi" list="my-list-id"></b-form-input>
 
   <datalist id="my-list-id" >
@@ -363,23 +387,35 @@
 
 
   </datalist>
--->
-      </b-form-group>
+          -->
+        </b-form-group>
 
+        <b-form-group  label-class="margenform" id="input-group-4" label="tipus_alertant_id" label-for="input-3">
+          <select
+            v-model="formAlertant.tipus_alertant_id"
+            name="city"
+            id="city"
+            class="form-control margeninput"
+            tabindex="12"
 
+          >
+            <option
+              v-for="(city, index) in tipoAlertant"
+              :key="index"
+              :value="city.id"
+            >{{ city.tipus }}</option>
+          </select>
 
-  <b-form-group id="input-group-4" label="tipus_alertant_id" label-for="input-3">
-                <select v-model="formAlertant.tipus_alertant_id" name="city" id="city" class="form-control" tabindex="12">
-            <option v-for="(city, index) in tipoAlertant"
-                    :key="index"
-                    :value="city.id">{{ city.tipus }}
-            </option>
-        </select>
+             <b-icon
+                        v-b-tooltip.focus
+                        title="Este campo se ha de rellenar con el tipo de alertante que tiene el alertante"
+                        icon="question-circle"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "
+                    ></b-icon>
+        </b-form-group>
 
-      </b-form-group>
-
-
-<!--
+        <!--
   <b-form-input  v-model="formAlertant.municipis_id"  name="municipi" id="municipi" list="my-list-id"></b-form-input>
 
   <datalist id="my-list-id" >
@@ -391,133 +427,190 @@
     </option>
 
   </datalist>
--->
-
-
+        -->
       </form>
-
     </b-modal>
-
   </b-container>
-
-
-
-
-
-
-
 </template>
 
 <script>
-import Vuex from 'vuex';
+import Vuex from "vuex";
 
-  export default {
-      /**
-       * OBTENEMOS LAS VARIABLES PASADAS POR PARAMETRO DE LARAVEL EN VUE CON LAS PROPS
-       */
-         props: ['api','tablaccion','nomtabla','tablanula','datamunicipi','adreca','telefon','tipusalertant','nombtablaalertant'],
-    data() {
-      return {
-          testfields: ['nom', 'last_name', 'age'],
-          dataReady: false,
-        items: [
-
-        ],
-        fields: [
-/**
- * INDICAREMOS CADA VARIABLE CON SU CAMPO CORRESPONDIENTE.
- */
-          { key: this.nomtabla, label: this.nomtabla, sortable: true, sortDirection: 'desc' },
-          { key: this.adreca, label: this.adreca, sortable: true, class: 'text-center' },
-          { key: this.telefon, label: this.telefon, sortable: true, class: 'text-center' },
-         // { key: 'municipis_id', label: 'municipis', sortable: true, class: 'text-center' },
-         // { key: 'municipis_id', label: 'nom', sortable: true, class: 'text-center' },
-
-        { key: this.datamunicipi , label: 'municipi', sortable: true, class: 'text-center' },
-        { key: this.tipusalertant, label: this.nombtablaalertant, sortable: true, class: 'text-center' },
-
-          { key: 'actions', label: 'Actions' , class: 'text-center' },
-
-        ],
-
-        click:0,
-        //totalRows: 1,
-        VALOR:0,
-        currentPage: 1,
-        perPage: 5,
-        pageOptions: [5, 10, 15],
-        test:0,
-        sortBy: '',
-        sortDesc: false,
-        sortDirection: 'asc',
-        filter: '',
-        filterOn: [],
-        Pruebamunicipi:[],
-        infoModal: {
-
-          rols_id:0,
-          Contraseña:'',
-          codi:'',
-          nom:'',
-          id:0
+export default {
+  /**
+   * OBTENEMOS LAS VARIABLES PASADAS POR PARAMETRO DE LARAVEL EN VUE CON LAS PROPS
+   */
+  props: [
+    "api",
+    "tablaccion",
+    "nomtabla",
+    "tablanula",
+    "datamunicipi",
+    "adreca",
+    "telefon",
+    "tipusalertant",
+    "nombtablaalertant",
+    "col23",
+    "col24",
+    "col25",
+    "col26",
+    "col27",
+  ],
+  data() {
+    return {
+      testfields: ["nom", "last_name", "age"],
+      dataReady: false,
+      items: [],
+      fields: [
+        /**
+         * INDICAREMOS CADA VARIABLE CON SU CAMPO CORRESPONDIENTE.
+         */
+        {
+          key: this.nomtabla,
+          label: this.nomtabla,
+          sortable: true,
+          sortDirection: "desc"
         },
-         formAlertant: {
-                id:0,
-                nom:"",
+        {
+          key: this.adreca,
+          label: this.adreca,
+          sortable: true,
+          class: "text-center"
+        },
+        {
+          key: this.telefon,
+          label: this.telefon,
+          sortable: true,
+          class: "text-center"
+        },
+        // { key: 'municipis_id', label: 'municipis', sortable: true, class: 'text-center' },
+        // { key: 'municipis_id', label: 'nom', sortable: true, class: 'text-center' },
 
-                adreca:'',
-                municipis_id:null,
+        {
+          key: this.datamunicipi,
+          label: "municipi",
+          sortable: true,
+          class: "text-center"
+        },
+        {
+          key: this.tipusalertant,
+          label: this.nombtablaalertant,
+          sortable: true,
+          class: "text-center"
+        },
+        {
+          key: this.col23,
+          label: this.col23,
+          sortable: true,
+          class: "text-center"
+        },
+        {
+          key: this.col24,
+          label: this.col24,
+          sortable: true,
+          class: "text-center"
+        },
+        {
+          key: this.col25,
+          label: this.col25,
+          sortable: true,
+          class: "text-center"
+        },
+        {
+          key: this.col26,
+          label: this.col26,
+          sortable: true,
+          class: "text-center"
+        },
+        {
+          key: this.col27,
+          label: this.col27,
+          sortable: true,
+          class: "text-center"
+        },
+        { key: "actions", label: "Actions", class: "text-center" },
+      ],
 
-                telefon:'',
-                tipus_alertant_id:null
-
-
-            },
-           formRecurs: {
-                id:0,
-                codi:"",
-                tipus_recurs_id:null
-
-            },
-        deleteModal:{
-            titulo:'',
-            id:0,
-            content:''
-        }
-      }
-    },
-    computed: {
-                   ...Vuex.mapState(['message','count','users','posts','tipoRols','municipis','tipoAlertant','tipoRecursos']),
-         //...Vuex.mapGetters({selectedOption:'getUsers'}),
-
-      sortOptions() {
-        // Create an options list from our fields
-        return this.fields
-          .filter(f => f.sortable)
-          .map(f => {
-            return { text: f.label, value: f.key }
-          })
+      click: 0,
+      //totalRows: 1,
+      VALOR: 0,
+      currentPage: 1,
+      perPage: 5,
+      pageOptions: [5, 10, 15],
+      test: 0,
+      sortBy: "",
+      sortDesc: false,
+      sortDirection: "asc",
+      filter: "",
+      filterOn: [],
+      Pruebamunicipi: [],
+      infoModal: {
+        rols_id: 0,
+        Contraseña: "",
+        codi: "",
+        nom: "",
+        id: 0
       },
+      formAlertant: {
+        id: 0,
+        nom: "",
 
+        adreca: "",
+        municipis_id: null,
 
+        telefon: "",
+        tipus_alertant_id: null
+      },
+      formRecurs: {
+        id: 0,
+        codi: "",
+        tipus_recurs_id: null
+      },
+      deleteModal: {
+        titulo: "",
+        id: 0,
+        content: ""
+      }
+      ,
+              boxTwo: ''
 
-    },
-    beforeCreate() {
+    };
+  },
+  computed: {
+    ...Vuex.mapState([
+      "message",
+      "count",
+      "users",
+      "posts",
+      "tipoRols",
+      "municipis",
+      "tipoAlertant",
+      "tipoRecursos"
+    ]),
+    //...Vuex.mapGetters({selectedOption:'getUsers'}),
 
-    },
+    sortOptions() {
+      // Create an options list from our fields
+      return this.fields
+        .filter(f => f.sortable)
+        .map(f => {
+          return { text: f.label, value: f.key };
+        });
+    }
+  },
+  beforeCreate() {},
 
-    created() {
+  created() {
+    //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/users');
+    //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/posts');
+    // this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
+    //this.items=  this.users.length;/
+    this.$store.dispatch("loadUsers", "http://127.0.0.1:8000/api/" + this.api);
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/rols");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/municipi");
+    this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/TipusA");
 
-            //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/users');
-            //this.$store.dispatch('loadUsers','https://jsonplaceholder.typicode.com/posts');
-            // this.$store.dispatch('loadUsers','https://pokeapi.co/api/v2/pokemon');
-             //this.items=  this.users.length;/
-               this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api);
-                             this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/rols');
-               this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/municipi');
-               this.$store.dispatch('loadUsers',' http://127.0.0.1:8000/api/TipusA');
-
-        /*if(this.api =="alertant"){
+    /*if(this.api =="alertant"){
                     this.$store.dispatch('loadAlertant','http://127.0.0.1:8000/api/'+this.api );
 
 
@@ -525,279 +618,268 @@ import Vuex from 'vuex';
         this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api );
         }*/
 
+    console.log(this.Pruebamunicipi[0]);
 
-  console.log( this.Pruebamunicipi[0]);
-    this.pageOptions.push(this.$store.state.count);
-
-        console.log(this.$store.state.users[0])
+    console.log(this.$store.state.users[0]);
+  },
+  beforeUpdate() {
+    // this.selectedOption=this.getResults
+    this.All_fields = this.fields;
 
   },
-  beforeUpdate(){
-                  // this.selectedOption=this.getResults
-this.All_fields=this.fields;
+  updated() {
+    //SE EJECUTA CUÁNDO SE RALIZAN LOS CAMBIOS
+    // this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
 
-    this.pageOptions.push(this.$store.state.count);
-
-
+    console.log("update");
   },
-    updated() {
-        //SE EJECUTA CUÁNDO SE RALIZAN LOS CAMBIOS
-                                        // this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
-
-        console.log('update');
-    },
- async mounted() {
-
+  async mounted() {
     this.get();
     this.dataReady = true;
-},
-     beforeMount() {
-        //SE EJECUTA ANTES DE INSERTAR EL DOM
-        console.log('beforeMount');
+  },
+  beforeMount() {
+    //SE EJECUTA ANTES DE INSERTAR EL DOM
+    console.log("beforeMount");
 
-
-                               //  this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
-
-
+    //  this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/alertant');
+  },
+  methods: {
+    makeToast(variant = null) {
+      this.$bvToast.toast("Toast body content", {
+        title: `Variant ${variant || "default"}`,
+        variant: variant,
+        solid: true
+      });
     },
-    methods: {
-          makeToast(variant = null) {
-        this.$bvToast.toast('Toast body content', {
-          title: `Variant ${variant || 'default'}`,
-          variant: variant,
-          solid: true
-        })
-      },
- get () {
-      return this.Pruebamunicipi=this.$store.state.users
+    get() {
+      return (this.Pruebamunicipi = this.$store.state.users);
 
       console.log(this.$store.state.users);
     },
-     ...Vuex.mapMutations(['getallusers','getResults']),
-     ...Vuex.mapActions(['getResults']),
-       update(item, index, button) {
-           //console.log(item);
-             console.log(item);
-        if(this.tablaccion=="rols"){
-        this.infoModal.id=index;
-        this.infoModal.rols_id=item.rols_id;
+    ...Vuex.mapMutations(["getallusers", "getResults"]),
+    ...Vuex.mapActions(["getResults"]),
+    update(item, index, button) {
+      //console.log(item);
+      console.log(item);
+      if (this.tablaccion == "rols") {
+        this.infoModal.id = index;
+        this.infoModal.rols_id = item.rols_id;
 
-         this.infoModal.Contraseña=item.contrasenya;
-         this.infoModal.codi=item.codi;
-                  this.infoModal.nom=item.nom;
-        }
-        else if(this.tablaccion=="recursos"){
-         /*   console.log(this.formRecurs);
+        this.infoModal.Contraseña = item.contrasenya;
+        this.infoModal.codi = item.codi;
+        this.infoModal.nom = item.nom;
+      } else if (this.tablaccion == "recursos") {
+        /*   console.log(this.formRecurs);
                         console.log(this.item);*/
 
-         this.formRecurs.id=index;
+        this.formRecurs.id = index;
 
-         this.formRecurs.codi=item.codi;
-         this.formRecurs.tipus_recurs_id=item.tipus_recurs_id;
+        this.formRecurs.codi = item.codi;
+        this.formRecurs.tipus_recurs_id = item.tipus_recurs_id;
 
-                      this.$root.$emit('bv::show::modal', "modal-recursos2", button)
+        this.$root.$emit("bv::show::modal", "modal-recursos2", button);
 
         //this.$root.$emit('bv::show::modal', "modal-recursos2", button)
-        }
-        else if(this.tablaccion=="alertant"){
-                this.formAlertant.id=index;
-                this.formAlertant.nom=item.nom;
-                 this.formAlertant.adreca=item.adreca;
-                  this.formAlertant.telefon=item.telefon;
-                  this.formAlertant.municipis_id=item.municipi.id;
-                  this.formAlertant.tipus_alertant_id=item.tipus_alertant.id;
+      } else if (this.tablaccion == "alertant") {
+        this.formAlertant.id = index;
+        this.formAlertant.nom = item.nom;
+        this.formAlertant.adreca = item.adreca;
+        this.formAlertant.telefon = item.telefon;
+        this.formAlertant.municipis_id = item.municipi.id;
+        this.formAlertant.tipus_alertant_id = item.tipus_alertant.id;
 
-                   console.log(this.formAlertant);
-                      this.$root.$emit('bv::show::modal', "modal-alertant2", button)
+        console.log(this.formAlertant);
+        this.$root.$emit("bv::show::modal", "modal-alertant2", button);
+      }
 
-            }
-
-
-
-       console.log(item);
-                          console.log(this.formAlertant);
-
-
-      },
-      info(item, index, button) {
-        this.deleteModal.id = index
-        this.$bvModal.msgBoxOk(`Esta seguro que desea borrar este elemento.  Row index: ${index}`, {
-          title: 'Confirmation',
-          size: 'sm',
-          buttonSize: 'sm',
-          okVariant: 'success',
-          headerClass: 'p-2 border-bottom-0',
-          footerClass: 'p-2 border-top-0',
-          centered: true
-        }).then(value => {
-              console.log( this.deleteModal.id);
-                 var vm = this
-            axios.delete('http://127.0.0.1:8000/api/'+this.api +'/'+ this.deleteModal.id)
-            .then(response => {
-                        /*const prueba = this.users.findIndex(user => user.id === id) // find the post index
-                        if (~prueba) // if the post exists in array
-                            this.users.splice(prueba, 1) //delete the post
-
-                console.log(this.result);*/
-                    this.Actualizar(this.api);
-
-
-
-
-            });          })
-          .catch(err => {
-            // An error occurred
-          });
-        console.log(this.$refs.table.refresh());
-        this.$refs.table.refresh();
-        //console.log();
-      },
-      UpdateFORMS(Apiactuar,RecibirObjeto) {
-          console.log("RECIBIROBKETO")
-        console.log(RecibirObjeto);
-      return axios.put('http://127.0.0.1:8000/api/'+Apiactuar +'/'+ RecibirObjeto.id,RecibirObjeto)
-             .then(function(response){
-                    //me.rols=response.data;
-
-                           console.log(this.result);
-                            //this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+Apiactuar);
-                            Actualizar(Apiactuar)
-
-
-                })
-                .catch(function(error){
-
-    });
+      console.log(item);
+      console.log(this.formAlertant);
     },
-      onFiltered(filteredItems) {
-        // Trigger pagination to update the number of buttons/pages due to filtering
-        //this.totalRows = users.length;
-        this.currentPage = 1;
-      },
-       selectedOption () {
-    return pageOptions.push(this.$store.state.users.length);
-  },
-  checkFormValidity() {
-        const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        return valid
-      },
-      resetModal() {
-        this.name = ''
-        this.nameState = null
+    info(item, index, button) {
+      this.deleteModal.id = index;
+      this.$bvModal
+        .msgBoxConfirm(
+          `Esta seguro que desea borrar este elemento?`,
+          {
+            title: "Confirmación",
+            size: "sm",
+            buttonSize: "sm",
+            okVariant: "danger",
+            headerClass: "p-2 border-bottom-0",
+            footerClass: "p-2 border-top-0",
+            centered: true,
+            okTitle: 'Eliminar',
+            cancelTitle: 'Cancelar',
+          }
+        )
+        .then(value => {
+            this.boxTwo = value
+          console.log(this.boxTwo);
+          if(this.boxTwo==true){
+          var vm = this;
+            axios
+                .delete(
+                "http://127.0.0.1:8000/api/" +
+                    this.api +
+                    "/" +
+                    this.deleteModal.id
+                )
+                .then(response => {
+                /*const prueba = this.users.findIndex(user => user.id === id) // find the post index
+                            if (~prueba) // if the post exists in array
+                                this.users.splice(prueba, 1) //delete the post
 
+                    console.log(this.result);*/
+                this.Actualizar(this.api);
+                });
+          }
+            })
+        .catch(err => {
+          // An error occurred
+        });
+      console.log(this.$refs.table.refresh());
+      this.$refs.table.refresh();
+      //console.log();
+    },
+    UpdateFORMS(Apiactuar, RecibirObjeto) {
+      console.log("RECIBIROBKETO");
+      console.log(RecibirObjeto);
+      return axios
+        .put(
+          "http://127.0.0.1:8000/api/" + Apiactuar + "/" + RecibirObjeto.id,
+          RecibirObjeto
+        )
+        .then(function(response) {
+          //me.rols=response.data;
 
-      },
-      Borrarelemento(bvModalEvt){
-          bvModalEvt.preventDefault()
-               // console.log(this.infoModal);
+          console.log(this.result);
+          //this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+Apiactuar);
+          Actualizar(Apiactuar);
+        })
+        .catch(function(error) {});
+    },
+    onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      //this.totalRows = users.length;
+      this.currentPage = 1;
+    },
+    selectedOption() {
+      return pageOptions.push(this.$store.state.users.length);
+    },
+    checkFormValidity() {
+      const valid = this.$refs.form.checkValidity();
+      this.nameState = valid;
+      return valid;
+    },
+    resetModal() {
+      this.name = "";
+      this.nameState = null;
+    },
+    Borrarelemento(bvModalEvt) {
+      bvModalEvt.preventDefault();
+      // console.log(this.infoModal);
 
-                axios.delete('http://127.0.0.1:8000/api/'+this.nombreApi + this.infoModal.index)
-            .then(response => {
-                        const prueba = this.items.findIndex(item => items.id === id) // find the post index
-                        if (~prueba) // if the post exists in array
-                            this.items.splice(prueba, 1) //delete the post
+      axios
+        .delete(
+          "http://127.0.0.1:8000/api/" + this.nombreApi + this.infoModal.index
+        )
+        .then(response => {
+          const prueba = this.items.findIndex(item => items.id === id); // find the post index
+          if (~prueba)
+            // if the post exists in array
+            this.items.splice(prueba, 1); //delete the post
 
-                console.log(this.result);
-            });
+          console.log(this.result);
+        });
 
-          this.handleSubmit();
+      this.handleSubmit();
+    },
+    handleOk(bvModalEvt) {
+      // Prevent modal from closing
 
+      bvModalEvt.preventDefault();
+      // console.log(this.infoModal);
+      console.log(this.api);
+      console.log(this.formRecurs);
+      if (this.api == "recurso") {
+        this.UpdateFORMS(this.api, this.formRecurs);
+      } else if (this.api == "alertant") {
+        this.UpdateFORMS(this.api, this.formAlertant);
 
-      },
-      handleOk(bvModalEvt) {
-        // Prevent modal from closing
+        this.handleSubmit();
+      }
 
+      this.handleSubmit();
+    },
+    Actualizar(Apiactuar) {
+      this.$store.dispatch(
+        "loadUsers",
+        "http://127.0.0.1:8000/api/" + Apiactuar
+      );
+    },
+    handleSubmit() {
+      // Exit when the form isn't valid
 
-        bvModalEvt.preventDefault()
-               // console.log(this.infoModal);
-    console.log(this.api);
-        console.log(this.formRecurs);
-        if(this.api=="recurso"){
-        this.UpdateFORMS(this.api,this.formRecurs);
-        }
-        else if(this.api=="alertant"){
-             this.UpdateFORMS(this.api,this.formAlertant);
-
-          this.handleSubmit();
-        }
-
-
-
-          this.handleSubmit();
-
-      },
-      Actualizar(Apiactuar){
-          this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+Apiactuar);
-      },
-      handleSubmit() {
-        // Exit when the form isn't valid
-
-         console.log("cerrar modal");
-        console.log(this.infoModal);
+      console.log("cerrar modal");
+      console.log(this.infoModal);
       // location.reload();
 
-
-
-        // Push the name to submitted names
-        // Hide the modal manually
-        this.$nextTick(() => {
-            this.popToast();
-          // Wrapped in $nextTick to ensure DOM is rendered before closing
-          this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.api);
-          this.$refs.modal.hide()
-        })
-      },
-     eliminar(id) {
-        // Exit when the form isn't valid
-
-
-
-
-      axios.delete('http://127.0.0.1:8000/api/usuarios/' + id)
-      .then(response => {
-                  this.$store.dispatch('loadUsers','http://127.0.0.1:8000/api/'+this.nombreApi);
-
-        this.result.splice(id, 1)
-        console.log(this.result);
+      // Push the name to submitted names
+      // Hide the modal manually
+      this.$nextTick(() => {
+        this.popToast();
+        // Wrapped in $nextTick to ensure DOM is rendered before closing
+        this.$store.dispatch(
+          "loadUsers",
+          "http://127.0.0.1:8000/api/" + this.api
+        );
+        this.$refs.modal.hide();
       });
     },
-      popToast() {
-        // Use a shorter name for this.$createElement
-        const h = this.$createElement
-        // Increment the toast count
-        this.VALOR++
-        // Create the message
-        const vNodesMsg = h(
-          'p',
-          { class: ['text-center', 'mb-0'] },
-          [
-            h('b-spinner', { props: { type: 'grow', small: true } }),
-            ' Flashy ',
-            h('strong', 'toast'),
-            ` message #${this.count} `,
-            h('b-spinner', { props: { type: 'grow', small: true } })
-          ]
-        )
-           // Create the title
-        const vNodesTitle = h(
-          'div',
-          { class: ['d-flex', 'flex-grow-1', 'align-items-baseline', 'mr-2'] },
-          [
-            h('strong', { class: 'mr-2' }, 'The Title'),
-            h('small', { class: 'ml-auto text-italics' }, '5 minutes ago')
-          ]
-        )
-        // Pass the VNodes as an array for message and title
-        this.$bvToast.toast([vNodesMsg], {
-          title: [vNodesTitle],
-          solid: true,
-          variant: 'success'
-        })
-      }
+    eliminar(id) {
+      // Exit when the form isn't valid
+
+      axios
+        .delete("http://127.0.0.1:8000/api/usuarios/" + id)
+        .then(response => {
+          this.$store.dispatch(
+            "loadUsers",
+            "http://127.0.0.1:8000/api/" + this.nombreApi
+          );
+
+          this.result.splice(id, 1);
+          console.log(this.result);
+        });
+    },
+    popToast() {
+      // Use a shorter name for this.$createElement
+      const h = this.$createElement;
+      // Increment the toast count
+      this.VALOR++;
+      // Create the message
+      const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
+        h("b-spinner", { props: { type: "grow", small: true } }),
+        " Flashy ",
+        h("strong", "toast"),
+        ` message #${this.count} `,
+        h("b-spinner", { props: { type: "grow", small: true } })
+      ]);
+      // Create the title
+      const vNodesTitle = h(
+        "div",
+        { class: ["d-flex", "flex-grow-1", "align-items-baseline", "mr-2"] },
+        [
+          h("strong", { class: "mr-2" }, "The Title"),
+          h("small", { class: "ml-auto text-italics" }, "5 minutes ago")
+        ]
+      );
+      // Pass the VNodes as an array for message and title
+      this.$bvToast.toast([vNodesMsg], {
+        title: [vNodesTitle],
+        solid: true,
+        variant: "success"
+      });
     }
-
-
   }
-
+};
 </script>

@@ -52,6 +52,9 @@ Vue.component("modal", require("./components/modal.vue").default);
 Vue.component("calendar", require("./components/calendar.vue").default);
 Vue.component("tableJS", require("./components/table.vue").default);
 Vue.component("tablecomplexa", require("./components/tablecomplexa.vue").default);
+
+Vue.component("taula-form", require("./components/taula_form.vue").default);
+
 Vue.component("probademodal", require("./components/modalboostrappryeba.vue").default);
 
 Vue.component("form-incidencia", require("./components/form_incidencia.vue").default);
@@ -73,9 +76,9 @@ devtool: 'source-map';
  */
 
 const store = new Vuex.Store({
-      state: {
+      state: {
         count:0,
-        message: 'Hello World',
+        message: 'Hello World',
         users: [],
         alertants:[],
         posts:[],
@@ -83,9 +86,11 @@ const store = new Vuex.Store({
         municipis:[],
         tipoRecursos:[],
         tipoAlertant:[],
+        tipoIncidentes:[],
+        incidencias:[],
         modalVisible: false,
         modalComponent: null,
-      },
+      },
     getters:{
         getUsers:  state => {
             return state.users.length;
@@ -119,7 +124,12 @@ const store = new Vuex.Store({
             else if(url.includes("TipusA")){
                 commit('SAVE_TIPOALERTANT',result.data);
             }
-
+            else if(url.includes("incidencias")){
+              commit('SAVE_USERS',result.data);
+            }
+            else if(url.includes("TipusI")){
+              commit('SAVE_TIPOINCIDENTE',result.data);
+            }
 
           }).catch(error => {
             throw new Error(`API ${error}`);
@@ -197,7 +207,7 @@ const store = new Vuex.Store({
             state.tipoRols=tipoRols ;
 
           },
-          SAVE_ALERTAMT(state,alertants){
+          SAVE_ALERTANT(state,alertants){
             state.alertants=alertants;
           },
           disminuir(state) {
@@ -215,6 +225,12 @@ const store = new Vuex.Store({
           },
           SAVE_TIPOALERTANT(state, tipoAlertant) {
             state.tipoAlertant=tipoAlertant ;
+          },
+          SAVE_TIPOINCIDENTE(state, tipoIncidentes) {
+            state.tipoIncidentes=tipoIncidentes ;
+          },
+          SAVE_INCIDENCIAS(state, incidencia) {
+            state.incidencia=incidencia ;
           },
           showModal(state, componentName) {
             state.modalVisible = true;
@@ -239,7 +255,7 @@ const app = new Vue({
 
 
 
-     
+
 /*export const store = new Vuex.Store({
     state: {
         flavor: ''

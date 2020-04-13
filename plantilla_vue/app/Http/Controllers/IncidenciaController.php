@@ -11,22 +11,31 @@ class IncidenciaController extends Controller
     **/
     public function mostrarTaula()
     {
-        $api='alertant';
-        $tipoaccion="alertant";
-        $tablaccion ="alertant";
+        $api='incidencias';
+        $tipoaccion="incidencias";
+        $tablaccion ="incidencias";
         $test="Prueba de pasar mas parametros";
-        $nomtabla="nom";
-        $datamunicipi="municipi.nom";
-        $adreca='adreca';
-        $telefon='telefon';
-        $tipusalertant='tipus_alertant.tipus';
-        $nombtablaalertant='Alertant';
+        $nomtabla="num_incidencia";
+        $datamunicipi="telefon_alertant";
+        $adreca='data';
+        $telefon='hora';
+        $tipusalertant='complement_adreca';
+        $nombtablaalertant='descripcio';
+        $col23='municipis_id';
+        $col24 = 'tipus_incident_id';
+        $col25 = 'estats_incidencia_id';
+        $col26 = 'tipus_alertant_id';
+        $col27 = 'alertants_id';
+
 
 
         // tornem la vista
         //return view('taules.taula_incidencia', compact('api', 'tipoaccion', 'tipusalertant','tablaccion','nomtabla','nombtablaalertant'));
 
-        return view('taules.taula_incidencia', compact('api', 'test','tipoaccion', 'tipusalertant','tablaccion','nomtabla','datamunicipi','adreca','telefon','nombtablaalertant'));
+        return view('taules.taula_incidencia', 
+            compact('api', 'test','tipoaccion', 'tipusalertant','tablaccion',
+                    'nomtabla','datamunicipi','adreca','telefon','nombtablaalertant',
+                    'col23', 'col24', 'col25', 'col26', 'col27'));
 
     }
 

@@ -82,8 +82,25 @@ body{
     background-color: #304269;
 }
 
+.containercard{
+    padding-top: 150px;
+}
 
+.containercard .card{
+    height: 100%;
+}
 
+@media(max-width:800px){
+    .containercard{
+        padding-top: 0;
+    }
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
 /*Margen del form*/
 
 .margenform{
@@ -93,4 +110,19 @@ body{
 .margeninput{
     width: 70% !important
     ; float: left;  margin-left: 25px;
+}
+
+
+.btn-colordefondoinsert {
+    color: #fff !important;
+    background-color: #f26101 !important;
+    border-color: #f26101 !important;
+    width: auto;
+    height: auto;
+}
+
+.btn-colordefondoenviar {
+
+    width: auto;
+    height: auto;
 }
