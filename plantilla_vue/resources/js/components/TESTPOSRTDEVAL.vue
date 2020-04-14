@@ -22,11 +22,11 @@
     <!-- boto PARA Afectat -->
     <b-button
       class="btn boto-terciari"
-      v-if="tipoaccion == 'afectat'"
+      v-if="tipoaccion == 'afectats'"
       v-b-modal.modal-afectat
     >Afegeix afectat</b-button>
 
-<!-- MODALS -->
+    <!-- MODALS -->
     <!-- FORM PARA ROL -->
     <b-modal
       id="modalPostRol"
@@ -282,7 +282,6 @@
     </b-modal>
 
     <!-- FORM PARA RECURSOS -->
-
     <b-modal
       id="modal-recursos"
       ref="modal"
@@ -311,8 +310,7 @@
             v-b-tooltip.focus
             title="Este campo se ha de rellenar con el municipio del alertante"
             icon="question-circle"
-            style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
+            style="width: 37px; height: 32px;     margin-left: 25px; margin-top: 2px; "
           ></b-icon>
         </b-form-group>
 
@@ -334,8 +332,7 @@
             v-b-tooltip.focus
             title="Este campo se ha de rellenar con el municipio del alertante"
             icon="question-circle"
-            style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
+            style="width: 37px; height: 32px;     margin-left: 25px;    margin-top: 2px; "
           ></b-icon>
         </b-form-group>
 
@@ -343,80 +340,246 @@
           <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
         </div>
 
-      <b-form-group
-                    label-class="margenform"
+        <b-form-group
+          label-class="margenform"
+          id="input-group-1"
+          label="codi"
+          label-for="input-1"
+          description="We'll never share your email with anyone else."
+        >
+          <b-form-input
+            class="margeninput"
+            id="input-1"
+            v-model="formNourecurs.codi"
+            required
+            placeholder="Enter codi"
+          ></b-form-input>
 
-        id="input-group-1"
-        label="codi"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-                            class="margeninput"
+          <b-icon
+            v-b-tooltip.focus
+            title="Este campo se ha de rellenar con el municipio del alertante"
+            icon="question-circle"
+            style="width: 37px; height: 32px;     margin-left: 25px;    margin-top: 2px; "
+          ></b-icon>
+        </b-form-group>
 
-          id="input-1"
-          v-model="formNourecurs.codi"
-          required
-          placeholder="Enter codi"
-        ></b-form-input>
-
-             <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "></b-icon>
-      </b-form-group>
-
-      <b-form-group                     label-class="margenform"
- id="input-group-3" label="rols:" label-for="input-3">
-                <select  v-model="formNourecurs.tipus_recurs_id" name="city" id="city" class="form-control margeninput" tabindex="12">
-            <option v-for="(city, index) in tipoRecursos"
-                    :key="index"
-                    :value="city.id">{{ city.tipus }}
-            </option>
-        </select>
- <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "></b-icon>
-      </b-form-group>
-<div class="d-flex justify-content-center">
-         <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
-      </div>
-
-      <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
-        <template v-slot:overlay>
-          <div v-if="processing" class="text-center p-4 bg-primary text-light rounded">
-            <b-icon icon="cloud-upload" font-scale="4"></b-icon>
-            <div class="mb-3">Processing...</div>
-            <b-progress
-              min="1"
-              max="20"
-              :value="counter"
-              variant="success"
-              height="3px"
-              class="mx-n4 rounded-0"
-            ></b-progress>
-          </div>
-          <div
-            v-else
-            ref="dialog"
-            tabindex="-1"
-            role="dialog"
-            aria-modal="false"
-            aria-labelledby="form-confirm-label"
-            class="text-center p-3"
+        <b-form-group label-class="margenform" id="input-group-3" label="rols:" label-for="input-3">
+          <select
+            v-model="formNourecurs.tipus_recurs_id"
+            name="city"
+            id="city"
+            class="form-control margeninput"
+            tabindex="12"
           >
-            <p><strong id="form-confirm-label">Are you sure?</strong></p>
-            <div class="d-flex">
-              <b-button variant="outline-danger" class="mr-3" @click="onCancel">
-                Cancel
-              </b-button>
-              <b-button variant="outline-success" @click="onOK">OK</b-button>
+            <option
+              v-for="(city, index) in tipoRecursos"
+              :key="index"
+              :value="city.id"
+            >{{ city.tipus }}</option>
+          </select>
+          <b-icon
+            v-b-tooltip.focus
+            title="Este campo se ha de rellenar con el municipio del alertante"
+            icon="question-circle"
+            style="width: 37px; height: 32px;     margin-left: 25px;     margin-top: 2px; "
+          ></b-icon>
+        </b-form-group>
+        <div class="d-flex justify-content-center">
+          <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
+        </div>
+
+        <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
+          <template v-slot:overlay>
+            <div v-if="processing" class="text-center p-4 bg-primary text-light rounded">
+              <b-icon icon="cloud-upload" font-scale="4"></b-icon>
+              <div class="mb-3">Processing...</div>
+              <b-progress
+                min="1"
+                max="20"
+                :value="counter"
+                variant="success"
+                height="3px"
+                class="mx-n4 rounded-0"
+              ></b-progress>
             </div>
-          </div>  
+            <div
+              v-else
+              ref="dialog"
+              tabindex="-1"
+              role="dialog"
+              aria-modal="false"
+              aria-labelledby="form-confirm-label"
+              class="text-center p-3"
+            >
+              <p>
+                <strong id="form-confirm-label">Are you sure?</strong>
+              </p>
+              <div class="d-flex">
+                <b-button variant="outline-danger" class="mr-3" @click="onCancel">Cancel</b-button>
+                <b-button variant="outline-success" @click="onOK">OK</b-button>
+              </div>
+            </div>
           </template>
         </b-overlay>
       </form>
     </b-modal>
 
-    <!-- FORM PARA RECURSOS -->
+    <!-- FORM PARA AFECTAT -->
+    <b-modal
+      id="modal-afectat"
+      ref="modal"
+      title="Completa el form per afectat"
+      @show="resetModal"
+      @hidden="resetModal"
+      hide-footer
+    >
+      <form ref="form" @submit.stop.prevent="onSubmit">
+        <!-- tenir_tarjeta -->
+        <b-form-group
+          label-cols="5"
+          label-cols-md="4"
+          label-cols-xl="3"
+          id="input-group-0"
+          label="Té targeta?"
+          label-for="input-0"
+        >
+          <select v-model="formAfectat.tenir_tarjeta">
+            <option  :value="1">Sí</option>
+            <option  :value="0">No</option>
+          </select>
+        </b-form-group>
+        <!-- CIP -->
+        <b-form-group
+          label-cols="5"
+          label-cols-md="4"
+          label-cols-xl="3"
+          id="input-group-1"
+          label="Codi CIP"
+          label-for="input-1"
+        >
+          <b-form-input
+            id="input-1"
+            v-model="formAfectat.cip"
+            required
+            type="text"
+            maxlength="14"
+            placeholder="EX: 910913412340 SAFE"
+          ></b-form-input>
+        </b-form-group>
+        <!-- Nom -->
+        <b-form-group
+          label-cols="5"
+          label-cols-md="4"
+          label-cols-xl="3"
+          id="input-group-2"
+          label="Nom"
+          label-for="input-2"
+        >
+          <b-form-input id="input-2" v-model="formAfectat.nom" required placeholder="Ex: Bonifaci"></b-form-input>
+        </b-form-group>
+        <!-- Cognom -->
+        <b-form-group
+          label-cols="5"
+          label-cols-md="4"
+          label-cols-xl="3"
+          id="input-group-3"
+          label="Cognom"
+          label-for="input-3"
+        >
+          <b-form-input
+            id="input-3"
+            v-model="formAfectat.cognoms"
+            type="text"
+            placeholder="Ex: Pérez"
+          ></b-form-input>
+        </b-form-group>
+        <!-- Edat -->
+        <b-form-group
+          label-cols="5"
+          label-cols-md="4"
+          label-cols-xl="3"
+          id="input-group-4"
+          label="Edat (en anys)"
+          label-for="input-4"
+        >
+          <b-form-input
+            id="input-4"
+            v-model="formAfectat.edat"
+            type="number"
+            max="150"
+            min="1"
+            placeholder="Ex: 69"
+          ></b-form-input>
+        </b-form-group>
+        <!-- Sexe -->
+        <b-form-group
+          label-cols="5"
+          label-cols-md="4"
+          label-cols-xl="3"
+          id="input-group-5"
+          label="Sexe (M o F)"
+          label-for="input-4"
+        >
+          <b-form-input id="input-4" v-model="formAfectat.sexe" type="text" placeholder="Ex: M"></b-form-input>
+        </b-form-group>
+        <!-- Telefon -->
+        <b-form-group
+          label-cols="5"
+          label-cols-md="4"
+          label-cols-xl="3"
+          id="input-group-6"
+          label="Telefon)"
+          label-for="input-6"
+        >
+          <b-form-input
+            id="input-4"
+            v-model="formAfectat.telefon"
+            type="text"
+            placeholder="Ex: 606 969 606"
+          ></b-form-input>
+        </b-form-group>
 
+        <!-- Submit -->
+        <div class="d-flex justify-content-center">
+          <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
+        </div>
+
+        <!-- keloké? -->
+        <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
+          <template v-slot:overlay>
+            <div v-if="processing" class="text-center p-4 bg-primary text-light rounded">
+              <b-icon icon="cloud-upload" font-scale="4"></b-icon>
+              <div class="mb-3">Processing...</div>
+              <b-progress
+                min="1"
+                max="20"
+                :value="counter"
+                variant="success"
+                height="3px"
+                class="mx-n4 rounded-0"
+              ></b-progress>
+            </div>
+            <div
+              v-else
+              ref="dialog"
+              tabindex="-1"
+              role="dialog"
+              aria-modal="false"
+              aria-labelledby="form-confirm-label"
+              class="text-center p-3"
+            >
+              <p>
+                <strong id="form-confirm-label">Are you sure?</strong>
+              </p>
+              <div class="d-flex">
+                <b-button variant="outline-danger" class="mr-3" @click="onCancel">Cancel</b-button>
+                <b-button variant="outline-success" @click="onOK">OK</b-button>
+              </div>
+            </div>
+          </template>
+        </b-overlay>
+      </form>
+    </b-modal>
   </div>
 </template>
 <script>
@@ -457,7 +620,7 @@ export default {
         codi: "",
         tipus_recurs_id: null
       },
-      formAfectat:{
+      formAfectat: {
         cip: "",
         telefon: "",
         edat: null,
@@ -465,7 +628,7 @@ export default {
         nom: "",
         cognoms: "",
         tenir_tarjeta: null,
-        municipis_id: null
+        municipis_id: 1
       },
       name: "",
       nameState: null,
@@ -529,6 +692,9 @@ export default {
           } else if (this.tipoaccion == "recurso") {
             console.log(this.formNourecurs);
             this.getPosts(this.tipoaccion, this.formNourecurs);
+          }else if (this.tipoaccion == "afectats") {
+            console.log(this.formAfectat);
+            this.getPosts(this.tipoaccion, this.formAfectat);
           }
 
           this.$nextTick(() => {
@@ -540,6 +706,8 @@ export default {
               this.$bvModal.hide("modal-Alertant");
             } else if (this.tipoaccion == "recurso") {
               this.$bvModal.hide("modal-recursos");
+            } else if (this.tipoaccion == "afectats") {
+              this.$bvModal.hide("modal-afectat");
             } else {
               this.$bvModal.hide("modalPostRol");
             }
