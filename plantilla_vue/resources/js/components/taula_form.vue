@@ -148,7 +148,8 @@ import Vuex from "vuex";
       "col2",
       "col3",
       "col4",
-      "col5"
+      "col5",
+      "col6",
     ],
     data() {       
       return {
@@ -175,6 +176,12 @@ import Vuex from "vuex";
           {
             key: this.col4,
             label: this.col4,
+            sortable: true,
+            class: "text-center"
+          },
+          {
+            key: this.col6,
+            label: this.col5,
             sortable: true,
             class: "text-center"
           }

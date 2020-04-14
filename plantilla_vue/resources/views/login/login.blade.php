@@ -25,6 +25,9 @@
                                       <label for="exampleInputPassword1">Password</label>
                                       <input type="password" name="contrasenya" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                     </div>
+                                    <div>
+                                      <a href="{{ url('/register') }}" style="float:right;">No tinc un compte</a>
+                                    </div>
                                     
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                   </form>
