@@ -4,9 +4,12 @@
 
        <!-- Afectat -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-1" label="Form afectat" label-for="input-1">
+        <!--  
           <b-button  @click="modalAfectat = !modalAfectat" ref="botoAfectat">
             FORM AFECTAT
-        </b-button> 
+          </b-button> 
+        -->
+        <modal-post tipoaccion= "afectats"></modal-post>
       </b-form-group> 
 
       <!-- Num Inciedncia -->
