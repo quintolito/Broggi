@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
     //taula
     Route::get('/recurscard', 'PruebaController@landingpagerecurs' );
     Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
+    Route::get('/taula_incidencia_recursmovil', 'IncidenciaController@mostrarTaula' );
+
     //form
     Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');
     Route::get('/landingpage','PruebaController@landingpage' );

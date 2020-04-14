@@ -24,7 +24,7 @@ class incidenciaController extends Controller
     public function index()
     {
         //
-    $incidencias = incidencias::with('Municipi','EstatIncidencia','tipusIncident','tipusAlertant','Alertants',)->get();
+    $incidencias = incidencias::with('Municipi','EstatIncidencia','tipusIncident','tipusAlertant','Alertants','incidenciaspruebaderecursos')->get();
         return  incidenciaResource::collection($incidencias);
     }
 
@@ -68,6 +68,8 @@ class incidenciaController extends Controller
         try {
             $incidencia->save();
             //$incidencia->pivot->1;
+            $incidencia->Usuario()->attach($Usuario[0]);
+            $incidencia->Afectats()->attach($afectats[0]);
             $incidencia->incidenciahasrecursos()
             ->attach($Recurs[0],['prioritat' => 1,
             'hora_acitvacio' => $now  ,
@@ -79,8 +81,7 @@ class incidenciaController extends Controller
             'hora_finalitzacio' => $now]
         );
 
-            $incidencia->Usuario()->attach($Usuario[0]);
-            $incidencia->Afectats()->attach($afectats[0]);
+
 
             //$incidencia->incidenciahasrecursos()->attach($Recusr[0]);
 
@@ -109,7 +110,8 @@ class incidenciaController extends Controller
         $incidencias = incidencias::with('tipusAlertant')
             ->with('tipusIncident')
             ->with('EstatIncidencia')
-            ->with('Municipi')->find($incidencias);
+            ->with('Municipi')
+            ->with('incidenciaspruebaderecursos')->find($incidencias);
         return new incidenciaResource($incidencias);
     }
 
@@ -123,27 +125,58 @@ class incidenciaController extends Controller
     public function update(Request $request,  $id)
     {
         //
-        $incidencia = incidencias::find($id);
-        $incidencia->num_incidencia = $request->input('num_incidencia');
-        $incidencia->telefon_alertant = $request->input('telefon_alertant');
-        $incidencia->data = $request->input('data');
-        $incidencia->hora = $request->input('hora');
-        $incidencia->adreca = $request->input('adreca');
-        $incidencia->complement_adreca = $request->input('complement_adreca');
-        $incidencia->descripcio = $request->input('descripcio');
-        $incidencia->municipis_id = $request->input('municipis_id');
-        $incidencia->tipus_incident_id = $request->input('tipus_incident_id');
-        $incidencia->estats_incidencia_id = $request->input('estats_incidencia_id');
-        $incidencia->tipus_alertant_id = $request->input('tipus_alertant_id');
-        $incidencia->num_incidencia = $request->input('num_incidencia');
-        $incidencia->alertants_id = $request->input('alertants_id');
+          // millorar (seleccionar el recurs en el form)
+          $Recurs = Recurs::all();
 
+        $incidencia = incidencias::find($id);
+
+
+        $incidencia->incidenciaspruebaderecursos->hora_acitvacio =$request->input('hora_acitvacio');
+        $incidencia->incidenciaspruebaderecursos->hora_mobilitzacio =$request->input('hora_mobilitzacio');
+        $incidencia->incidenciaspruebaderecursos->hora_assistencia =$request->input('hora_assistencia');
+        $incidencia->incidenciaspruebaderecursos->hora_transport =$request->input('hora_transport');
+        $incidencia->incidenciaspruebaderecursos->hora_arribada_hospital =$request->input('hora_arribada_hospital');
+        $incidencia->incidenciaspruebaderecursos->hora_transferencia =$request->input('hora_transferencia');
+        $incidencia->incidenciaspruebaderecursos->hora_finalitzacio =$request->input('hora_finalitzacio');
+
+
+        $UTC =new DateTimeZone("UTC");
+        $now=new DateTime();
+        $mytime = Carbon::now();
+        $mytime->setTimezone('UTC');
+        $incidencia->incidenciahasrecursos()
+        ->detach($Recurs[0],['prioritat' => 1,
+        'hora_acitvacio' => $now  ,
+        'hora_mobilitzacio' => $now,
+        'hora_assistencia' => $now,
+        'hora_transport' => $now,
+        'hora_arribada_hospital' => $now,
+        'hora_transferencia' => $now,
+        'hora_finalitzacio' => $now]
+    );
         try {
+
             $incidencia->save();
-            $incidencia->incidenciahasrecursos()->attach(1);
-            $incidencia->save();
+            //$incidencia->pivot->1;
+
+
+            $incidencia->incidenciahasrecursos()
+            ->attach($Recurs[0],['prioritat' => 1,
+            'hora_acitvacio' => $incidencia->incidenciaspruebaderecursos->hora_acitvacio  ,
+            'hora_mobilitzacio' =>  $incidencia->incidenciaspruebaderecursos->hora_mobilitzacio,
+            'hora_assistencia' =>   $incidencia->incidenciaspruebaderecursos->hora_assistencia ,
+            'hora_transport' =>  $incidencia->incidenciaspruebaderecursos->hora_transport,
+            'hora_arribada_hospital' => $incidencia->incidenciaspruebaderecursos->hora_arribada_hospital,
+            'hora_transferencia' => $incidencia->incidenciaspruebaderecursos->hora_transferencia,
+            'hora_finalitzacio' => $incidencia->incidenciaspruebaderecursos->hora_finalitzacio ]
+        );
+
+
+
+            //$incidencia->incidenciahasrecursos()->attach($Recusr[0]);
 
             $resposta = (new incidenciaResource($incidencia))->response()->setStatusCode(201);
+
         } catch (QueryException $e) {
             $error = Utilitat::errorMessage($e);
 
@@ -151,6 +184,7 @@ class incidenciaController extends Controller
         }
 
         return     $resposta;
+
     }
 
     /**

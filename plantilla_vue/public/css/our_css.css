@@ -108,7 +108,7 @@ body{
 }
 
 .margeninput{
-    width: 70% !important
+    width: 60% !important
     ; float: left;  margin-left: 25px;
 }
 
@@ -125,4 +125,13 @@ body{
 
     width: auto;
     height: auto;
+}
+
+.buttondatetime {
+    border-color: #f26101 !important;
+
+    margin-left: 10px;
+    margin-bottom: 17px;
+    background-color: #f26101 !important;
+
 }

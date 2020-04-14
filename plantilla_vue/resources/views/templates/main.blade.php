@@ -29,16 +29,18 @@
                     @if(Auth::check())
                         <li class="nav-item dropdown">
 
-                            <a class="nav-link dropdown toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->codic }}
+                            <a class="nav-link dropdown toggle text-white btn boto-primari text_titol" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->codi}}
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ route('logout')}}">Logout</a>
+                                <a class="nav-link dropdown-item " href="#">FORMACIO <span class="sr-only"></span></a>
+
                             </div>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a href="{{ url('/login')}}" class="nav-link">LOGIN</a>
+                            <a href="{{ url('/login')}}" class="nav-link"></a>
                         </li>
                     @endif
 
@@ -46,13 +48,7 @@
                 </ul>
 
 
-                <ul class="navbar-nav ml-md-auto">
 
-                    <li class="nav-item active">
-                         <a class="nav-link text-white btn boto-primari text_titol" href="#">FORMACIO <span class="sr-only"></span></a>
-                    </li>
-
-                </ul>
 
             </div>
         </nav>
