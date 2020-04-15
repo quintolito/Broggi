@@ -88,6 +88,7 @@ const store = new Vuex.Store({
         tipoAlertant:[],
         tipoIncidentes:[],
         incidencias:[],
+        tipoEstat:[],
         modalVisible: false,
         modalComponent: null,
       },
@@ -130,6 +131,9 @@ const store = new Vuex.Store({
             else if(url.includes("TipusI")){
               commit('SAVE_TIPOINCIDENTE',result.data);
             }
+            else if(url.includes("estat")){
+                commit('SAVE_ESTAT',result.data);
+              }
 
           }).catch(error => {
             throw new Error(`API ${error}`);
@@ -239,6 +243,11 @@ const store = new Vuex.Store({
           hideModal(state) {
             state.modalVisible = false;
           },
+
+          SAVE_ESTAT(state, tipoEstat) {
+            state.tipoEstat=tipoEstat ;
+          },
+
           getResults() {
             //const data = await this.$store.dispatch('loadUsers', 'http://127.0.0.1:8000/api/alertant')
             //do whatever you need with the returned data

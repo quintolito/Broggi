@@ -73,7 +73,6 @@
                     label="Nom:"
                     label-for="input-1"
                     label-class="margenform"
-
                 >
                     <b-form-input
                         class="margeninput"
@@ -176,7 +175,6 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
 
                     <b-button
                         class="margeninput  boto-primari"
-
                         @click="modalMunicpis2 = !modalMunicpis2"
                         ref="botoMunincpi2"
                     >
@@ -220,7 +218,11 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
                     ></b-icon>
                 </b-form-group>
                 <div class="d-flex justify-content-center">
-                    <b-button ref="submit" class="boto-primari" type="submit" :disabled="busy"
+                    <b-button
+                        ref="submit"
+                        class="boto-primari"
+                        type="submit"
+                        :disabled="busy"
                         >Submit</b-button
                     >
                 </div>
@@ -444,7 +446,11 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
                     ></b-icon>
                 </b-form-group>
                 <div class="d-flex justify-content-center">
-                    <b-button  class="boto-primari" ref="submit" type="submit" :disabled="busy"
+                    <b-button
+                        class="boto-primari"
+                        ref="submit"
+                        type="submit"
+                        :disabled="busy"
                         >Submit</b-button
                     >
                 </div>

@@ -130,6 +130,7 @@ class incidenciaController extends Controller
 
         $incidencia = incidencias::find($id);
 
+        $incidencia->estats_incidencia_id = $request->input('estats_incidencia_id');
 
         $incidencia->incidenciaspruebaderecursos->hora_acitvacio =$request->input('hora_acitvacio');
         $incidencia->incidenciaspruebaderecursos->hora_mobilitzacio =$request->input('hora_mobilitzacio');

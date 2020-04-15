@@ -12,6 +12,10 @@
     <link rel="stylesheet" href=" {{ asset('css/app.css') }}">
     {{-- Vinculem el bootstrap --}}
     <link rel="stylesheet" href=" {{ asset('css/our_css.css') }}">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="template">
@@ -21,7 +25,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand btn text_titol" href="/home" {{-- boto per anar a home o whatever --}}>LOGO BROGGI</a>
+            <a class="navbar-brand btn text_titol" href="/formacio" {{-- boto per anar a home o whatever --}}>LOGO BROGGI</a>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul class="navbar-nav ml-md-auto">

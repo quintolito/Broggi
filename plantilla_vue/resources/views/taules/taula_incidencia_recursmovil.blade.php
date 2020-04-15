@@ -1,20 +1,17 @@
 @extends('templates.main')
 
 @section('titol')
-    Taula incidencia
+Gestionar Horas
 @endsection
 
 @section('main')
 
     <h1 class="display-4 text_titol">
-        INCIDÈNCIES
+        Gestionar Horas
     </h1>
     <div class="card p-3">
         <div card-body>
-            <a href="{{ action('IncidenciaController@mostrarForm')}}" class="btn boto-terciari">
 
-                <span>
-                    NOVA INCIDÈNCIA
                 </span>
             </a>
         </div>
@@ -36,7 +33,11 @@
         col25= "{{ $col25 }}"
         col26= "{{ $col26 }}"
         col27= "{{ $col27 }}"
-
+        col28= "{{ $col28 }}"
+        col29= "{{ $col29 }}"
+        col30= "{{ $col30 }}"
+        col31= "{{ $col31 }}"
+        col32= "{{ $col32 }}"
 
         ></tablecomplexa>   </div>
 

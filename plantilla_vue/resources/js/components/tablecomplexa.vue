@@ -7,7 +7,7 @@
 
   <datalist id="my-list-id">
 
-    <option v-for="size in municipis" :key="size.id">{{ size.nom }}
+    <option v-for="size in municipis" :key="size.id">{{ size.nomfomrupdateincidenciasxRecursos }}
       <p>{{size.id}}</p>
     </option>
 
@@ -603,6 +603,37 @@
             margin-top: 2px; "
                     ></b-icon>
                 </b-form-group>
+
+
+                <b-form-group
+                    label-class="margenform"
+                    id="input-group-8"
+                    label="estats_incidencia_id"
+                    label-for="input-8"
+                >
+                    <select
+                        v-model="fomrupdateincidenciasxRecursos.estats_incidencia_id"
+                        name="city"
+                        id="city"
+                        class="form-control margeninput"
+                        tabindex="12"
+                    >
+                        <option
+                            v-for="(city, index) in tipoEstat"
+                            :key="index"
+                            :value="city.id"
+                            >{{ city.estat }}</option
+                        >
+                    </select>
+
+                    <b-icon
+                        v-b-tooltip.focus
+                        title="Este campo se ha de rellenar con el tipo de alertante que tiene el alertante"
+                        icon="question-circle"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+    margin-top: 2px; "
+                    ></b-icon>
+                </b-form-group>
             </form>
         </b-modal>
     </b-container>
@@ -736,7 +767,8 @@ export default {
                 hora_transport: "",
                 hora_arribada_hospital: "",
                 hora_transferencia: "",
-                hora_finalitzacio: ""
+                hora_finalitzacio: "",
+                estats_incidencia_id:0
             },
             formAlertant: {
                 id: 0,
@@ -770,7 +802,8 @@ export default {
             "tipoRols",
             "municipis",
             "tipoAlertant",
-            "tipoRecursos"
+            "tipoRecursos",
+            "tipoEstat"
         ]),
         //...Vuex.mapGetters({selectedOption:'getUsers'}),
 
@@ -800,6 +833,9 @@ export default {
             " http://127.0.0.1:8000/api/municipi"
         );
         this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/TipusA");
+
+                this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/estat");
+
 
         /*if(this.api =="alertant"){
                     this.$store.dispatch('loadAlertant','http://127.0.0.1:8000/api/'+this.api );
@@ -921,7 +957,7 @@ export default {
                 console.log(this.formAlertant);
                 this.$root.$emit("bv::show::modal", "modal-alertant2", button);
             } else if (this.tablaccion == "incidencias") {
-                console.log(item);
+                console.log(item.estat_incidencia[0].id);
                 if (item.incidenciaspruebaderecursos.hora_acitvacio != null) {
                     this.fomrupdateincidenciasxRecursos.id = index;
 
@@ -939,6 +975,7 @@ export default {
                         item.incidenciaspruebaderecursos.hora_transferencia;
                     this.fomrupdateincidenciasxRecursos.hora_finalitzacio =
                         item.incidenciaspruebaderecursos.hora_finalitzacio;
+                       this.fomrupdateincidenciasxRecursos.estats_incidencia_id=item.estat_incidencia[0].id;
                     this.$root.$emit(
                         "bv::show::modal",
                         "modal-incidenciasxrecursos",
@@ -1074,7 +1111,7 @@ export default {
                 this.handleSubmit();
             }
 
-            this.handleSubmit();
+            //this.handleSubmit();
         },
         Actualizar(Apiactuar) {
             this.$store.dispatch(
@@ -1092,14 +1129,16 @@ export default {
             // Push the name to submitted names
             // Hide the modal manually
             this.$nextTick(() => {
-                this.popToast();
+
                 // Wrapped in $nextTick to ensure DOM is rendered before closing
                 this.$store.dispatch(
                     "loadUsers",
                     "http://127.0.0.1:8000/api/" + this.api
                 );
                 this.$refs.modal.hide();
+
             });
+             this.popToast();
         },
         eliminar(id) {
             // Exit when the form isn't valid
@@ -1124,9 +1163,7 @@ export default {
             // Create the message
             const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
                 h("b-spinner", { props: { type: "grow", small: true } }),
-                " Flashy ",
-                h("strong", "toast"),
-                ` message #${this.count} `,
+                ` Se ha modificado Correctamente`,
                 h("b-spinner", { props: { type: "grow", small: true } })
             ]);
             // Create the title
@@ -1141,7 +1178,7 @@ export default {
                     ]
                 },
                 [
-                    h("strong", { class: "mr-2" }, "The Title"),
+                    h("strong", { class: "mr-2" }, "Notificacion"),
                     h(
                         "small",
                         { class: "ml-auto text-italics" },
