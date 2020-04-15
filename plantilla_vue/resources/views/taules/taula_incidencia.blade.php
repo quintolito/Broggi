@@ -36,8 +36,13 @@
         col25= "{{ $col25 }}"
         col26= "{{ $col26 }}"
         col27= "{{ $col27 }}"
+        col28= "{{ $col28 }}"
+        col29= "{{ $col29 }}"
+        col30= "{{ $col30 }}"
+        col31= "{{ $col31 }}"
+        col32= "{{ $col32 }}"
 
-
-        ></tablecomplexa>   </div>
+        ></tablecomplexa>  
+    </div>
 
 @endsection

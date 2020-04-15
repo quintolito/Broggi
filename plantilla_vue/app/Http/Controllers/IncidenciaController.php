@@ -26,16 +26,22 @@ class IncidenciaController extends Controller
         $col25 = 'estats_incidencia_id';
         $col26 = 'tipus_alertant_id';
         $col27 = 'alertants_id';
+        $col28="alertants.nom";
+        $col29="tipus_alertant[0].tipus";
+        $col30="tipus_incident[0].tipus";
+        $col31="estat_incidencia[0].estat";
+        $col32="municipi[0].nom";
+
 
 
 
         // tornem la vista
         //return view('taules.taula_incidencia', compact('api', 'tipoaccion', 'tipusalertant','tablaccion','nomtabla','nombtablaalertant'));
 
-        return view('taules.taula_incidencia', 
+        return view('taules.taula_incidencia',
             compact('api', 'test','tipoaccion', 'tipusalertant','tablaccion',
                     'nomtabla','datamunicipi','adreca','telefon','nombtablaalertant',
-                    'col23', 'col24', 'col25', 'col26', 'col27'));
+                    'col23', 'col24', 'col25', 'col26', 'col27','col28','col29','col30','col31','col32'));
 
     }
 

@@ -9,7 +9,7 @@
 
   <div class="card-deck" >
       <div class="card text-center" id="card-boostrap">
-        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-zTVIvOtz5Va3qA2i8-LpG8XxpM93jeLDyqGxGUxz3n6cH7o6" alt="Card image cap">
+        <img class="card-img-top" src="https://www.consalud.es/uploads/s1/11/67/95/0/servicios-emergencia-comunidad-de-madrid.jpeg" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">INCIDÈNCIES</h5>
           <button type="button" class="btn boto-primari"  onclick="window.location='{{ url('/taula_incidencia') }}'" action>INCIDÈNCIAS</button>
