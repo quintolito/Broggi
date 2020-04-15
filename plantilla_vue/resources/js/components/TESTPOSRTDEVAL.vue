@@ -443,10 +443,10 @@
           label="Té targeta?"
           label-for="input-0"
         >
-          <select v-model="formAfectat.tenir_tarjeta">
-            <option  :value="1">Sí</option>
-            <option  :value="0">No</option>
-          </select>
+        <b-form-radio-group id="radio-group" v-model="formAfectat.tenir_tarjeta" name="radio-sub-component">
+          <b-form-radio  name="some-radios" @change="verificarCip" value="1">Si</b-form-radio>
+          <b-form-radio name="some-radios" @change="verificarCip" value="0">No</b-form-radio>
+        </b-form-radio-group>              
         </b-form-group>
         <!-- CIP -->
         <b-form-group
@@ -460,7 +460,7 @@
           <b-form-input
             id="input-1"
             v-model="formAfectat.cip"
-            required
+            ref="inputCip"
             type="text"
             maxlength="14"
             placeholder="EX: 910913412340 SAFE"
@@ -520,7 +520,10 @@
           label="Sexe (M o F)"
           label-for="input-4"
         >
-          <b-form-input id="input-4" v-model="formAfectat.sexe" type="text" placeholder="Ex: M"></b-form-input>
+          <b-form-radio-group id="radio-group-2" v-model="formAfectat.sexe" name="radio-sub-component-2">
+            <b-form-radio  name="some-radios-2" value="M">Masculí</b-form-radio>
+            <b-form-radio name="some-radios-3" value="F">Femení</b-form-radio>
+          </b-form-radio-group> 
         </b-form-group>
         <!-- Telefon -->
         <b-form-group
@@ -648,6 +651,14 @@ export default {
     ])
   },
   methods: {
+    verificarCip(checked){
+      if(checked == "1"){        
+        this.$refs['inputCip'].disabled = false;
+      }else{
+        this.$refs['inputCip'].disabled = true;
+        this.formAfectat.cip = "";
+      }
+    },
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity();
       this.nameState = valid;
