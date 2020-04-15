@@ -39,4 +39,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/landingpage','PruebaController@landingpage' );
     Route::get('/Recursos','PruebaController@index' );
     Route::get('/alertant','PruebaController@moostrarvip' );
+    Route::get('/recurscard', 'PruebaController@landingpagerecurs' );
 });
