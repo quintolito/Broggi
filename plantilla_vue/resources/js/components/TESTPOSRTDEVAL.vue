@@ -653,10 +653,14 @@ export default {
   methods: {
     verificarCip(checked){
       if(checked == "1"){        
-        this.$refs['inputCip'].disabled = false;
+        // this.$refs['inputCip'].disabled = false;
+         document.getElementById("input-1").disabled = false;
+         this.formAfectat.cip = "";
       }else{
-        this.$refs['inputCip'].disabled = true;
-        this.formAfectat.cip = "";
+        //this.$refs['inputCip'].disabled = true;
+        //this.formAfectat.cip.disabled = true;
+        document.getElementById("input-1").disabled = true;
+        this.formAfectat.cip = "null";
       }
     },
     checkFormValidity() {

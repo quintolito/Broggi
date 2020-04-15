@@ -391,6 +391,11 @@ export default {
     "col25",
     "col26",
     "col27",
+    "col28",
+    "col29",
+    "col30",
+    "col31",
+    "col32"
   ],
   data() {
     return {
@@ -435,36 +440,36 @@ export default {
           class: "text-center"
         },
         {
-          key: this.col23,
+          key: this.col32,
           label: this.col23,
           sortable: true,
           class: "text-center"
         },
         {
-          key: this.col24,
+          key: this.col30,
           label: this.col24,
           sortable: true,
           class: "text-center"
         },
         {
-          key: this.col25,
+          key: this.col31,
           label: this.col25,
           sortable: true,
           class: "text-center"
         },
         {
-          key: this.col26,
+          key: this.col29,
           label: this.col26,
           sortable: true,
           class: "text-center"
         },
         {
-          key: this.col27,
+          key: this.col28,
           label: this.col27,
           sortable: true,
           class: "text-center"
         },
-        { key: "actions", label: "Actions", class: "text-center" },        
+        { key: "actions", label: "Actions", class: "text-center" }
       ],
 
       click: 0,
