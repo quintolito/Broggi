@@ -18,11 +18,11 @@
                                     <form action="{{ action("LoginController@login")}}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                      <label for="exampleInputEmail1">Email address</label>
+                                      <label for="exampleInputEmail1">Correu electrònic</label>
                                       <input type="email" name="codi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                                     </div>
                                     <div class="form-group">
-                                      <label for="exampleInputPassword1">Password</label>
+                                      <label for="exampleInputPassword1">Contrasenya</label>
                                       <input type="password" name="contrasenya" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                     </div>
                                     <div>

@@ -43,7 +43,7 @@
                         
                     @else
                         <li class="nav-item">
-                            <a href="{{ url('/login')}}" class="nav-link">LOGIN</a>
+                            <a href="{{ url('/login')}}" class="nav-link btn boto-primari text_titol">LOGIN</a>
                         </li>
                     @endif
 
