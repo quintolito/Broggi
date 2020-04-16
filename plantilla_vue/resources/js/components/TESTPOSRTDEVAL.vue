@@ -43,10 +43,9 @@
           <div>
             <b-icon
               v-b-tooltip.focus
-              title="Este campo se ha de rellenar con el municipio del alertante"
+              title="Aquest camp s'ha d'omplir amb el municipio del alertante"
               icon="question-circle"
-              style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
+              class="icona-info"
             ></b-icon>
           </div>
           <b-form-input id="input-2" v-model="formRols.nom" required placeholder="Enter nom"></b-form-input>
@@ -54,86 +53,80 @@
       </form>
     </b-modal>
 
+    
     <!-- FORM PARA ALERTANT  ok-only ok-variant="secondary" ok-title="Cancel" -->
+    <b-modal
+      hide-footer
+      class="margeninput"
+      id="modal-Alertant"
+      ref="modal"
+      @show="resetModal"
+      @hidden="resetModal"
+      title="Afegeix un alertant/vip "
+    >
+      <form inline ref="form" @submit.stop.prevent="onSubmit">
 
-        <!-- FORM PARA ALERTANT  ok-only ok-variant="secondary" ok-title="Cancel" -->
-
-        <b-modal
-            hide-footer
+        <!-- Nom -->
+        <b-form-group id="input-group-1" label="Nom" label-for="input-1" label-class="margenform">
+          <b-form-input
             class="margeninput"
-            id="modal-Alertant"
-            ref="modal"
-            @show="resetModal"
-            @hidden="resetModal"
-            title="Añade otro alertante/vip "
+            id="input-1"
+            v-model="formAlertant.nom"
+            required
+            placeholder="nom"
+          ></b-form-input>
+          <b-icon
+            v-b-tooltip.focus
+            title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+            icon="question-circle"
+            class="icona-info"
+          ></b-icon>
+        </b-form-group>
+
+        <!-- Adreça -->
+        <b-form-group
+          id="input-group-2"
+          label-class="margenform"
+          label="Adreça"
+          label-for="input-2"
         >
-            <form inline ref="form" @submit.stop.prevent="onSubmit">
-                <b-form-group
-                    id="input-group-1"
-                    label="Nom:"
-                    label-for="input-1"
-                    label-class="margenform"
-                >
-                    <b-form-input
-                        class="margeninput"
-                        id="input-1"
-                        v-model="formAlertant.nom"
-                        required
-                        placeholder="Enter codi"
-                    ></b-form-input>
+          <b-form-input
+            class="margeninput"
+            id="input-2"
+            v-model="formAlertant.adreca"
+            required
+            placeholder="adreça"
+          ></b-form-input>
+          <b-icon
+            v-b-tooltip.focus
+            title="Aquest camp s'ha d'omplir amb la direcció de l'alertant"
+            icon="question-circle"
+            class="icona-info"
+          ></b-icon>
+        </b-form-group>
 
-                    <b-icon
-                        v-b-tooltip.focus
-                        title="Este campo se ha de rellenar con el nombre del alertante"
-                        icon="question-circle"
-                        style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
-                    ></b-icon>
-                </b-form-group>
-
-                <b-form-group
-                    id="input-group-2"
-                    label-class="margenform"
-                    label="adreca"
-                    label-for="input-2"
-                >
-                    <b-form-input
-                        class="margeninput"
-                        id="input-2"
-                        v-model="formAlertant.adreca"
-                        required
-                        placeholder="Enter nom"
-                    ></b-form-input>
-                    <b-icon
-                        v-b-tooltip.focus
-                        title="Este campo se ha de rellenar con la direccion del alertante"
-                        icon="question-circle"
-                        style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
-                    ></b-icon>
-                </b-form-group>
-                <b-form-group
-                    id="input-group-5"
-                    label-class="margenform"
-                    label="telefon"
-                    label-for="input-5"
-                >
-                    <b-form-input
-                        class="margeninput"
-                        id="input-5"
-                        v-model="formAlertant.telefon"
-                        required
-                        placeholder="Indica el telefon"
-                    ></b-form-input>
-                    <b-icon
-                        v-b-tooltip.focus
-                        title="Este campo se ha de rellenar con el telefono del alertante"
-                        icon="question-circle"
-                        style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
-                    ></b-icon>
-                </b-form-group>
-                <!--
+        <!-- Telefon -->
+        <b-form-group
+          id="input-group-5"
+          label-class="margenform"
+          label="Telefon"
+          label-for="input-5"
+        >
+          <b-form-input
+            class="margeninput"
+            id="input-5"
+            v-model="formAlertant.telefon"
+            required
+            placeholder="telefon"
+          ></b-form-input>
+          <b-icon
+            v-b-tooltip.focus
+            title="Aquest camp s'ha d'omplir amb el telèfon de l'alertant"
+            icon="question-circle"
+            class="icona-info"
+          ></b-icon>
+        </b-form-group>
+        <!--
       <b-form-group id="input-group-3"                  label-class="margenform"
  label="municipis_id" label-for="input-3">
                 <select
@@ -144,20 +137,19 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
                     :value="municipi.id">{{ municipi.nom }}
             </option>
         </select>
-        <b-icon v-b-tooltip.focus title="Este campo se ha de rellenar con el municipio del alertante" icon="question-circle" style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "></b-icon>
+        <b-icon v-b-tooltip.focus title="Aquest camp s'ha d'omplir amb el municipio del alertante" icon="question-circle" class="icona-info"b-icon>
 
       </b-form-group>
---->
+        --->
 
-                <!-- Municipi -->
-                <b-form-group
-                    label-class="margenform"
-                    id="input-group-3"
-                    label="Municipi"
-                    label-for="input-3"
-                >
-                    <!--
+        <!-- Municipi -->
+        <b-form-group
+          label-class="margenform"
+          id="input-group-3"
+          label="Municipi"
+          label-for="input-3"
+        >
+          <!--
         <select
           v-model="formIncidencia.municipis_id"
           name="municipi"
@@ -171,135 +163,107 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
             :value="municipi.id"
           >{{ municipi.nom }}</option>
         </select>
-        -->
+          -->
 
-                    <b-button
-                        class="margeninput  boto-primari"
-                        @click="modalMunicpis2 = !modalMunicpis2"
-                        ref="botoMunincpi2"
-                    >
-                        Selecionar municipi
-                    </b-button>
-                    <b-icon
-                        v-b-tooltip.focus
-                        title="Este campo se ha de rellenar con el municipio del alertante"
-                        icon="question-circle"
-                        style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
-                    ></b-icon>
-                </b-form-group>
+          <b-button
+            class="margeninput boto-primari"
+            @click="modalMunicpis2 = !modalMunicpis2"
+            ref="botoMunincpi2"
+          >Selecionar municipi</b-button>
+          <b-icon
+            v-b-tooltip.focus
+            title="Aquest camp s'ha d'omplir amb el municipi de l'alertant"
+            icon="question-circle"
+            class="icona-info"
+          ></b-icon>
+        </b-form-group>
+        
+        <!-- Tipus alertant -->
+        <b-form-group
+          label-class="margenform"
+          id="input-group-4"
+          label="Tipus s'alertant"
+          label-for="input-3"
+        >
+          <select
+            v-model="formAlertant.tipus_alertant_id"
+            name="city"
+            id="city"
+            class="form-control margeninput"
+            tabindex="12"
+          >
+            <option
+              v-for="(city, index) in tipoAlertant"
+              :key="index"
+              :value="city.id"
+            >{{ city.tipus }}</option>
+          </select>
+          <b-icon
+            v-b-tooltip.focus
+            title="Aquest camp s'ha d'omplir amb el tipus d'alertant que hi ha"
+            icon="question-circle"
+            class="icona-info"
+          ></b-icon>
+        </b-form-group>
 
-                <b-form-group
-                    label-class="margenform"
-                    id="input-group-4"
-                    label="tipus_alertant_id"
-                    label-for="input-3"
-                >
-                    <select
-                        v-model="formAlertant.tipus_alertant_id"
-                        name="city"
-                        id="city"
-                        class="form-control margeninput"
-                        tabindex="12"
-                    >
-                        <option
-                            v-for="(city, index) in tipoAlertant"
-                            :key="index"
-                            :value="city.id"
-                            >{{ city.tipus }}
-                        </option>
-                    </select>
-                    <b-icon
-                        v-b-tooltip.focus
-                        title="Este campo se ha de rellenar con el tipo de alertante que tiene el alertante"
-                        icon="question-circle"
-                        style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
-                    ></b-icon>
-                </b-form-group>
-                <div class="d-flex justify-content-center">
-                    <b-button
-                        ref="submit"
-                        class="boto-primari"
-                        type="submit"
-                        :disabled="busy"
-                        >Submit</b-button
-                    >
-                </div>
+        <!-- SUBMIT -->
+        <div class="d-flex justify-content-center">
+          <b-button ref="submit" class="boto-primari" type="submit" :disabled="busy">Submit</b-button>
+        </div>
 
-                <b-overlay
-                    :show="busy"
-                    no-wrap
-                    @shown="onShown"
-                    @hidden="onHidden"
-                >
-                    <template v-slot:overlay>
-                        <div
-                            v-if="processing"
-                            class="text-center p-4 bg-primary text-light rounded"
-                        >
-                            <b-icon icon="cloud-upload" font-scale="4"></b-icon>
-                            <div class="mb-3">Processing...</div>
-                            <b-progress
-                                min="1"
-                                max="20"
-                                :value="counter"
-                                variant="success"
-                                height="3px"
-                                class="mx-n4 rounded-0"
-                            ></b-progress>
-                        </div>
-                        <div
-                            v-else
-                            ref="dialog"
-                            tabindex="-1"
-                            role="dialog"
-                            aria-modal="false"
-                            aria-labelledby="form-confirm-label"
-                            class="text-center p-3"
-                        >
-                            <p>
-                                <strong id="form-confirm-label"
-                                    >Are you sure?</strong
-                                >
-                            </p>
-                            <div class="d-flex">
-                                <b-button
-                                    variant="outline-danger"
-                                    class="mr-3"
-                                    @click="onCancel"
-                                >
-                                    Cancel
-                                </b-button>
-                                <b-button
-                                    variant="outline-success"
-                                    @click="onOK"
-                                    >OK</b-button
-                                >
-                            </div>
-                        </div>
-                    </template>
-                </b-overlay>
+        <!-- Modal confirmacio -->
+        <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
+          <template v-slot:overlay>
+            <div v-if="processing" class="text-center p-4 bg-primary text-light rounded">
+              <b-icon icon="cloud-upload" font-scale="4"></b-icon>
+              <div class="mb-3">Processing...</div>
+              <b-progress
+                min="1"
+                max="20"
+                :value="counter"
+                variant="success"
+                height="3px"
+                class="mx-n4 rounded-0"
+              ></b-progress>
+            </div>
+            <div
+              v-else
+              ref="dialog"
+              tabindex="-1"
+              role="dialog"
+              aria-modal="false"
+              aria-labelledby="form-confirm-label"
+              class="text-center p-3"
+            >
+              <p>
+                <strong id="form-confirm-label">Estas segur?</strong>
+              </p>
+              <div class="d-flex">
+                <b-button variant="outline-danger" class="mr-3" @click="onCancel">NO</b-button>
+                <b-button variant="outline-success" @click="onOK">SI</b-button>
+              </div>
+            </div>
+          </template>
+        </b-overlay>
 
-                <!-- MODAL PARA Municipis -->
-                <b-modal
-                    id="modal-municipi2"
-                    title="Seleciona un municipi"
-                    @ok="handleOk"
-                    size="xl"
-                    v-model="modalMunicpis2"
-                >
-                    <taula-form
-                        :current_items="municipis"
-                        col1="id"
-                        col2="nom"
-                        col3="comarques_id"
-                        @tancar-modal="tancarModal"
-                    >
-                    </taula-form>
-                </b-modal>
-            </form>
+        <!-- MODAL PARA Municipis -->
+        <b-modal
+          id="modal-municipi2"
+          title="Seleciona un municipi"
+          @ok="handleOk"
+          size="xl"
+          v-model="modalMunicpis2"
+        >
+          <taula-form
+            :current_items="municipis"
+            col1="id"
+            col2="nom"
+            col3="comarques_id"
+            @tancar-modal="tancarModal"
+          ></taula-form>
         </b-modal>
+      </form>
+    </b-modal>
 
     <!-- FORM PARA rol -->
 
@@ -329,10 +293,9 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
 
           <b-icon
             v-b-tooltip.focus
-            title="Este campo se ha de rellenar con el municipio del alertante"
+            title="Aquest camp s'ha d'omplir amb el municipio del alertante"
             icon="question-circle"
-            style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
+            class="icona-info"
           ></b-icon>
         </b-form-group>
 
@@ -355,8 +318,6 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
       </form>
     </b-modal>
 
-
-
     <!-- FORM PARA AFECTAT -->
     <b-modal
       id="modal-afectat"
@@ -376,10 +337,15 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           label="Té targeta?"
           label-for="input-0"
         >
-        <b-form-radio-group id="radio-group" v-model="formAfectat.tenir_tarjeta" name="radio-sub-component">
-          <b-form-radio  name="some-radios" @change="verificarCip" value="1">Si</b-form-radio>
-          <b-form-radio name="some-radios" @change="verificarCip" value="0">No</b-form-radio>
-        </b-form-radio-group>
+          <b-form-radio-group
+            id="radio-group"
+            required
+            v-model="formAfectat.tenir_tarjeta"
+            name="radio-sub-component"
+          >
+            <b-form-radio name="some-radios" @change="verificarCip" value="1">Si</b-form-radio>
+            <b-form-radio name="some-radios" @change="verificarCip" value="0">No</b-form-radio>
+          </b-form-radio-group>
         </b-form-group>
         <!-- CIP -->
         <b-form-group
@@ -392,6 +358,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-1"
+            required
             v-model="formAfectat.cip"
             ref="inputCip"
             type="text"
@@ -408,7 +375,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           label="Nom"
           label-for="input-2"
         >
-          <b-form-input id="input-2" v-model="formAfectat.nom" required placeholder="Ex: Bonifaci"></b-form-input>
+          <b-form-input id="input-2" required v-model="formAfectat.nom" placeholder="Ex: Bonifaci"></b-form-input>
         </b-form-group>
         <!-- Cognom -->
         <b-form-group
@@ -421,6 +388,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-3"
+            required
             v-model="formAfectat.cognoms"
             type="text"
             placeholder="Ex: Pérez"
@@ -437,6 +405,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-4"
+            required
             v-model="formAfectat.edat"
             type="number"
             max="150"
@@ -453,8 +422,13 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           label="Sexe (M o F)"
           label-for="input-4"
         >
-          <b-form-radio-group id="radio-group-2" v-model="formAfectat.sexe" name="radio-sub-component-2">
-            <b-form-radio  name="some-radios-2" value="M">Masculí</b-form-radio>
+          <b-form-radio-group
+            required
+            id="radio-group-2"
+            v-model="formAfectat.sexe"
+            name="radio-sub-component-2"
+          >
+            <b-form-radio name="some-radios-2" value="M">Masculí</b-form-radio>
             <b-form-radio name="some-radios-3" value="F">Femení</b-form-radio>
           </b-form-radio-group>
         </b-form-group>
@@ -469,6 +443,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-4"
+            required
             v-model="formAfectat.telefon"
             type="text"
             placeholder="Ex: 606 969 606"
@@ -516,133 +491,99 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         </b-overlay>
       </form>
     </b-modal>
-        <!-- FORM PARA RECURSOS -->
 
-        <b-modal
-            id="modal-recursos"
-            ref="modal"
-            title="Añadir un recurso movil"
-            @show="resetModal"
-            @hidden="resetModal"
-            hide-footer
+    <!-- FORM PARA RECURSOS -->
+    <b-modal
+      id="modal-recursos"
+      ref="modal"
+      title="Afegeix un recurs mòbil"
+      @show="resetModal"
+      @hidden="resetModal"
+      hide-footer
+    >
+      <form ref="form" @submit.stop.prevent="onSubmit">
+        <b-form-group label-class="margenform" id="input-group-1" label="Codi" label-for="input-1">
+          <b-form-input
+            class="margeninput"
+            id="input-1"
+            v-model="formNourecurs.codi"
+            required
+            placeholder="Enter codi"
+          ></b-form-input>
+
+          <b-icon
+            v-b-tooltip.focus
+            title="Aquest camp s'ha d'omplir amb el codi del recurs mòbil"
+            icon="question-circle"
+            class="icona-info"
+          ></b-icon>
+        </b-form-group>
+
+        <b-form-group
+          label-class="margenform"
+          id="input-group-3"
+          label="Tipus de recurs"
+          label-for="input-3"
         >
-            <form ref="form" @submit.stop.prevent="onSubmit">
-                <b-form-group
-                    label-class="margenform"
-                    id="input-group-1"
-                    label="codi"
-                    label-for="input-1"
-                >
-                    <b-form-input
-                        class="margeninput"
-                        id="input-1"
-                        v-model="formNourecurs.codi"
-                        required
-                        placeholder="Enter codi"
-                    ></b-form-input>
+          <select
+            v-model="formNourecurs.tipus_recurs_id"
+            name="city"
+            id="city"
+            class="form-control margeninput"
+            tabindex="12"
+          >
+            <option
+              v-for="(city, index) in tipoRecursos"
+              :key="index"
+              :value="city.id"
+            >{{ city.tipus }}</option>
+          </select>
+          <b-icon
+            v-b-tooltip.focus
+            title="Aquest camp s'ha d'omplir amb el tipus del recurs mòbil"
+            icon="question-circle"
+            class="icona-info"
+          ></b-icon>
+        </b-form-group>
+        <div class="d-flex justify-content-center">
+          <b-button class="boto-primari" ref="submit" type="submit" :disabled="busy">Submit</b-button>
+        </div>
 
-                    <b-icon
-                        v-b-tooltip.focus
-                        title="Este campo se ha de rellenar con el codigo del recurso movil"
-                        icon="question-circle"
-                        style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
-                    ></b-icon>
-                </b-form-group>
-
-                <b-form-group
-                    label-class="margenform"
-                    id="input-group-3"
-                    label="rols:"
-                    label-for="input-3"
-                >
-                    <select
-                        v-model="formNourecurs.tipus_recurs_id"
-                        name="city"
-                        id="city"
-                        class="form-control margeninput"
-                        tabindex="12"
-                    >
-                        <option
-                            v-for="(city, index) in tipoRecursos"
-                            :key="index"
-                            :value="city.id"
-                            >{{ city.tipus }}
-                        </option>
-                    </select>
-                    <b-icon
-                        v-b-tooltip.focus
-                        title="Este campo se ha de rellenar con el tipo que sera el recurso movil"
-                        icon="question-circle"
-                        style="width: 37px; height: 32px;     margin-left: 25px;
-    margin-top: 2px; "
-                    ></b-icon>
-                </b-form-group>
-                <div class="d-flex justify-content-center">
-                    <b-button
-                        class="boto-primari"
-                        ref="submit"
-                        type="submit"
-                        :disabled="busy"
-                        >Submit</b-button
-                    >
-                </div>
-
-                <b-overlay
-                    :show="busy"
-                    no-wrap
-                    @shown="onShown"
-                    @hidden="onHidden"
-                >
-                    <template v-slot:overlay>
-                        <div
-                            v-if="processing"
-                            class="text-center p-4 bg-primary text-light rounded"
-                        >
-                            <b-icon icon="cloud-upload" font-scale="4"></b-icon>
-                            <div class="mb-3">Processing...</div>
-                            <b-progress
-                                min="1"
-                                max="20"
-                                :value="counter"
-                                variant="success"
-                                height="3px"
-                                class="mx-n4 rounded-0"
-                            ></b-progress>
-                        </div>
-                        <div
-                            v-else
-                            ref="dialog"
-                            tabindex="-1"
-                            role="dialog"
-                            aria-modal="false"
-                            aria-labelledby="form-confirm-label"
-                            class="text-center p-3"
-                        >
-                            <p>
-                                <strong id="form-confirm-label"
-                                    >Are you sure?</strong
-                                >
-                            </p>
-                            <div class="d-flex">
-                                <b-button
-                                    variant="outline-danger"
-                                    class="mr-3"
-                                    @click="onCancel"
-                                >
-                                    Cancel
-                                </b-button>
-                                <b-button
-                                    variant="outline-success"
-                                    @click="onOK"
-                                    >OK</b-button
-                                >
-                            </div>
-                        </div>
-                    </template>
-                </b-overlay>
-            </form>
-        </b-modal>
+        <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
+          <template v-slot:overlay>
+            <div v-if="processing" class="text-center p-4 bg-primary text-light rounded">
+              <b-icon icon="cloud-upload" font-scale="4"></b-icon>
+              <div class="mb-3">Processing...</div>
+              <b-progress
+                min="1"
+                max="20"
+                :value="counter"
+                variant="success"
+                height="3px"
+                class="mx-n4 rounded-0"
+              ></b-progress>
+            </div>
+            <div
+              v-else
+              ref="dialog"
+              tabindex="-1"
+              role="dialog"
+              aria-modal="false"
+              aria-labelledby="form-confirm-label"
+              class="text-center p-3"
+            >
+              <p>
+                <strong id="form-confirm-label">Estas segur?</strong>
+              </p>
+              <div class="d-flex">
+                <b-button variant="outline-danger" class="mr-3" @click="onCancel">NO</b-button>
+                <b-button variant="outline-success" @click="onOK">SI</b-button>
+              </div>
+            </div>
+          </template>
+        </b-overlay>
+      </form>
+    </b-modal>
   </div>
 </template>
 <script>
@@ -696,8 +637,7 @@ export default {
       name: "",
       nameState: null,
       submittedNames: [],
-                  modalMunicpis2: false,
-
+      modalMunicpis2: false
     };
   },
   computed: {
@@ -713,25 +653,27 @@ export default {
     ])
   },
   methods: {
-              tancarModal(item) {
-            //alert(item.id);
-            //input = this.$refs['input-alertant'];
-            if (this.modalHospitals) {
-                this.modalHospitals = false;
-                this.$refs.botoHospital.textContent = item.nom;
-                this.formIncidencia.alertants_id = item.id;
-            } else {
-                this.modalMunicpis2 = false;
-                this.$refs.botoMunincpi2.textContent = item.nom;
-                this.formAlertant.municipis_id = item.id;
-            }
-        },
-    verificarCip(checked){
-      if(checked == "1"){
-        // this.$refs['inputCip'].disabled = false;
-         document.getElementById("input-1").disabled = false;
-         this.formAfectat.cip = "";
+    tancarModal(item) {
+      //alert(item.id);
+      //input = this.$refs['input-alertant'];
+      if (this.modalHospitals) {
+        this.modalHospitals = false;
+        this.$refs.botoHospital.textContent = item.nom;
+        this.formIncidencia.alertants_id = item.id;
+      } else if(this.modalMunicpis2){
+        this.modalMunicpis2 = false;
+        this.$refs.botoMunincpi2.textContent = item.nom;
+        this.formAlertant.municipis_id = item.id;
       }else{
+
+      }
+    },
+    verificarCip(checked) {
+      if (checked == "1") {
+        // this.$refs['inputCip'].disabled = false;
+        document.getElementById("input-1").disabled = false;
+        this.formAfectat.cip = "";
+      } else {
         //this.$refs['inputCip'].disabled = true;
         //this.formAfectat.cip.disabled = true;
         document.getElementById("input-1").disabled = true;
@@ -782,7 +724,7 @@ export default {
           } else if (this.tipoaccion == "recurso") {
             console.log(this.formNourecurs);
             this.getPosts(this.tipoaccion, this.formNourecurs);
-          }else if (this.tipoaccion == "afectats") {
+          } else if (this.tipoaccion == "afectats") {
             console.log(this.formAfectat);
             this.getPosts(this.tipoaccion, this.formAfectat);
           }
@@ -815,9 +757,16 @@ export default {
           console.log(response);
 
           this.Actualizar(this.tipoaccion);
+          // enviem la info en cas de que sigui afectat
+          if (this.tipoaccion == "afectat") {
+            this.$emit("verificar-afectat", true);
+          }
         })
         .catch(function(error) {
           console.log(error);
+          if (this.tipoaccion == "afectat") {
+            this.$emit("verificar-afectat", false);
+          }
         });
     },
 

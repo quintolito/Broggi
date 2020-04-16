@@ -7,7 +7,7 @@ Gestionar Horas
 @section('main')
 
     <h1 class="display-4 text_titol">
-        Gestionar Horas
+        Gestionar Hores
     </h1>
     <div class="card p-3">
         <div card-body>
