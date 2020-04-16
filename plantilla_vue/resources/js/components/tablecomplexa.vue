@@ -1101,6 +1101,7 @@ export default {
             console.log(this.formRecurs);
             if (this.api == "recurso") {
                 this.UpdateFORMS(this.api, this.formRecurs);
+                 this.handleSubmit();
             } else if (this.api == "alertant") {
                 this.UpdateFORMS(this.api, this.formAlertant);
 
@@ -1111,7 +1112,7 @@ export default {
                 this.handleSubmit();
             }
 
-            //this.handleSubmit();
+
         },
         Actualizar(Apiactuar) {
             this.$store.dispatch(
