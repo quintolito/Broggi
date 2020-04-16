@@ -65,10 +65,10 @@ class IncidenciaController extends Controller
         $tablaccion ="incidencias";
         $test="Prueba de pasar mas parametros";
         $nomtabla="num_incidencia";
-        $datamunicipi="telefon_alertant";
+        $datamunicipi="municipi[0].nom";
         $adreca='data';
         $telefon='hora';
-        $tipusalertant='complement_adreca';
+        $tipusalertant='descripcio';
         $nombtablaalertant='descripcio';
         $col23='municipis_id';
         $col24 = 'tipus_incident_id';
