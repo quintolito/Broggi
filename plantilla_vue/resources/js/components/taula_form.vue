@@ -75,10 +75,9 @@
           label-cols-sm="3"
           label-align-sm="right"
           label-size="sm"
-          description="Leave all unchecked to filter on all data"
           class="mb-0">
           <b-form-checkbox-group v-model="filterOn" class="mt-1">
-            <b-form-checkbox value="1">Barcelona</b-form-checkbox>
+            <b-form-checkbox value="id_provincia">Barcelona</b-form-checkbox>
             <b-form-checkbox value="2">Girona</b-form-checkbox>
             <b-form-checkbox value="3">Lleida</b-form-checkbox>
             <b-form-checkbox value="4">Tarragona</b-form-checkbox>
@@ -152,6 +151,8 @@ import Vuex from "vuex";
       "col4",
       "col5",
       "col6",
+      "col7",
+      "col8"
     ],
     data() {
       return {
@@ -184,6 +185,12 @@ import Vuex from "vuex";
           {
             key: this.col6,
             label: this.col5,
+            sortable: true,
+            class: "text-center"
+          },
+          {
+            key: this.col7,
+            label: this.col8,
             sortable: true,
             class: "text-center"
           }

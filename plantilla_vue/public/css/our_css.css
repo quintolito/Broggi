@@ -9,6 +9,11 @@
 .text_titol{
     font-family: 'Bungee', cursive !important;
 }
+
+.text_titol_max{
+    font-family: 'Bungee', cursive !important;
+    font-size: 200px;
+}
     /*per a tot la resta*/
 *{
     font-family: 'Open Sans', sans-serif !important;
