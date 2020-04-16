@@ -33,11 +33,15 @@ Route::get('/register','LoginController@showRegister');
     //cosas raras @marti
 Route::group(['middleware' => ['auth']], function () {
     //taula
+    Route::get('/recurscard', 'PruebaController@landingpagerecurs' );
     Route::get('/taula_incidencia', 'IncidenciaController@mostrarTaula' );
+    Route::get('/taula_incidencia_recursmovil', 'IncidenciaController@mostrarTaulaIncidenciaxRecurs' );
+
     //form
     Route::get('/form_incidencia', 'IncidenciaController@mostrarForm');
     Route::get('/landingpage','PruebaController@landingpage' );
     Route::get('/Recursos','PruebaController@index' );
     Route::get('/alertant','PruebaController@moostrarvip' );
-    Route::get('/recurscard', 'PruebaController@landingpagerecurs' );
+    Route::get('/formacio','PruebaController@formacio' );
+
 });

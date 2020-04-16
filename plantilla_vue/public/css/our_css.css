@@ -51,7 +51,10 @@ body{
     color: white !important;
     background-color: #304269 !important;
 }
-
+.video-fluid {
+    width: 100%;
+    height: auto;
+  }
 /*
 .footer {
     position: absolute;
@@ -113,6 +116,56 @@ body{
 }
 
 .margeninput{
-    width: 70% !important
+    width: 60% !important
     ; float: left;  margin-left: 25px;
 }
+
+
+.btn-colordefondoinsert {
+    color: #fff !important;
+    background-color: #f26101 !important;
+    border-color: #f26101 !important;
+    width: auto;
+    height: auto;
+}
+
+.btn-colordefondoenviar {
+
+    width: auto;
+    height: auto;
+}
+
+.buttondatetime {
+    border-color: #f26101 !important;
+
+    margin-left: 10px;
+    margin-bottom: 17px;
+    background-color: #f26101 !important;
+
+}
+
+.videoclcik{
+    float: left;
+    margin-left: 5vh;
+}
+.esconder{
+    visibility: hidden;
+}
+
+.ver{
+    visibility: none;
+
+}
+.elemetos {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

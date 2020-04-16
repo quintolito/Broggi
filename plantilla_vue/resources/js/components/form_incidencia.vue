@@ -4,13 +4,13 @@
 
        <!-- Afectat -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-1" label="Form afectat" label-for="input-1">
-        <!--  
+        <!--
           <b-button  @click="modalAfectat = !modalAfectat" ref="botoAfectat">
             FORM AFECTAT
-          </b-button> 
+          </b-button>
         -->
         <modal-post tipoaccion= "afectats"></modal-post>
-      </b-form-group> 
+      </b-form-group>
 
       <!-- Num Inciedncia -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-1" label="Numero incidència" label-for="input-1">
@@ -64,7 +64,7 @@
 
       <!-- Alertants/Hospitals -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-5" label="Hospitals/Alertants" label-for="input-3">
-        <!-- 
+        <!--
         <select
           v-model="formIncidencia.alertants_id"
           name="municipi"
@@ -97,7 +97,7 @@
 
       <!-- Municipi -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-5" label="Municipi" label-for="input-3">
-        <!-- 
+        <!--
         <select
           v-model="formIncidencia.municipis_id"
           name="municipi"
@@ -115,7 +115,7 @@
 
         <b-button  @click="modalMunicpis = !modalMunicpis" ref="botoMunincpi">
           Selecionar Municipi
-        </b-button> 
+        </b-button>
       </b-form-group>
 
       <!-- Adreça -->
@@ -172,7 +172,7 @@
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-9" label="Recurs mòbil" label-for="input-3">
         <b-button  @click="modalRecursos = !modalRecursos" ref="botoRecurs">
           Selecionar Recurs Mòbil
-        </b-button> 
+        </b-button>
       </b-form-group>
     </form>
 
@@ -185,19 +185,19 @@
       size="xl"
 
       v-model="modalHospitals"
-      
+
     >
-      <taula-form :current_items="alertants" 
+      <taula-form :current_items="alertants"
         col1="id"
         col2="nom"
         col3="adreca"
         col4="municipis_id"
         col5="telefon"
-        
+
         @tancar-modal="tancarModal">
 
       </taula-form>
-      
+
     </b-modal>
 
     <!-- MODAL PARA Municipis -->
@@ -208,7 +208,7 @@
 
        v-model="modalMunicpis"
     >
-      <taula-form :current_items="municipis" 
+      <taula-form :current_items="municipis"
         col1="id"
         col2="nom"
         col3="comarques_id"
@@ -217,7 +217,7 @@
         @tancar-modal="tancarModal">
 
       </taula-form>
-      
+
     </b-modal>
 
     <!-- MODAL PARA Recursos -->
@@ -228,17 +228,15 @@
 
        v-model="modalRecursos"
     >
-      <taula-form :current_items="recursos" 
-        col1="id"
+      <taula-form :current_items="recursos"
+          col1="id"
         col2="codi"
-        col3="tipus_recurs_id"
-        col4="id_usuario"
         col5="recursosid"
         col6="recursosid.tipus"
         @tancar-modal="tancarModal">
 
       </taula-form>
-      
+
     </b-modal>
 
   </div>
@@ -256,13 +254,13 @@ export default {
         hora: "",
         tipus_alertant_id: null,
         alertants_id: null,
-        
+
         telefon_alertant: "",
 
         municipis_id: null,
         adreca: "",
         complement_adreca: "",
-        
+
         tipus_incident_id: null,
         // recurs_mobil: "",
         descripcio: "",
@@ -319,21 +317,22 @@ export default {
     tancarModal(item){
       //alert(item.id);
       //input = this.$refs['input-alertant'];
+      console.log(item.codi)
       if(this.modalHospitals){
         this.modalHospitals = false;
         this.$refs.botoHospital.textContent = item.nom;
         this.formIncidencia.alertants_id = item.id
       }else if(this.modalMunicpis){
-        this.modalMunicpis = false;        
+        this.modalMunicpis = false;
         this.$refs.botoMunincpi.textContent = item.nom;
         this.formIncidencia.municipis_id = item.id
       }else if(this.modalRecursos){
-        this.modalRecursos = false;        
-        this.$refs.botoRecurs.textContent = item.nom;
+        this.modalRecursos = false;
+        this.$refs.botoRecurs.textContent = item.codi;
         this.formIncidencia.recurs_mobil_id = item.id
       }else{
         this.modalAfectat = false;
-      }     
+      }
     },
   },
   created() {

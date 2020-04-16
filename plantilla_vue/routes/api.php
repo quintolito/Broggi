@@ -32,3 +32,7 @@ Route::apiResource("/TipusR", "Api\TipusRecursController");
 Route::apiResource("/usuarios", "Api\UsuarioController");
 
 Route::apiResource('/register', 'Auth\RegisterController');
+
+
+
+Route::apiResource("/incidenciasxrecurs", "Api\incidenciahasrecursController");

@@ -45,7 +45,7 @@
         </b-form-group>
       </b-col>
 
-      
+
       <b-col lg="5" class="my-1">
         <b-form-group
           label="Filtrar"
@@ -96,11 +96,13 @@
         ></b-pagination>
       </b-col>
 
-      
+
     </b-row>
 
     <!-- Main table element -->
     <b-table
+    selectable
+        select-mode="single"
       head-variant="dark"
       show-empty
       small
@@ -117,9 +119,9 @@
       @row-dblclicked="showInfo"
       @filtered="onFiltered"
     >
-      
 
-      
+
+
     </b-table>
   </b-container>
 </template>
@@ -152,9 +154,9 @@ import Vuex from "vuex";
       "col7",
       "col8"
     ],
-    data() {       
+    data() {
       return {
-        fields: [          
+        fields: [
           //columnes personalitzades
           {
             key: this.col1,
@@ -230,7 +232,7 @@ import Vuex from "vuex";
       },
       showInfo(item, index){
         //alert(item.id)
-        
+
         this.$emit('tancar-modal', item);
       }
     }
