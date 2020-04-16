@@ -212,6 +212,8 @@
         col1="id"
         col2="nom"
         col3="comarques_id"
+        col8="id_provincia"
+        col7="comarca.provincies_id"
         @tancar-modal="tancarModal">
 
       </taula-form>

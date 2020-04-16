@@ -21,7 +21,7 @@ class municipiController extends Controller
     public function index()
     {
         //
-        $Municipi = Municipi::all();
+        $Municipi = Municipi::with('comarca')->get();
         return new municipiResource($Municipi);
     }
 
