@@ -102,11 +102,11 @@
 
     <!-- Main table element -->
     <b-table
+    selectable
+        select-mode="single"
       head-variant="dark"
       show-empty
       small
-      select-mode="single"
-      selectable
       stacked="md"
       :items="current_items"
       :fields="fields"
@@ -150,7 +150,8 @@ import Vuex from "vuex";
       "col2",
       "col3",
       "col4",
-      "col5"
+      "col5",
+      "col6",
     ],
     data() {
       return {
@@ -158,7 +159,7 @@ import Vuex from "vuex";
           //columnes personalitzades
           {
             key: this.col1,
-            label: "Codi",
+            label: this.col1,
             sortable: true,
             class: "text-center"
           },
@@ -177,6 +178,12 @@ import Vuex from "vuex";
           {
             key: this.col4,
             label: this.col4,
+            sortable: true,
+            class: "text-center"
+          },
+          {
+            key: this.col6,
+            label: this.col5,
             sortable: true,
             class: "text-center"
           }

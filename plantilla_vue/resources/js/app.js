@@ -82,6 +82,7 @@ const store = new Vuex.Store({
         users: [],
         alertants:[],
         posts:[],
+        recursos: [],
         tipoRols:[],
         municipis:[],
         tipoRecursos:[],
@@ -108,9 +109,13 @@ const store = new Vuex.Store({
             if(url.includes("alertant")){
 
                 commit('SAVE_USERS',result.data);
+                commit('SAVE_ALERTANT',result.data);
+
             }
             else if(url.includes("recurso")){
                 commit('SAVE_USERS',result.data);
+                commit('SAVE_RECURSO', result.data);
+
             }
             else if(url.includes("rols")){
                 commit('SAVE_ROLS',result.data);
@@ -209,6 +214,10 @@ const store = new Vuex.Store({
           },
           SAVE_ROLS(state,tipoRols){
             state.tipoRols=tipoRols ;
+
+          },
+          SAVE_RECURSO(state, recursos) {
+            state.recursos = recursos;
 
           },
           SAVE_ALERTANT(state,alertants){
