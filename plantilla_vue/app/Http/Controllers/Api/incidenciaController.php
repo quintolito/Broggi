@@ -39,12 +39,12 @@ class incidenciaController extends Controller
         //
         $incidencia = new incidencias();
 
-        // millorar (seleccionar el recurs en el form)
-        $Recurs = Recurs::all();
-        // millorar
+        // selecciona el recurs en el form a partir de la id
+        $Recurs = Recurs::find($request->input('recurs_mobil_id'));
+        // agafem les usuaris
         $Usuario = Usuario::all();
-        // millorar (selecionar l'afectat introduit previament)
-        $afectats=Afectats::all();
+        // agafem l'ultim afectat introduit a la base de dades
+        $afectat = Afectats::all()->last();
 
         $incidencia->num_incidencia = $request->input('num_incidencia');
         $incidencia->telefon_alertant = $request->input('telefon_alertant');
@@ -69,9 +69,9 @@ class incidenciaController extends Controller
             $incidencia->save();
             //$incidencia->pivot->1;
             $incidencia->Usuario()->attach($Usuario[0]);
-            $incidencia->Afectats()->attach($afectats[0]);
+            $incidencia->Afectats()->attach($afectat);
             $incidencia->incidenciahasrecursos()
-            ->attach($Recurs[0],['prioritat' => 1,
+            ->attach($Recurs,['prioritat' => 1,
             'hora_acitvacio' => $now  ,
             'hora_mobilitzacio' => $now,
             'hora_assistencia' => $now,
@@ -93,7 +93,7 @@ class incidenciaController extends Controller
             $resposta = response()->json(['error' => $error], 400);
         }
 
-        return     $resposta;
+        return $resposta;
     }
 
     /**

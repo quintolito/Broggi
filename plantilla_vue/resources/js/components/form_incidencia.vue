@@ -9,7 +9,7 @@
             FORM AFECTAT
           </b-button>
         -->
-        <modal-post tipoaccion= "afectats"></modal-post>
+        <modal-post tipoaccion= "afectats" @verificar-afectat="verificarAfectat"></modal-post>
       </b-form-group>
 
       <!-- Num Inciedncia -->
@@ -87,7 +87,7 @@
       <!-- Telefon alertant -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-8" label="Telefon alertant" label-for="input-2">
         <b-form-input
-          id="input-2"
+          id="input-telefon"
           v-model="formIncidencia.telefon_alertant"
           required
           placeholder="000-000-000"
@@ -121,7 +121,7 @@
       <!-- Adreça -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-6" label="Adreça" label-for="input-2">
         <b-form-input
-          id="input-2"
+          id="input-adreca"
           v-model="formIncidencia.adreca"
           required
           placeholder="Adreça"
@@ -132,7 +132,7 @@
       <!-- Complement Adreça -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-7" label="Complemnet Adreça" label-for="input-2">
         <b-form-input
-          id="input-2"
+          id="input-complement"
           v-model="formIncidencia.complement_adreca"
           required
           placeholder="Informacio complemntaria sobre l'adreça"
@@ -160,7 +160,7 @@
       <!-- Descripcio -->
       <b-form-group label-cols="4" label-cols-md="3" label-cols-xl="2"  id="input-group-8" label="Descripció" label-for="input-2">
         <b-form-input
-          id="input-2"
+          id="input-descripcio"
           v-model="formIncidencia.descripcio"
           required
           placeholder="Què ha passat?"
@@ -174,9 +174,10 @@
           Selecionar Recurs Mòbil
         </b-button>
       </b-form-group>
-    </form>
 
-    <button type="submit" v-on:click="postIncidencia()" class="btn boto-primari">Guardar Incidencia</button>
+      <button type="submit" id="boto-submit" v-on:click="postIncidencia()" disabled class="btn boto-primari">Guardar Incidencia</button>
+      <p id="text-submit">Completa tots els camps</p>
+    </form>    
 
     <!-- MODAL PARA Hospital -->
     <b-modal
@@ -231,7 +232,7 @@
       <taula-form :current_items="recursos"
           col1="id"
         col2="codi"
-        col5="recursosid"
+        col5="Tipus de recurs"
         col6="recursosid.tipus"
         @tancar-modal="tancarModal">
 
@@ -267,6 +268,7 @@ export default {
 
         estats_incidencia_id: "1",
         recurs_mobil_id: null,
+        formAfectat: null
       },
       formAfectat:{
         cip: "",
@@ -306,12 +308,25 @@ export default {
         .post("http://127.0.0.1:8000/api/incidencias", this.formIncidencia)
         .then(function(response) {
           console.log(response);
-          alert("todo ok");
+          alert("Insertat correctament");
+          // fem ek redirect
+          window.location.href = 'http://127.0.0.1:8000/taula_incidencia';
         })
         .catch(function(error) {
           this.errors.push(error.response.data);
           console.log(error.response.data);
         });
+    },
+    // comprovem que hagi fet tots els forms
+    comprobarCamps(){      
+      if( this.formIncidencia.formAfectat == null &&
+          this.formIncidencia.recurs_mobil_id != null &&
+          this.formIncidencia.alertants_id != null &&
+          this.formIncidencia.municipis_id  != null
+      ){
+        document.getElementById("text-submit").innerHTML = "";
+        document.getElementById("boto-submit").disabled = false;
+      }
     },
     // tancar modal
     tancarModal(item){
@@ -328,12 +343,21 @@ export default {
         this.formIncidencia.municipis_id = item.id
       }else if(this.modalRecursos){
         this.modalRecursos = false;
-        this.$refs.botoRecurs.textContent = item.codi;
+        this.$refs.botoRecurs.textContent = item.recursosid.tipus;
+        console.log(item);
         this.formIncidencia.recurs_mobil_id = item.id
       }else{
         this.modalAfectat = false;
       }
+      this.comprobarCamps();
     },
+    verificarAfectat(resposta){
+      if(resposta){
+        this.formIncidencia.formAfectat = "completat"
+      }else{
+       alert("Form afectat no completat correctament") 
+      }
+    }
   },
   created() {
     this.$store.dispatch("loadUsers", " http://127.0.0.1:8000/api/rols");

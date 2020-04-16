@@ -376,7 +376,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           label="Té targeta?"
           label-for="input-0"
         >
-        <b-form-radio-group id="radio-group" v-model="formAfectat.tenir_tarjeta" name="radio-sub-component">
+        <b-form-radio-group id="radio-group" required v-model="formAfectat.tenir_tarjeta" name="radio-sub-component">
           <b-form-radio  name="some-radios" @change="verificarCip" value="1">Si</b-form-radio>
           <b-form-radio name="some-radios" @change="verificarCip" value="0">No</b-form-radio>
         </b-form-radio-group>
@@ -392,6 +392,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-1"
+            required
             v-model="formAfectat.cip"
             ref="inputCip"
             type="text"
@@ -408,7 +409,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           label="Nom"
           label-for="input-2"
         >
-          <b-form-input id="input-2" v-model="formAfectat.nom" required placeholder="Ex: Bonifaci"></b-form-input>
+          <b-form-input id="input-2" required v-model="formAfectat.nom" placeholder="Ex: Bonifaci"></b-form-input>
         </b-form-group>
         <!-- Cognom -->
         <b-form-group
@@ -421,6 +422,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-3"
+            required
             v-model="formAfectat.cognoms"
             type="text"
             placeholder="Ex: Pérez"
@@ -437,6 +439,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-4"
+            required
             v-model="formAfectat.edat"
             type="number"
             max="150"
@@ -453,7 +456,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           label="Sexe (M o F)"
           label-for="input-4"
         >
-          <b-form-radio-group id="radio-group-2" v-model="formAfectat.sexe" name="radio-sub-component-2">
+          <b-form-radio-group required id="radio-group-2" v-model="formAfectat.sexe" name="radio-sub-component-2">
             <b-form-radio  name="some-radios-2" value="M">Masculí</b-form-radio>
             <b-form-radio name="some-radios-3" value="F">Femení</b-form-radio>
           </b-form-radio-group>
@@ -469,6 +472,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
         >
           <b-form-input
             id="input-4"
+            required
             v-model="formAfectat.telefon"
             type="text"
             placeholder="Ex: 606 969 606"
@@ -815,9 +819,16 @@ export default {
           console.log(response);
 
           this.Actualizar(this.tipoaccion);
+          // enviem la info en cas de que sigui afectat
+          if(this.tipoaccion == "afectat"){
+            this.$emit('verificar-afectat', true);
+          }
         })
         .catch(function(error) {
           console.log(error);
+          if(this.tipoaccion == "afectat"){
+            this.$emit('verificar-afectat', false);
+          }
         });
     },
 
