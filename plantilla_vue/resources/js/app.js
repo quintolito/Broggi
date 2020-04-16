@@ -107,7 +107,7 @@ const store = new Vuex.Store({
 
 
             if(url.includes("alertant")){
-
+                //MODIFICACIO PER QUE EN ELS DIFERENC COMPONENTS FUNCIONI
                 commit('SAVE_USERS',result.data);
                 commit('SAVE_ALERTANT',result.data);
 
