@@ -1,7 +1,7 @@
 @extends('templates.main')
 
 @section('titol')
-    Taula incidencia
+    Taula incidència
 @endsection
 
 @section('main')
@@ -42,6 +42,7 @@
         col31= "{{ $col31 }}"
         col32= "{{ $col32 }}"
 
-        ></tablecomplexa>   </div>
+        ></tablecomplexa>  
+    </div>
 
 @endsection

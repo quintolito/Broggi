@@ -1,11 +1,6 @@
 @extends('templates.main')
-
-
-
 @section('main')
-
 <div class="container containercard">
-
   <div class="card-deck" >
       <div class="card text-center" id="card-boostrap">
         <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-zTVIvOtz5Va3qA2i8-LpG8XxpM93jeLDyqGxGUxz3n6cH7o6" alt="Card image cap">
@@ -21,8 +16,5 @@
         <button type="button" class="btn boto-primari"  onclick="window.location='{{ url('/Recursos') }}'" action>INCIDÈNCIES OBERTES</button>
       </div>
     </div>
-
 </div>
-
-
 @endsection
