@@ -68,6 +68,14 @@ class PruebaController extends Controller
     public function landingpage(){
         return view ('card');
     }
+
+    public function landingpagerecurs(){
+        return view ('recurscard');
+    }
+
+    public function formacio(){
+        return view ('login.formacio');
+    }
 /*
     public function index()
     {
