@@ -105,7 +105,7 @@
         label="Hospitals/Alertants"
         label-for="input-3"
       >
-        <b-button @click="modalHospitals = !modalHospitals" ref="botoHospital">Selecionar Hospital</b-button>
+        <b-button @click="modalHospitals = !modalHospitals" ref="botoHospital" class="boto-terciari">Selecionar Hospital</b-button>
       </b-form-group>
 
       <!-- Telefon alertant -->
@@ -135,7 +135,7 @@
         label="Municipi"
         label-for="input-3"
       >
-        <b-button @click="modalMunicpis = !modalMunicpis" ref="botoMunincpi">Selecionar Municipi</b-button>
+        <b-button @click="modalMunicpis = !modalMunicpis" ref="botoMunincpi" class="boto-terciari">Selecionar Municipi</b-button>
       </b-form-group>
 
       <!-- Adreça -->
@@ -225,7 +225,7 @@
         label="Recurs mòbil"
         label-for="input-3"
       >
-        <b-button @click="modalRecursos = !modalRecursos" ref="botoRecurs">Selecionar Recurs Mòbil</b-button>
+        <b-button @click="modalRecursos = !modalRecursos" ref="botoRecurs" class="boto-terciari">Selecionar Recurs Mòbil</b-button>
       </b-form-group>
       <div class="d-flex justify-content-center">
         <button
