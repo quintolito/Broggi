@@ -21,7 +21,10 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand btn text_titol" href="/home" {{-- boto per anar a home o whatever --}}>LOGO BROGGI</a>
+
+        <a class="navbar-brand btn text_titol" href="/home">
+            <img src="assets/images/broggivec.PNG" style="width: 20%; float: left">
+        </a>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul class="navbar-nav ml-md-auto">
