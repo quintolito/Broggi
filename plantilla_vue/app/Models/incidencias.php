@@ -17,7 +17,7 @@ class incidencias extends Model
 
     public function Afectats()
     {
-        return $this->belongsTo('App\Models\Afectats', 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
+        return $this->belongsToMany('App\Models\Afectats', 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
     }
 
     public function Alertants()
@@ -28,6 +28,12 @@ class incidencias extends Model
     public function getYourDateFieldAttribute($value)
     {
         return $value->format('Y-m-d H:i');
+    }
+
+    public function incidenciaspruebaderecursos()
+    {
+        return $this->belongsTo('App\Models\incidenciahasrecurs','id','incidencies_id');
+
     }
 
     public function incidenciahasrecursos()

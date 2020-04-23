@@ -34,8 +34,26 @@ class afectatsController extends Controller
     public function store(Request $request)
     {
         //
+        $afectat = new Afectats();
+        $afectat->cip = $request->input("cip");
+        $afectat->telefon = $request->input("telefon");
+        $afectat->edat = $request->input("edat");
+        $afectat->sexe = $request->input("sexe");
+        $afectat->nom = $request->input("nom");
+        $afectat->cognoms = $request->input("cognoms");
+        $afectat->tenir_tarjeta = $request->input("tenir_tarjeta");
+        $afectat->municipis_id = $request->input("municipis_id");
+        try {
+            $afectat->save();
+            $resposta = (new afectantResource($afectat))->response()->setStatusCode(201);
 
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
 
+            $resposta = response()->json(['error' => $error], 400);
+        }
+
+        return     $resposta;
     }
 
     /**

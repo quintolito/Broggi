@@ -17,6 +17,10 @@ class Municipi extends Model
     {
         return $this->belongsTo('App\Models\Comarca', 'comarques_id');
     }
+    public function provincia()
+    {
+        return $this->belongsTo('App\Models\Provincia', 'provincies_id');
+    }
 
     public function Afectats()
     {

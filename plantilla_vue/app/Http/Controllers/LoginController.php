@@ -26,7 +26,13 @@ class LoginController extends Controller
         if($user != null && Hash::check($contrasenya, $user->contrasenya)){
 
             Auth::login($user);
-            return redirect('/landingpage');
+
+            if($user->rols_id ==1){
+                return redirect('/landingpage');
+            }else{
+                return redirect('/recurscard');
+            }
+
         }else{
             return redirect('/login')->withInput();
         }
