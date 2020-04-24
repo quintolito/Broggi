@@ -82,7 +82,7 @@ body{
     color: white !important;
     background-color: #304269 !important;
     transition: 0.5s ease !important;
-    
+
 }
 
 .boto-terciari:hover
@@ -187,8 +187,12 @@ body{
 }
 
 .videoclcik{
+    border-radius: 25px;
+
     float: left;
     margin-left: 5vh;
+    border: 5px solid #f26101 !important;
+
 }
 .esconder{
     visibility: hidden;
@@ -214,8 +218,25 @@ body{
 
  /*icona nfo modal*/
 .icona-info{
-    width: 37px; 
+    width: 37px;
     height: 32px;
     margin-left: 25px;
-    margin-top: 2px; 
+    margin-top: 2px;
+}
+
+.margentitulo{
+
+    margin-bottom: 5vh;
+
+    float: left;
+    margin-left: 5vh;
+}
+
+.imagen{
+    border-radius: 25px;
+
+    float: left;
+    margin-left: 5vh;
+    border: 5px solid #304269 !important;
+
 }
