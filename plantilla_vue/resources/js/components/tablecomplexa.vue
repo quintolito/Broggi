@@ -92,6 +92,7 @@
             </b-col>
         </b-row>
 
+
         <!-- Main table element -->
         <b-table
             sticky-header
@@ -141,7 +142,12 @@
         -->
             </template>
         </b-table>
+  <b-button
 
+                        @click="guardarPDF()"
+                        class="buttondatetime"
+                        >Guardar pagina</b-button
+                    >
         <b-modal
             id="modal-recursos2"
             ref="modal"
@@ -395,12 +401,15 @@
                     label-for="input-1"
                     label-class="margenform"
                 >
-                    <b-button
 
-                        @click="Obtenertiemopo('activacio')"
-                        class="buttondatetime"
-                        >Button</b-button
-                    >
+                    <b-icon
+                        v-b-tooltip.focus
+                        title="Al clickear el boton se obtendra la hora y la fecha actual"
+                        icon="stopwatch"
+                         @click="Obtenertiemopo('activacio')"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+                margin-top: 2px; "
+                    ></b-icon>
 
                     <b-form-input
                         class="margeninput"
@@ -425,11 +434,15 @@
                     label-for="input-2"
                     label-class="margenform"
                 >
-                    <b-button
-                        @click="Obtenertiemopo('mobilitat')"
-                        class="buttondatetime"
-                        >Button</b-button
-                    >
+                <b-icon
+                        v-b-tooltip.focus
+                        title="Al clickear el boton se obtendra la hora y la fecha actual"
+                        icon="stopwatch"
+                         @click="Obtenertiemopo('mobilitat')"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+                margin-top: 2px; "
+                    ></b-icon>
+
 
                     <b-form-input
                         class="margeninput"
@@ -455,13 +468,15 @@
                     label-for="input-3"
                     label-class="margenform"
                 >
-                    <b-button
 
-                        @click="Obtenertiemopo('asistencia')"
-                        class="buttondatetime"
-                        >Button</b-button
-                    >
-
+      <b-icon
+                        v-b-tooltip.focus
+                        title="Al clickear el boton se obtendra la hora y la fecha actual"
+                        icon="stopwatch"
+                         @click="Obtenertiemopo('asistencia')"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+                margin-top: 2px; "
+                    ></b-icon>
                     <b-form-input
                         class="margeninput"
                         id="input-3"
@@ -487,13 +502,15 @@
                     label-for="input-4"
                     label-class="margenform"
                 >
-                    <b-button
 
-                        @click="Obtenertiemopo('transport')"
-                        class="buttondatetime"
-                        >Button</b-button
-                    >
-
+      <b-icon
+                        v-b-tooltip.focus
+                        title="Al clickear el boton se obtendra la hora y la fecha actual"
+                        icon="stopwatch"
+                         @click="Obtenertiemopo('transport')"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+                margin-top: 2px; "
+                    ></b-icon>
                     <b-form-input
                         class="margeninput"
                         id="input-4"
@@ -516,13 +533,15 @@
                     label-for="input-5"
                     label-class="margenform"
                 >
-                    <b-button
 
-                        @click="Obtenertiemopo('hospital')"
-                        class="buttondatetime"
-                        >Button</b-button
-                    >
-
+      <b-icon
+                        v-b-tooltip.focus
+                        title="Al clickear el boton se obtendra la hora y la fecha actual"
+                        icon="stopwatch"
+                         @click="Obtenertiemopo('hospital')"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+                margin-top: 2px; "
+                    ></b-icon>
                     <b-form-input
                         class="margeninput"
                         id="input-5"
@@ -547,13 +566,16 @@
                     label-for="input-6"
                     label-class="margenform"
                 >
-                    <b-button
 
-                        @click="Obtenertiemopo('transferencia')"
-                        class="buttondatetime"
-                        >Button</b-button
-                    >
 
+      <b-icon
+                        v-b-tooltip.focus
+                        title="Al clickear el boton se obtendra la hora y la fecha actual"
+                        icon="stopwatch"
+                         @click="Obtenertiemopo('transferencia')"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+                margin-top: 2px; "
+                    ></b-icon>
                     <b-form-input
                         class="margeninput"
                         id="input-6"
@@ -578,13 +600,15 @@
                     label-for="input-7"
                     label-class="margenform"
                 >
-                    <b-button
 
-                        @click="Obtenertiemopo('finlatizacio')"
-                        class="buttondatetime"
-                        >Button</b-button
-                    >
-
+      <b-icon
+                        v-b-tooltip.focus
+                        title="Al clickear el boton se obtendra la hora y la fecha actual"
+                        icon="stopwatch"
+                         @click="Obtenertiemopo('finlatizacio')"
+                        style="width: 37px; height: 32px;     margin-left: 25px;
+                margin-top: 2px; "
+                    ></b-icon>
                     <b-form-input
                         class="margeninput"
                         id="input-7"
@@ -641,6 +665,9 @@
 
 <script>
 import Vuex from "vuex";
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
 
 export default {
     /**
@@ -1155,6 +1182,11 @@ export default {
                     this.result.splice(id, 1);
                     console.log(this.result);
                 });
+        },
+        guardarPDF(){
+            const doc = new jsPDF()
+            doc.autoTable({ html: '#my-table' })
+            doc.save('table.pdf')
         },
         popToast() {
             // Use a shorter name for this.$createElement
