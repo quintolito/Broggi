@@ -37,20 +37,62 @@ body{
 /* classe aplicable a tots els botons principals */
 .boto-primari
 {
+    border-radius: 25px!important;
     color: white !important;
     background-color: #f26101 !important;
+    transition: 0.7s ease !important;
 }
+
+.boto-primari:hover
+{
+    color: white !important;
+    border-radius: 0px!important;
+    transform: scale(1.1);
+    background-color: #c04d00 !important;
+    transition: 0.7s ease;
+}
+
+.boto-primari:disabled
+{
+    color: white !important;
+    background-color: #ff8839 !important;
+    transform: scale(1);
+    border-radius: 25px!important;
+}
+
 /* classe aplicable a tots els botons secondaris */
 .boto-secondari
 {
+    border-radius: 2rem!important;
     background-color: #91BED4 !important;
+    transition: 0.5s ease!important;
+}
+
+.boto-secondari:hover
+{
+    border-radius: 0rem!important;
+    transform: scale(1.2);
+    background-color: rgb(165, 224, 253) !important;
+    transition: 0.5s ease;
 }
 
 .boto-terciari
 {
+    border-radius: 25px!important;
     color: white !important;
     background-color: #304269 !important;
+    transition: 0.5s ease !important;
+
 }
+
+.boto-terciari:hover
+{
+    border-radius: 5px!important;
+    color: white !important;
+    background-color: #2366f5 !important;
+    transition: 0.7s ease;
+}
+
 .video-fluid {
     width: 100%;
     height: auto;
@@ -145,8 +187,12 @@ body{
 }
 
 .videoclcik{
+    border-radius: 25px;
+
     float: left;
     margin-left: 5vh;
+    border: 5px solid #f26101 !important;
+
 }
 .esconder{
     visibility: hidden;
@@ -172,8 +218,25 @@ body{
 
  /*icona nfo modal*/
 .icona-info{
-    width: 37px; 
+    width: 37px;
     height: 32px;
     margin-left: 25px;
-    margin-top: 2px; 
+    margin-top: 2px;
+}
+
+.margentitulo{
+
+    margin-bottom: 5vh;
+
+    float: left;
+    margin-left: 5vh;
+}
+
+.imagen{
+    border-radius: 25px;
+
+    float: left;
+    margin-left: 5vh;
+    border: 5px solid #304269 !important;
+
 }
