@@ -1,20 +1,20 @@
 @extends('templates.main')
 
 @section('titol')
-    Register
+    Formació
 @endsection
 
 @section('main')
 
 
 
-  <img src="{{ asset('assets/images/adults.png')}}" usemap="#planetmap" class="videoclcik">
+  <img src="{{ asset('assets/images/adults.png')}}" usemap="#planetmap" class="imagen">
 
   <map name="planetmap">
-    <area  class="1" id="1" shape="rect" data-clips="1"  data-src="{{ asset('assets/video/CLIP1.mp4')}}"   coords="40,30,800,90"  alt="clip1"  href="#">
-    <area class="2" shape="rect" coords="50,105,900,180" alt="clip2" href="#" data-src="{{ asset('assets/video/CLIP2.mp4')}}">
-    <area class="3" shape="rect" coords="70,205,1800,370" alt="clip3" href="#" data-src="{{ asset('assets/video/CLIP3.mp4')}}">
-    <area class="7" shape="rect" coords="524, 505, 376, 302" alt="clip4" href="#" data-src="{{ asset('assets/video/CLIP7.mp4')}}">
+    <area  class="1" id="1" shape="rect" data-clips="1"  data-titulo="Victima cau a terra" data-src="{{ asset('assets/video/CLIP1.mp4')}}"   coords="40,30,800,90"  alt="clip1"  href="#">
+    <area class="2" shape="rect" coords="50,105,900,180" alt="clip2" data-titulo="Avaluem la conciencia " href="#" data-src="{{ asset('assets/video/CLIP2.mp4')}}">
+    <area class="3" shape="rect" coords="70,205,1800,370" alt="clip3" data-titulo="Avaluem si respira:Veura,Sentir,Escoltar" href="#" data-src="{{ asset('assets/video/CLIP3.mp4')}}">
+    <area class="7" shape="rect" coords="524, 505, 376, 302" alt="clip4" href="#" data-titulo="un ritme per 100 compressions per minut"  data-src="{{ asset('assets/video/CLIP7.mp4')}}">
     <area class="4" shape="rect" coords="524, 505, 376, 402" alt="clip4" href="#" data-src="{{ asset('assets/video/CLIP4.mp4')}}">
 
     <area shape="circle" coords="124,58,8" alt="Venus" href="#">
@@ -29,9 +29,11 @@
 </video>
 --}}
 
+<div>
+    <h1 id="titulo" class="text_titol  margentitulo"></h1>
+</div>
 
-
-<video  width="640" height="360"  class="videoclcik esconder " id ="videosdeprueba" src="{{ asset('assets/video/CLIP6.mp4')}}" controls type="video/mov">
+<video  width="50%" height="50%"  class="videoclcik esconder " id ="videosdeprueba" src="{{ asset('assets/video/CLIP6.mp4')}}" controls type="video/mov">
 
   </video>
 
@@ -121,56 +123,62 @@ var x = document.getElementById("1");
 
     document.body.addEventListener("click", function (event) {
   if (event.target.classList.contains("1")) {
-    cargarvideo( event.target.getAttribute('data-src'));
+    cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
   }
   else if(event.target.classList.contains("2")){
-    cargarvideo( event.target.getAttribute('data-src'));
+    cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
 
      }
      else if(event.target.classList.contains("2")){
-    cargarvideo( event.target.getAttribute('data-src'));
+        cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
 
      }
      else if(event.target.classList.contains("3")){
-    cargarvideo( event.target.getAttribute('data-src'));
+        cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
 
      }
      else if(event.target.classList.contains("4")){
-    cargarvideo( event.target.getAttribute('data-src'));
+        cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
 
      }
      else if(event.target.classList.contains("5")){
-    cargarvideo( event.target.getAttribute('data-src'));
+        cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
 
      }
      else if(event.target.classList.contains("6")){
-    cargarvideo( event.target.getAttribute('data-src'));
+        cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
 
      }
      else if(event.target.classList.contains("7")){
-    cargarvideo( event.target.getAttribute('data-src'));
+        cargarvideo( event.target.getAttribute('data-src'), event.target.getAttribute('data-titulo'));
 
 
      }
 
 });
 
-function cargarvideo(SRCVIDEO){
+function cargarvideo(SRCVIDEO,titulvideo){
 
         var video = document.getElementById("videosdeprueba");
+        var titulo = document.getElementById("titulo");
 
     video.src=SRCVIDEO;
       video.classList.remove('esconder');
       video.autoplay = true;
 
+
+      titulo.innerHTML=titulvideo;
+
     }
+
+
 /*
 $(document).ready(function() {
 
