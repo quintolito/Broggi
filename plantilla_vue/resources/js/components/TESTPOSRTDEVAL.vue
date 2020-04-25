@@ -44,7 +44,7 @@
             <b-icon
               v-b-tooltip.focus
               title="Aquest camp s'ha d'omplir amb el municipio del alertante"
-              icon="question-circle"
+              icon="info-circle"
               class="icona-info"
             ></b-icon>
           </div>
@@ -78,7 +78,7 @@
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>
@@ -100,7 +100,7 @@
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb la direcció de l'alertant"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>
@@ -122,7 +122,7 @@
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb el telèfon de l'alertant"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>
@@ -137,7 +137,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
                     :value="municipi.id">{{ municipi.nom }}
             </option>
         </select>
-        <b-icon v-b-tooltip.focus title="Aquest camp s'ha d'omplir amb el municipio del alertante" icon="question-circle" class="icona-info"b-icon>
+        <b-icon v-b-tooltip.focus title="Aquest camp s'ha d'omplir amb el municipio del alertante" icon="info-circle" class="icona-info"b-icon>
 
       </b-form-group>
         --->
@@ -173,7 +173,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb el municipi de l'alertant"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>
@@ -201,7 +201,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb el tipus d'alertant que hi ha"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>
@@ -294,7 +294,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb el municipio del alertante"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>
@@ -514,7 +514,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb el codi del recurs mòbil"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>
@@ -541,7 +541,7 @@ v-model="formAlertant.municipis_id" name="municipi" id="municipi" class="form-co
           <b-icon
             v-b-tooltip.focus
             title="Aquest camp s'ha d'omplir amb el tipus del recurs mòbil"
-            icon="question-circle"
+            icon="info-circle"
             class="icona-info"
           ></b-icon>
         </b-form-group>

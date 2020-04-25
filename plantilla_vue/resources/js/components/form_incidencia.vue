@@ -15,7 +15,13 @@
             FORM AFECTAT
           </b-button>
         -->
-        <modal-post tipoaccion="afectats" @verificar-afectat="verificarAfectat"></modal-post>
+        <modal-post  class="margeninput2" tipoaccion="afectats" @verificar-afectat="verificarAfectat"></modal-post>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Num Inciedncia -->
@@ -28,12 +34,19 @@
         label-for="input-1"
       >
         <b-form-input
+          class="margeninput2"
           id="input-num-incidencia"
           v-model="formIncidencia.num_incidencia"
           required
           placeholder="00000000000"
           type="number"
         ></b-form-input>
+         <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el numero d''incidencia"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Data -->
@@ -46,12 +59,19 @@
         label-for="input-1"
       >
         <b-form-input
+         class="margeninput2"
           id="input-data"
           v-model="formIncidencia.data"
           required
           placeholder="Data de la incidecnia"
           type="date"
         ></b-form-input>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Hora -->
@@ -64,12 +84,19 @@
         label-for="input-3"
       >
         <b-form-input
+        class="margeninput2"
           id="input-hora"
           v-model="formIncidencia.hora"
           required
           placeholder="0"
           type="time"
         ></b-form-input>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Tipus d'alertant -->
@@ -85,7 +112,7 @@
           v-model="formIncidencia.tipus_alertant_id"
           name="city"
           id="tipus-alertant"
-          class="form-control"
+          class="form-control margeninput2"
           tabindex="12"
         >
           <option
@@ -94,18 +121,24 @@
             :value="city.id"
           >{{ city.tipus }}</option>
         </select>
-      </b-form-group>
-
-      <!-- Alertants/Hospitals -->
-      <b-form-group
-        label-cols="4"
-        label-cols-md="3"
-        label-cols-xl="2"
-        id="input-group-5"
-        label="Hospitals/Alertants"
-        label-for="input-3"
-      >
-        <b-button @click="modalHospitals = !modalHospitals" ref="botoHospital" class="boto-terciari">Selecionar Hospital</b-button>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="ENGLISH: Who is injuried? PRONUNCIACIÓ: Ju is injured? SIGNIFICAT: Qui és l'afectat?"
+          icon="question-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="ENGLISH: Myself, Friend, Other Person PRONUNCIACIÓ: Maiself, Frend, Oder Person SIGNIFICAT: Jo mateix, Amic/ga, Una altra persona"
+          icon="chat-dots"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Telefon alertant -->
@@ -118,24 +151,31 @@
         label-for="input-2"
       >
         <b-form-input
+        class="margeninput2"
           id="input-telefon"
           v-model="formIncidencia.telefon_alertant"
           required
           placeholder="000-000-000"
           type="number"
         ></b-form-input>
-      </b-form-group>
-
-      <!-- Municipi -->
-      <b-form-group
-        label-cols="4"
-        label-cols-md="3"
-        label-cols-xl="2"
-        id="input-group-5"
-        label="Municipi"
-        label-for="input-3"
-      >
-        <b-button @click="modalMunicpis = !modalMunicpis" ref="botoMunincpi" class="boto-terciari">Selecionar Municipi</b-button>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="ENGLISH: What's your phone number? PRONUNCIACIÓ: Güats yur fon nambar? SIGNIFICAT: Quin és el teu número de telèfon?"
+          icon="question-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="Zero , O = ziro, ou = 0 / One = uan = 1 / Two = chu = 2 / Three = zri = 3 / Four = for = 4 / Five = faif = 5 / Six = sics = 6 / Seven = Seven = 7 / Eight = Eit = 8 / Nine = nain = 9"
+          icon="chat-dots"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Adreça -->
@@ -148,12 +188,25 @@
         label-for="input-2"
       >
         <b-form-input
+        class="margeninput2"
           id="input-adreca"
           v-model="formIncidencia.adreca"
           required
           placeholder="Adreça"
           type="text"
         ></b-form-input>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="ENGLISH: What's your current addres right now? PRONUNCIACIÓ: Güats yur current adres rai nau? SIGNIFICAT: Quina es l'adreça actual ara mateix?"
+          icon="question-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Complement Adreça -->
@@ -166,36 +219,76 @@
         label-for="input-2"
       >
         <b-form-input
+        class="margeninput2"
           id="input-complement"
           v-model="formIncidencia.complement_adreca"
           required
           placeholder="Informacio complemntaria sobre l'adreça"
           type="text"
         ></b-form-input>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="ENGLISH: More information about the addres? PRONUNCIACIÓ: Mor informeishon abaut de adres? SIGNIFICAT: Mes informació sobre l'adreça?"
+          icon="question-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
-      <!-- Tipus incident -->
+      <!-- Municipi -->
       <b-form-group
         label-cols="4"
         label-cols-md="3"
         label-cols-xl="2"
-        id="input-group-8"
-        label="Tipus icidència"
-        label-for="input-2"
+        id="input-group-5"
+        label="Municipi"
+        label-for="input-3"
       >
-        <select
-          v-model="formIncidencia.tipus_incident_id"
-          name="tipus_incidencia"
-          id="tipus_incidencia"
-          class="form-control"
-          tabindex="12"
-        >
-          <option
-            v-for="(tipoIncidente, index) in tipoIncidentes"
-            :key="index"
-            :value="tipoIncidente.id"
-          >{{ tipoIncidente.tipus }}</option>
-        </select>
+        <b-button
+        
+          @click="modalMunicpis = !modalMunicpis"
+          ref="botoMunincpi"
+          class="boto-terciari margeninput2"
+        >Selecionar Municipi</b-button>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="ENGLISH: What's the name of the town where you are? PRONUNCIACIÓ: Güats de neim of de taun güere yu ar? SIGNIFICAT: Com és diu el municipi on ets?"
+          icon="question-circle"
+          class="icona-info"
+        ></b-icon>
+      </b-form-group>
+
+      <!-- Alertants/Hospitals -->
+      <b-form-group
+        label-cols="4"
+        label-cols-md="3"
+        label-cols-xl="2"
+        id="input-group-5"
+        label="Hospitals/Alertants"
+        label-for="input-3"
+      >
+        <b-button
+          @click="modalHospitals = !modalHospitals"
+          ref="botoHospital"
+          class="boto-terciari margeninput2"
+        >Selecionar Hospital</b-button>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
 
       <!-- Descripcio -->
@@ -208,13 +301,57 @@
         label-for="input-2"
       >
         <b-form-input
+        class="margeninput2"
           id="input-descripcio"
           v-model="formIncidencia.descripcio"
           required
           placeholder="Què ha passat?"
           type="text"
         ></b-form-input>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
+        <b-icon
+          v-b-tooltip.focus
+          title="ENGLISH: Can you tell me what happened? PRONUNCIACIÓ: Can yu tel mi güat japenet? SIGNIFICAT: Em pots que ha passat"
+          icon="question-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
+
+       <!-- Tipus incident -->
+      <b-form-group
+        label-cols="4"
+        label-cols-md="3"
+        label-cols-xl="2"
+        id="input-group-8"
+        label="Tipus icidència"
+        label-for="input-2"
+      >
+        <select
+          v-model="formIncidencia.tipus_incident_id"
+          name="tipus_incidencia"
+          id="tipus_incidencia"
+          class="form-control margeninput2"
+          tabindex="12"
+        >
+          <option
+            v-for="(tipoIncidente, index) in tipoIncidentes"
+            :key="index"
+            :value="tipoIncidente.id"
+          >{{ tipoIncidente.tipus }}</option>
+        </select>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
+      </b-form-group>
+
 
       <!-- Recurs mòbil -->
       <b-form-group
@@ -225,8 +362,20 @@
         label="Recurs mòbil"
         label-for="input-3"
       >
-        <b-button @click="modalRecursos = !modalRecursos" ref="botoRecurs" class="boto-terciari">Selecionar Recurs Mòbil</b-button>
+        <b-button
+          @click="modalRecursos = !modalRecursos"
+          ref="botoRecurs"
+          class="boto-terciari margeninput2"
+        >Selecionar Recurs Mòbil</b-button>
+        <b-icon
+          v-b-tooltip.focus
+          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          icon="info-circle"
+          class="icona-info"
+        ></b-icon>
       </b-form-group>
+
+      <!-- Boto submit -->
       <div class="d-flex justify-content-center">
         <button
           type="submit"
@@ -236,12 +385,10 @@
           style="display: block;"
           class="btn boto-primari"
         >Guardar Incidencia</button>
-        
       </div>
       <div class="d-flex justify-content-center">
         <p id="text-submit">Completa tots els camps</p>
       </div>
-      
     </form>
 
     <!-- MODAL PARA Hospital -->
