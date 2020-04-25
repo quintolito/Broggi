@@ -42,22 +42,6 @@
             </b-col>
 
             <b-col lg="6" class="my-1">
-                <b-form-group
-                    label="Filter On"
-                    label-cols-sm="3"
-                    label-align-sm="right"
-                    label-size="sm"
-                    description="Leave all unchecked to filter on all data"
-                    class="mb-0"
-                >
-                    <b-form-checkbox-group v-model="filterOn" class="mt-1">
-                        <b-form-checkbox value="name">Name</b-form-checkbox>
-                        <b-form-checkbox value="age">Age</b-form-checkbox>
-                        <b-form-checkbox value="isActive"
-                            >Active</b-form-checkbox
-                        >
-                    </b-form-checkbox-group>
-                </b-form-group>
             </b-col>
 
             <b-col sm="5" md="6" class="my-1">
@@ -145,7 +129,7 @@
   <b-button
 
                         @click="guardarPDF()"
-                        class="buttondatetime"
+                        class="buttondatetime boto-primari"
                         >Guardar pagina</b-button
                     >
         <b-modal
