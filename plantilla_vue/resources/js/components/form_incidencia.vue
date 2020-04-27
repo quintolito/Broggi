@@ -18,7 +18,7 @@
         <modal-post  class="margeninput2" tipoaccion="afectats" @verificar-afectat="verificarAfectat"></modal-post>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="S'obrirà un modal on s'ha d'omplir amb la informació de l'afectat"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -68,7 +68,7 @@
         ></b-form-input>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir la data de l'incidencia"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -93,7 +93,7 @@
         ></b-form-input>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha de posar l'hora en que s'ha produit l'incidencia"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -123,7 +123,7 @@
         </select>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb el tipus d'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -160,7 +160,7 @@
         ></b-form-input>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb el telefon de l'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -197,7 +197,7 @@
         ></b-form-input>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb l'adreça de l'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -228,7 +228,7 @@
         ></b-form-input>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb informació complemntària sobre l'adreça de l'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -257,7 +257,7 @@
         >Selecionar Municipi</b-button>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb el municipi de l'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -285,7 +285,7 @@
         >Selecionar Hospital</b-button>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb l'hospital de l'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -310,7 +310,7 @@
         ></b-form-input>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb la descripció sobre els fets que ens digui l'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -346,7 +346,7 @@
         </select>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb el tipus dincident en funció de la informació que ens hagi proporcionat l'alertant"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
@@ -369,7 +369,7 @@
         >Selecionar Recurs Mòbil</b-button>
         <b-icon
           v-b-tooltip.focus
-          title="Aquest camp s'ha d'omplir amb el nom de l'alertant"
+          title="Aquest camp s'ha d'omplir amb el recurs mobil oportú"
           icon="info-circle"
           class="icona-info"
         ></b-icon>
